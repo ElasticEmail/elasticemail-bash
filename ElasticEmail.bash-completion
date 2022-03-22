@@ -1,0 +1,434 @@
+# ElasticEmail completion                               -*- shell-script -*-
+
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# !
+# ! Note:
+# !
+# ! THIS SCRIPT HAS BEEN AUTOMATICALLY GENERATED USING
+# ! openapi-generator (https://openapi-generator.tech)
+# ! FROM OPENAPI SPECIFICATION IN JSON.
+# !
+# !
+# !
+# ! System wide installation:
+# !
+# ! $ sudo cp ElasticEmail.bash-completion /etc/bash-completion.d/ElasticEmail
+# !
+# !
+# ! User home installation (add this line to .bash_profile):
+# !
+# ! [ -r ~/ElasticEmail.bash-completion ] && source ~/ElasticEmail.bash-completion
+# !
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+declare -A mime_type_abbreviations
+# text/*
+mime_type_abbreviations["text"]="text/plain"
+mime_type_abbreviations["html"]="text/html"
+mime_type_abbreviations["md"]="text/x-markdown"
+mime_type_abbreviations["csv"]="text/csv"
+mime_type_abbreviations["css"]="text/css"
+mime_type_abbreviations["rtf"]="text/rtf"
+# application/*
+mime_type_abbreviations["json"]="application/json"
+mime_type_abbreviations["xml"]="application/xml"
+mime_type_abbreviations["yaml"]="application/yaml"
+mime_type_abbreviations["js"]="application/javascript"
+mime_type_abbreviations["bin"]="application/octet-stream"
+mime_type_abbreviations["rdf"]="application/rdf+xml"
+# image/*
+mime_type_abbreviations["jpg"]="image/jpeg"
+mime_type_abbreviations["png"]="image/png"
+mime_type_abbreviations["gif"]="image/gif"
+mime_type_abbreviations["bmp"]="image/bmp"
+mime_type_abbreviations["tiff"]="image/tiff"
+
+
+#
+# Check if this is OSX, if so defined custom init_completion
+#
+if [[ `uname` =~ "Darwin" ]]; then
+    __osx_init_completion()
+    {
+        COMPREPLY=()
+        _get_comp_words_by_ref cur prev words cword
+    }
+fi
+
+_ElasticEmail()
+{
+    local cur
+    local prev
+    local words
+    local cword
+
+    # The reference of currently selected REST operation
+    local operation=""
+
+    # The list of available operation in the REST service
+    # It's modelled as an associative array for efficient key lookup
+    declare -A operations
+    operations["campaignsByNameDelete"]=1
+    operations["campaignsByNameGet"]=1
+    operations["campaignsByNamePut"]=1
+    operations["campaignsGet"]=1
+    operations["campaignsPost"]=1
+    operations["contactsByEmailDelete"]=1
+    operations["contactsByEmailGet"]=1
+    operations["contactsByEmailHistoryGet"]=1
+    operations["contactsByEmailPut"]=1
+    operations["contactsDeletePost"]=1
+    operations["contactsExportByIdStatusGet"]=1
+    operations["contactsExportPost"]=1
+    operations["contactsGet"]=1
+    operations["contactsImportPost"]=1
+    operations["contactsPost"]=1
+    operations["emailsByMsgidViewGet"]=1
+    operations["emailsMergefilePost"]=1
+    operations["emailsPost"]=1
+    operations["emailsTransactionalPost"]=1
+    operations["eventsByTransactionidGet"]=1
+    operations["eventsChannelsByNameExportPost"]=1
+    operations["eventsChannelsByNameGet"]=1
+    operations["eventsChannelsExportByIdStatusGet"]=1
+    operations["eventsExportByIdStatusGet"]=1
+    operations["eventsExportPost"]=1
+    operations["eventsGet"]=1
+    operations["filesByNameDelete"]=1
+    operations["filesByNameGet"]=1
+    operations["filesByNameInfoGet"]=1
+    operations["filesGet"]=1
+    operations["filesPost"]=1
+    operations["inboundrouteByIdDelete"]=1
+    operations["inboundrouteByIdGet"]=1
+    operations["inboundrouteByIdPut"]=1
+    operations["inboundrouteGet"]=1
+    operations["inboundrouteOrderPut"]=1
+    operations["inboundroutePost"]=1
+    operations["listsByNameContactsPost"]=1
+    operations["listsByNameContactsRemovePost"]=1
+    operations["listsByNameDelete"]=1
+    operations["listsByNameGet"]=1
+    operations["listsByNamePut"]=1
+    operations["listsGet"]=1
+    operations["listsPost"]=1
+    operations["securityApikeysByNameDelete"]=1
+    operations["securityApikeysByNameGet"]=1
+    operations["securityApikeysByNamePut"]=1
+    operations["securityApikeysGet"]=1
+    operations["securityApikeysPost"]=1
+    operations["securitySmtpByNameDelete"]=1
+    operations["securitySmtpByNameGet"]=1
+    operations["securitySmtpByNamePut"]=1
+    operations["securitySmtpGet"]=1
+    operations["securitySmtpPost"]=1
+    operations["segmentsByNameDelete"]=1
+    operations["segmentsByNameGet"]=1
+    operations["segmentsByNamePut"]=1
+    operations["segmentsGet"]=1
+    operations["segmentsPost"]=1
+    operations["statisticsCampaignsByNameGet"]=1
+    operations["statisticsCampaignsGet"]=1
+    operations["statisticsChannelsByNameGet"]=1
+    operations["statisticsChannelsGet"]=1
+    operations["statisticsGet"]=1
+    operations["subaccountsByEmailCreditsPatch"]=1
+    operations["subaccountsByEmailDelete"]=1
+    operations["subaccountsByEmailGet"]=1
+    operations["subaccountsByEmailSettingsEmailPut"]=1
+    operations["subaccountsGet"]=1
+    operations["subaccountsPost"]=1
+    operations["suppressionsBouncesGet"]=1
+    operations["suppressionsBouncesImportPost"]=1
+    operations["suppressionsBouncesPost"]=1
+    operations["suppressionsByEmailDelete"]=1
+    operations["suppressionsByEmailGet"]=1
+    operations["suppressionsComplaintsGet"]=1
+    operations["suppressionsComplaintsImportPost"]=1
+    operations["suppressionsComplaintsPost"]=1
+    operations["suppressionsGet"]=1
+    operations["suppressionsUnsubscribesGet"]=1
+    operations["suppressionsUnsubscribesImportPost"]=1
+    operations["suppressionsUnsubscribesPost"]=1
+    operations["templatesByNameDelete"]=1
+    operations["templatesByNameGet"]=1
+    operations["templatesByNamePut"]=1
+    operations["templatesGet"]=1
+    operations["templatesPost"]=1
+    operations["verificationsByEmailDelete"]=1
+    operations["verificationsByEmailGet"]=1
+    operations["verificationsByEmailPost"]=1
+    operations["verificationsFilesByIdDelete"]=1
+    operations["verificationsFilesByIdResultDownloadGet"]=1
+    operations["verificationsFilesByIdResultGet"]=1
+    operations["verificationsFilesByIdVerificationPost"]=1
+    operations["verificationsFilesPost"]=1
+    operations["verificationsFilesResultGet"]=1
+    operations["verificationsGet"]=1
+
+    # An associative array of operations to their parameters
+    # Only include path, query and header parameters
+    declare -A operation_parameters
+    operation_parameters["campaignsByNameDelete"]="name= "
+    operation_parameters["campaignsByNameGet"]="name= "
+    operation_parameters["campaignsByNamePut"]="name= "
+    operation_parameters["campaignsGet"]="search= offset= limit= "
+    operation_parameters["campaignsPost"]=""
+    operation_parameters["contactsByEmailDelete"]="email= "
+    operation_parameters["contactsByEmailGet"]="email= "
+    operation_parameters["contactsByEmailHistoryGet"]="email= limit= offset= "
+    operation_parameters["contactsByEmailPut"]="email= "
+    operation_parameters["contactsDeletePost"]=""
+    operation_parameters["contactsExportByIdStatusGet"]="id= "
+    operation_parameters["contactsExportPost"]="fileFormat= rule= emails= compressionFormat= fileName= "
+    operation_parameters["contactsGet"]="limit= offset= "
+    operation_parameters["contactsImportPost"]="listName= encodingName= "
+    operation_parameters["contactsPost"]="listnames= "
+    operation_parameters["emailsByMsgidViewGet"]="msgid= "
+    operation_parameters["emailsMergefilePost"]=""
+    operation_parameters["emailsPost"]=""
+    operation_parameters["emailsTransactionalPost"]=""
+    operation_parameters["eventsByTransactionidGet"]="transactionid= from= to= orderBy= limit= offset= "
+    operation_parameters["eventsChannelsByNameExportPost"]="name= eventTypes= from= to= fileFormat= compressionFormat= fileName= "
+    operation_parameters["eventsChannelsByNameGet"]="name= eventTypes= from= to= orderBy= limit= offset= "
+    operation_parameters["eventsChannelsExportByIdStatusGet"]="id= "
+    operation_parameters["eventsExportByIdStatusGet"]="id= "
+    operation_parameters["eventsExportPost"]="eventTypes= from= to= fileFormat= compressionFormat= fileName= "
+    operation_parameters["eventsGet"]="eventTypes= from= to= orderBy= limit= offset= "
+    operation_parameters["filesByNameDelete"]="name= "
+    operation_parameters["filesByNameGet"]="name= "
+    operation_parameters["filesByNameInfoGet"]="name= "
+    operation_parameters["filesGet"]="limit= offset= "
+    operation_parameters["filesPost"]="expiresAfterDays= "
+    operation_parameters["inboundrouteByIdDelete"]="id= "
+    operation_parameters["inboundrouteByIdGet"]="id= "
+    operation_parameters["inboundrouteByIdPut"]="id= "
+    operation_parameters["inboundrouteGet"]=""
+    operation_parameters["inboundrouteOrderPut"]=""
+    operation_parameters["inboundroutePost"]=""
+    operation_parameters["listsByNameContactsPost"]="name= "
+    operation_parameters["listsByNameContactsRemovePost"]="name= "
+    operation_parameters["listsByNameDelete"]="name= "
+    operation_parameters["listsByNameGet"]="name= "
+    operation_parameters["listsByNamePut"]="name= "
+    operation_parameters["listsGet"]="limit= offset= "
+    operation_parameters["listsPost"]=""
+    operation_parameters["securityApikeysByNameDelete"]="name= subaccount= "
+    operation_parameters["securityApikeysByNameGet"]="name= subaccount= "
+    operation_parameters["securityApikeysByNamePut"]="name= "
+    operation_parameters["securityApikeysGet"]="subaccount= "
+    operation_parameters["securityApikeysPost"]=""
+    operation_parameters["securitySmtpByNameDelete"]="name= subaccount= "
+    operation_parameters["securitySmtpByNameGet"]="name= subaccount= "
+    operation_parameters["securitySmtpByNamePut"]="name= "
+    operation_parameters["securitySmtpGet"]="subaccount= "
+    operation_parameters["securitySmtpPost"]=""
+    operation_parameters["segmentsByNameDelete"]="name= "
+    operation_parameters["segmentsByNameGet"]="name= "
+    operation_parameters["segmentsByNamePut"]="name= "
+    operation_parameters["segmentsGet"]="limit= offset= "
+    operation_parameters["segmentsPost"]=""
+    operation_parameters["statisticsCampaignsByNameGet"]="name= "
+    operation_parameters["statisticsCampaignsGet"]="limit= offset= "
+    operation_parameters["statisticsChannelsByNameGet"]="name= "
+    operation_parameters["statisticsChannelsGet"]="limit= offset= "
+    operation_parameters["statisticsGet"]="from= to= "
+    operation_parameters["subaccountsByEmailCreditsPatch"]="email= "
+    operation_parameters["subaccountsByEmailDelete"]="email= "
+    operation_parameters["subaccountsByEmailGet"]="email= "
+    operation_parameters["subaccountsByEmailSettingsEmailPut"]="email= "
+    operation_parameters["subaccountsGet"]="limit= offset= "
+    operation_parameters["subaccountsPost"]=""
+    operation_parameters["suppressionsBouncesGet"]="search= limit= offset= "
+    operation_parameters["suppressionsBouncesImportPost"]=""
+    operation_parameters["suppressionsBouncesPost"]=""
+    operation_parameters["suppressionsByEmailDelete"]="email= "
+    operation_parameters["suppressionsByEmailGet"]="email= "
+    operation_parameters["suppressionsComplaintsGet"]="search= limit= offset= "
+    operation_parameters["suppressionsComplaintsImportPost"]=""
+    operation_parameters["suppressionsComplaintsPost"]=""
+    operation_parameters["suppressionsGet"]="limit= offset= "
+    operation_parameters["suppressionsUnsubscribesGet"]="search= limit= offset= "
+    operation_parameters["suppressionsUnsubscribesImportPost"]=""
+    operation_parameters["suppressionsUnsubscribesPost"]=""
+    operation_parameters["templatesByNameDelete"]="name= "
+    operation_parameters["templatesByNameGet"]="name= "
+    operation_parameters["templatesByNamePut"]="name= "
+    operation_parameters["templatesGet"]="scopeType= templateTypes= limit= offset= "
+    operation_parameters["templatesPost"]=""
+    operation_parameters["verificationsByEmailDelete"]="email= "
+    operation_parameters["verificationsByEmailGet"]="email= "
+    operation_parameters["verificationsByEmailPost"]="email= "
+    operation_parameters["verificationsFilesByIdDelete"]="id= "
+    operation_parameters["verificationsFilesByIdResultDownloadGet"]="id= "
+    operation_parameters["verificationsFilesByIdResultGet"]="id= limit= offset= "
+    operation_parameters["verificationsFilesByIdVerificationPost"]="id= "
+    operation_parameters["verificationsFilesPost"]=""
+    operation_parameters["verificationsFilesResultGet"]=""
+    operation_parameters["verificationsGet"]="limit= offset= "
+
+    # An associative array of possible values for enum parameters
+    declare -A operation_parameters_enum_values
+
+    #
+    # Check if this is OSX and use special __osx_init_completion function
+    #
+    if [[ `uname` =~ "Darwin" ]]; then
+        __osx_init_completion || return
+    else
+        _init_completion -s || return
+    fi
+
+
+    # Check if operation is already in the command line provided
+    for word in "${words[@]}"; do
+        if [[ -n $word && ${operations[$word]} ]]; then
+            operation="${word}"
+        fi
+    done
+
+    if [[ -z $operation ]]; then
+        case $prev in
+            --ciphers|--connect-timeout|-C|--continue-at|-F|--form|--form-string|\
+            --ftp-account|--ftp-alternative-to-user|-P|--ftp-port|-H|--header|-h|\
+            --help|--hostpubmd5|--keepalive-time|--krb|--limit-rate|--local-port|\
+            --mail-from|--mail-rcpt|--max-filesize|--max-redirs|-m|--max-time|\
+            --pass|--proto|--proto-redir|--proxy-user|--proxy1.0|-Q|--quote|-r|\
+            --range|-X|--request|--retry|--retry-delay|--retry-max-time|\
+            --socks5-gssapi-service|-t|--telnet-option|--tftp-blksize|-z|\
+            --time-cond|--url|-u|--user|-A|--user-agent|-V|--version|-w|\
+            --write-out|--resolve|--tlsuser|--tlspassword|--about)
+                return
+                ;;
+            -K|--config|-b|--cookie|-c|--cookie-jar|-D|--dump-header|--egd-file|\
+            --key|--libcurl|-o|--output|--random-file|-T|--upload-file|--trace|\
+            --trace-ascii|--netrc-file)
+                _filedir
+                return
+                ;;
+            --cacert|-E|--cert)
+                _filedir '@(c?(e)rt|cer|pem|der)'
+                return
+                ;;
+            --capath)
+                _filedir -d
+                return
+                ;;
+            --cert-type|--key-type)
+                COMPREPLY=( $( compgen -W 'DER PEM ENG' -- "$cur" ) )
+                return
+                ;;
+            --crlfile)
+                _filedir crl
+                return
+                ;;
+            -d|--data|--data-ascii|--data-binary|--data-urlencode)
+                if [[ $cur == \@* ]]; then
+                    cur=${cur:1}
+                    _filedir
+                    COMPREPLY=( "${COMPREPLY[@]/#/@}" )
+                fi
+                return
+                ;;
+            --delegation)
+                COMPREPLY=( $( compgen -W 'none policy always' -- "$cur" ) )
+                return
+                ;;
+            --engine)
+                COMPREPLY=( $( compgen -W 'list' -- "$cur" ) )
+                return
+                ;;
+            --ftp-method)
+                COMPREPLY=( $( compgen -W 'multicwd nocwd singlecwd' -- "$cur" ) )
+                return
+                ;;
+            --ftp-ssl-ccc-mode)
+                COMPREPLY=( $( compgen -W 'active passive' -- "$cur" ) )
+                return
+                ;;
+            --interface)
+                _available_interfaces -a
+                return
+                ;;
+            -x|--proxy|--socks4|--socks4a|--socks5|--socks5-hostname)
+                _known_hosts_real
+                return
+                ;;
+            --pubkey)
+                _filedir pub
+                return
+                ;;
+            --stderr)
+                COMPREPLY=( $( compgen -W '-' -- "$cur" ) )
+                _filedir
+                return
+                ;;
+            --tlsauthtype)
+                COMPREPLY=( $( compgen -W 'SRP' -- "$cur" ) )
+                return
+                ;;
+            --host)
+                COMPREPLY=( $( compgen -W 'http:// https://' -- "$cur" ) )
+                return
+                ;;
+            -ct|--content-type|-ac|--accept)
+                COMPREPLY=( $( compgen -W '${!mime_type_abbreviations[*]}' -- "$cur" ) )
+                return
+                ;;
+        esac
+    fi
+
+    #
+    # Complete the server address based on ~/.ssh/known_hosts
+    # and ~/.ssh/config
+    #
+    local prefix=${COMP_WORDS[COMP_CWORD-2]}
+    local colon=${COMP_WORDS[COMP_CWORD-1]}
+    if [[ "$colon" == ":" && ( $prefix == "https" || $prefix == "http" ) ]]; then
+        COMPREPLY=()
+        local comp_ssh_hosts=`[[ -f ~/.ssh/known_hosts ]] && \
+                              ( cat ~/.ssh/known_hosts | \
+                              grep '^[a-zA-Z0-9]' | \
+                              cut -f 1 -d ' ' | \
+                              sed -e s/,.*//g | \
+                              grep -v ^# | \
+                              uniq | \
+                              grep -v "\[" ) ;
+                              [[ -f ~/.ssh/config ]] && \
+                              ( cat ~/.ssh/config | \
+                              grep "^Host " | \
+                              awk '{print $2}' )`
+        COMPREPLY=( $( compgen -P '//' -W '${comp_ssh_hosts}' -- "${cur:2}") )
+        return
+    fi
+
+    #
+    # Complete the ElasticEmail and cURL's arguments
+    #
+    if [[ $cur == -* ]]; then
+        COMPREPLY=( $( compgen -W '$(_parse_help curl) $(_parse_help $1)' -- "$cur" ) )
+        return
+    fi
+
+    #
+    # If the argument starts with a letter this could be either an operation
+    # or an operation parameter
+    # When $cur is empty, suggest the list of operations by default
+    #
+    if [[ $cur =~ ^[A-Za-z_0-9]* ]]; then
+        # If operation has not been yet selected, suggest the list of operations
+        # otherwise suggest arguments of this operation as declared in the
+        # OpenAPI specification
+        if [[ -z $operation ]]; then
+            COMPREPLY=( $(compgen -W '${!operations[*]}' -- ${cur}) )
+        else
+            COMPREPLY=( $(compgen -W '${operation_parameters[$operation]}' -- ${cur}) )
+            compopt -o nospace
+        fi
+        return
+    fi
+
+} &&
+complete -F _ElasticEmail ElasticEmail
+
+# ex: ts=4 sw=4 et filetype=sh
