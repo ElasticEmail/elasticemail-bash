@@ -97,6 +97,31 @@ fi
 
 In Zsh, the generated `_ElasticEmail` Zsh completion file must be copied to one of the folders under `$FPATH` variable.
 
+
+## Examples
+
+Function ||
+------------ | ------------- 
+[addCampaign](examples/addCampaign.sh) | [readme](examples/addCampaign.md)
+[addContacts](examples/addContacts.sh) | [readme](examples/addContacts.md)
+[addList](examples/addList.sh) | [readme](examples/addList.md)
+[addTemplate](examples/addTemplate.sh) | [readme](examples/addTemplate.md)
+[deleteCampaign](examples/deleteCampaign.sh) | [readme](examples/deleteCampaign.md)
+[deleteContact](examples/deleteContact.sh) | [readme](examples/deleteContact.md)
+[deleteList](examples/deleteList.sh) | [readme](examples/deleteList.md)
+[deleteTemplate](examples/deleteTemplate.sh) | [readme](examples/deleteTemplate.md)
+[exportContacts](examples/exportContacts.sh) | [readme](examples/exportContacts.md)
+[loadCampaign](examples/loadCampaign.sh) | [readme](examples/loadCampaign.md)
+[loadCampaignStatistics](examples/loadCampaignStatistics.sh) | [readme](examples/loadCampaignStatistics.md)
+[loadChannelStatistics](examples/loadChannelStatistics.sh) | [readme](examples/loadChannelStatistics.md)
+[loadList](examples/loadList.sh) | [readme](examples/loadList.md)
+[loadStatistics](examples/loadStatistics.sh) | [readme](examples/loadStatistics.md)
+[loadTemplate](examples/loadTemplate.sh) | [readme](examples/loadTemplate.md)
+[sendBulkEmail](examples/sendBulkEmail.sh) | [readme](examples/sendBulkEmail.md)
+[sendTransactionalEmail](examples/sendTransactionalEmail.sh) | [readme](examples/sendTransactionalEmail.md)
+[updateCampaign](examples/updateCampaign.sh) | [readme](examples/updateCampaign.md)
+[uploadContact](examples/uploadContact.sh) | [readme](examples/uploadContact.md)
+
 ## Documentation for API Endpoints
 
 All URIs are relative to */v4*
