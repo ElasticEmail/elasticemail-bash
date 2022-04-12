@@ -112,15 +112,15 @@ Function ||
 [deleteTemplate](examples/deleteTemplate.sh) | [readme](examples/deleteTemplate.md)
 [exportContacts](examples/exportContacts.sh) | [readme](examples/exportContacts.md)
 [loadCampaign](examples/loadCampaign.sh) | [readme](examples/loadCampaign.md)
-[loadCampaignStatistics](examples/loadCampaignStatistics.sh) | [readme](examples/loadCampaignStatistics.md)
-[loadChannelStatistics](examples/loadChannelStatistics.sh) | [readme](examples/loadChannelStatistics.md)
+[loadCampaignsStats](examples/loadCampaignsStats.sh) | [readme](examples/loadCampaignsStats.md)
+[loadChannelsStats](examples/loadChannelsStats.sh) | [readme](examples/loadChannelsStats.md)
 [loadList](examples/loadList.sh) | [readme](examples/loadList.md)
 [loadStatistics](examples/loadStatistics.sh) | [readme](examples/loadStatistics.md)
 [loadTemplate](examples/loadTemplate.sh) | [readme](examples/loadTemplate.md)
-[sendBulkEmail](examples/sendBulkEmail.sh) | [readme](examples/sendBulkEmail.md)
-[sendTransactionalEmail](examples/sendTransactionalEmail.sh) | [readme](examples/sendTransactionalEmail.md)
+[sendBulkEmails](examples/sendBulkEmails.sh) | [readme](examples/sendBulkEmails.md)
+[sendTransactionalEmails](examples/sendTransactionalEmails.sh) | [readme](examples/sendTransactionalEmails.md)
 [updateCampaign](examples/updateCampaign.sh) | [readme](examples/updateCampaign.md)
-[uploadContact](examples/uploadContact.sh) | [readme](examples/uploadContact.md)
+[uploadContacts](examples/uploadContacts.sh) | [readme](examples/uploadContacts.md)
 
 ## Documentation for API Endpoints
 
