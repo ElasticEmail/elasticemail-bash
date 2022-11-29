@@ -75,7 +75,6 @@ _ElasticEmail()
     operations["campaignsPost"]=1
     operations["contactsByEmailDelete"]=1
     operations["contactsByEmailGet"]=1
-    operations["contactsByEmailHistoryGet"]=1
     operations["contactsByEmailPut"]=1
     operations["contactsDeletePost"]=1
     operations["contactsExportByIdStatusGet"]=1
@@ -176,13 +175,12 @@ _ElasticEmail()
     operation_parameters["campaignsPost"]=""
     operation_parameters["contactsByEmailDelete"]="email= "
     operation_parameters["contactsByEmailGet"]="email= "
-    operation_parameters["contactsByEmailHistoryGet"]="email= limit= offset= "
     operation_parameters["contactsByEmailPut"]="email= "
     operation_parameters["contactsDeletePost"]=""
     operation_parameters["contactsExportByIdStatusGet"]="id= "
     operation_parameters["contactsExportPost"]="fileFormat= rule= emails= compressionFormat= fileName= "
     operation_parameters["contactsGet"]="limit= offset= "
-    operation_parameters["contactsImportPost"]="listName= encodingName= "
+    operation_parameters["contactsImportPost"]="listName= encodingName= fileUrl= "
     operation_parameters["contactsPost"]="listnames= "
     operation_parameters["emailsByMsgidViewGet"]="msgid= "
     operation_parameters["emailsMergefilePost"]=""

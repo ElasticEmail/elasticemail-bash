@@ -135,7 +135,6 @@ Class | Method | HTTP request | Description
 *CampaignsApi* | [**campaignsPost**](docs/CampaignsApi.md#campaignspost) | **POST** /campaigns | Add Campaign
 *ContactsApi* | [**contactsByEmailDelete**](docs/ContactsApi.md#contactsbyemaildelete) | **DELETE** /contacts/{email} | Delete Contact
 *ContactsApi* | [**contactsByEmailGet**](docs/ContactsApi.md#contactsbyemailget) | **GET** /contacts/{email} | Load Contact
-*ContactsApi* | [**contactsByEmailHistoryGet**](docs/ContactsApi.md#contactsbyemailhistoryget) | **GET** /contacts/{email}/history | Load History
 *ContactsApi* | [**contactsByEmailPut**](docs/ContactsApi.md#contactsbyemailput) | **PUT** /contacts/{email} | Update Contact
 *ContactsApi* | [**contactsDeletePost**](docs/ContactsApi.md#contactsdeletepost) | **POST** /contacts/delete | Delete Contacts Bulk
 *ContactsApi* | [**contactsExportByIdStatusGet**](docs/ContactsApi.md#contactsexportbyidstatusget) | **GET** /contacts/export/{id}/status | Check Export Status
@@ -246,8 +245,6 @@ Class | Method | HTTP request | Description
  - [ConsentTracking](docs/ConsentTracking.md)
  - [Contact](docs/Contact.md)
  - [ContactActivity](docs/ContactActivity.md)
- - [ContactHistEventType](docs/ContactHistEventType.md)
- - [ContactHistory](docs/ContactHistory.md)
  - [ContactPayload](docs/ContactPayload.md)
  - [ContactSource](docs/ContactSource.md)
  - [ContactStatus](docs/ContactStatus.md)

@@ -6,7 +6,6 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**contactsByEmailDelete**](ContactsApi.md#contactsByEmailDelete) | **DELETE** /contacts/{email} | Delete Contact
 [**contactsByEmailGet**](ContactsApi.md#contactsByEmailGet) | **GET** /contacts/{email} | Load Contact
-[**contactsByEmailHistoryGet**](ContactsApi.md#contactsByEmailHistoryGet) | **GET** /contacts/{email}/history | Load History
 [**contactsByEmailPut**](ContactsApi.md#contactsByEmailPut) | **PUT** /contacts/{email} | Update Contact
 [**contactsDeletePost**](ContactsApi.md#contactsDeletePost) | **POST** /contacts/delete | Delete Contacts Bulk
 [**contactsExportByIdStatusGet**](ContactsApi.md#contactsExportByIdStatusGet) | **GET** /contacts/export/{id}/status | Check Export Status
@@ -74,43 +73,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Contact**](Contact.md)
-
-### Authorization
-
-[apikey](../README.md#apikey)
-
-### HTTP request headers
-
-- **Content-Type**: Not Applicable
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## contactsByEmailHistoryGet
-
-Load History
-
-Returns detailed history of specified Contact. Required Access Level: ViewContacts
-
-### Example
-
-```bash
-ElasticEmail contactsByEmailHistoryGet email=value  limit=value  offset=value
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **email** | **string** | Proper email address. | [default to null]
- **limit** | **integer** | Maximum number of returned items. | [optional] [default to null]
- **offset** | **integer** | How many items should be returned ahead. | [optional] [default to null]
-
-### Return type
-
-[**array[ContactHistory]**](ContactHistory.md)
 
 ### Authorization
 
@@ -314,7 +276,7 @@ Upload contacts from a file. Required Access Level: ModifyContacts
 ### Example
 
 ```bash
-ElasticEmail contactsImportPost  listName=value  encodingName=value
+ElasticEmail contactsImportPost  listName=value  encodingName=value  fileUrl=value
 ```
 
 ### Parameters
@@ -324,6 +286,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **listName** | **string** | Name of an existing list to add these contacts to | [optional] [default to null]
  **encodingName** | **string** | In what encoding the file is uploaded | [optional] [default to null]
+ **fileUrl** | **string** | Optional url of csv to import | [optional] [default to null]
  **file** | **binary** |  | [optional] [default to null]
 
 ### Return type

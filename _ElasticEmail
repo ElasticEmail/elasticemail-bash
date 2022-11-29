@@ -302,7 +302,6 @@ case $state in
             "campaignsGet[Load Campaigns]" \
             "campaignsPost[Add Campaign]"             "contactsByEmailDelete[Delete Contact]" \
             "contactsByEmailGet[Load Contact]" \
-            "contactsByEmailHistoryGet[Load History]" \
             "contactsByEmailPut[Update Contact]" \
             "contactsDeletePost[Delete Contacts Bulk]" \
             "contactsExportByIdStatusGet[Check Export Status]" \
@@ -437,15 +436,6 @@ case $state in
                     )
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
-      contactsByEmailHistoryGet)
-        local -a _op_arguments
-        _op_arguments=(
-          "email=:[PATH] Proper email address."
-          "limit=:[QUERY] Maximum number of returned items."
-"offset=:[QUERY] How many items should be returned ahead."
-          )
-        _describe -t actions 'operations' _op_arguments -S '' && ret=0
-        ;;
       contactsByEmailPut)
         local -a _op_arguments
         _op_arguments=(
@@ -490,6 +480,7 @@ case $state in
         _op_arguments=(
                     "listName=:[QUERY] Name of an existing list to add these contacts to"
 "encodingName=:[QUERY] In what encoding the file is uploaded"
+"fileUrl=:[QUERY] Optional url of csv to import"
           )
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
