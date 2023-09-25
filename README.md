@@ -254,6 +254,7 @@ Class | Method | HTTP request | Description
  - [EmailContent](docs/EmailContent.md)
  - [EmailData](docs/EmailData.md)
  - [EmailMessageData](docs/EmailMessageData.md)
+ - [EmailPredictedValidationStatus](docs/EmailPredictedValidationStatus.md)
  - [EmailRecipient](docs/EmailRecipient.md)
  - [EmailSend](docs/EmailSend.md)
  - [EmailStatus](docs/EmailStatus.md)
