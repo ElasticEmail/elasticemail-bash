@@ -8,6 +8,7 @@
 # ! openapi-generator (https://openapi-generator.tech)
 # ! FROM OPENAPI SPECIFICATION IN JSON.
 # !
+# ! Generator version: 7.7.0
 # !
 # !
 # ! System wide installation:
@@ -83,6 +84,7 @@ _ElasticEmail()
     operations["contactsImportPost"]=1
     operations["contactsPost"]=1
     operations["emailsByMsgidViewGet"]=1
+    operations["emailsByTransactionidStatusGet"]=1
     operations["emailsMergefilePost"]=1
     operations["emailsPost"]=1
     operations["emailsTransactionalPost"]=1
@@ -104,6 +106,7 @@ _ElasticEmail()
     operations["inboundrouteGet"]=1
     operations["inboundrouteOrderPut"]=1
     operations["inboundroutePost"]=1
+    operations["listsByListnameContactsGet"]=1
     operations["listsByNameContactsPost"]=1
     operations["listsByNameContactsRemovePost"]=1
     operations["listsByNameDelete"]=1
@@ -183,6 +186,7 @@ _ElasticEmail()
     operation_parameters["contactsImportPost"]="listName= encodingName= fileUrl= "
     operation_parameters["contactsPost"]="listnames= "
     operation_parameters["emailsByMsgidViewGet"]="msgid= "
+    operation_parameters["emailsByTransactionidStatusGet"]="transactionid= showFailed= showSent= showDelivered= showPending= showOpened= showClicked= showAbuse= showUnsubscribed= showErrors= showMessageIDs= "
     operation_parameters["emailsMergefilePost"]=""
     operation_parameters["emailsPost"]=""
     operation_parameters["emailsTransactionalPost"]=""
@@ -204,6 +208,7 @@ _ElasticEmail()
     operation_parameters["inboundrouteGet"]=""
     operation_parameters["inboundrouteOrderPut"]=""
     operation_parameters["inboundroutePost"]=""
+    operation_parameters["listsByListnameContactsGet"]="listname= limit= offset= "
     operation_parameters["listsByNameContactsPost"]="name= "
     operation_parameters["listsByNameContactsRemovePost"]="name= "
     operation_parameters["listsByNameDelete"]="name= "
@@ -267,6 +272,116 @@ _ElasticEmail()
 
     # An associative array of possible values for enum parameters
     declare -A operation_parameters_enum_values
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showFailed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showSent"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showDelivered"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showPending"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showOpened"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showClicked"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showAbuse"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showUnsubscribed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showErrors"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showMessageIDs"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showFailed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showSent"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showDelivered"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showPending"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showOpened"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showClicked"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showAbuse"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showUnsubscribed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showErrors"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showMessageIDs"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showFailed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showSent"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showDelivered"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showPending"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showOpened"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showClicked"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showAbuse"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showUnsubscribed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showErrors"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showMessageIDs"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showFailed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showSent"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showDelivered"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showPending"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showOpened"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showClicked"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showAbuse"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showUnsubscribed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showErrors"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showMessageIDs"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showFailed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showSent"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showDelivered"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showPending"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showOpened"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showClicked"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showAbuse"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showUnsubscribed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showErrors"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showMessageIDs"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showFailed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showSent"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showDelivered"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showPending"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showOpened"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showClicked"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showAbuse"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showUnsubscribed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showErrors"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showMessageIDs"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showFailed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showSent"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showDelivered"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showPending"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showOpened"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showClicked"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showAbuse"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showUnsubscribed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showErrors"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showMessageIDs"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showFailed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showSent"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showDelivered"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showPending"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showOpened"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showClicked"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showAbuse"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showUnsubscribed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showErrors"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showMessageIDs"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showFailed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showSent"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showDelivered"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showPending"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showOpened"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showClicked"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showAbuse"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showUnsubscribed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showErrors"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showMessageIDs"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showFailed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showSent"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showDelivered"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showPending"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showOpened"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showClicked"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showAbuse"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showUnsubscribed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showErrors"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showMessageIDs"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showFailed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showSent"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showDelivered"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showPending"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showOpened"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showClicked"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showAbuse"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showUnsubscribed"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showErrors"]="true false"
+    operation_parameters_enum_values["emailsByTransactionidStatusGet::showMessageIDs"]="true false"
 
     #
     # Check if this is OSX and use special __osx_init_completion function

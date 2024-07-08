@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Poolname** | **string** |  | [optional] [default to null]
-**From** | **string** |  | [optional] [default to null]
+**From** | **string** |  | [default to null]
 **ReplyTo** | **string** |  | [optional] [default to null]
 **Subject** | **string** |  | [optional] [default to null]
 **TemplateName** | **string** |  | [optional] [default to null]

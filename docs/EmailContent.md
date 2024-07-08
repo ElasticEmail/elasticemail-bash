@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Headers** | **map[String, string]** |  | [optional] [default to null]
 **Postback** | **string** |  | [optional] [default to null]
 **EnvelopeFrom** | **string** |  | [optional] [default to null]
-**From** | **string** |  | [optional] [default to null]
+**From** | **string** |  | [default to null]
 **ReplyTo** | **string** |  | [optional] [default to null]
 **Subject** | **string** |  | [optional] [default to null]
 **TemplateName** | **string** |  | [optional] [default to null]

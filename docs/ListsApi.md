@@ -4,6 +4,7 @@ All URIs are relative to */v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**listsByListnameContactsGet**](ListsApi.md#listsByListnameContactsGet) | **GET** /lists/{listname}/contacts | Load Contacts in List
 [**listsByNameContactsPost**](ListsApi.md#listsByNameContactsPost) | **POST** /lists/{name}/contacts | Add Contacts to List
 [**listsByNameContactsRemovePost**](ListsApi.md#listsByNameContactsRemovePost) | **POST** /lists/{name}/contacts/remove | Remove Contacts from List
 [**listsByNameDelete**](ListsApi.md#listsByNameDelete) | **DELETE** /lists/{name} | Delete List
@@ -12,6 +13,43 @@ Method | HTTP request | Description
 [**listsGet**](ListsApi.md#listsGet) | **GET** /lists | Load Lists
 [**listsPost**](ListsApi.md#listsPost) | **POST** /lists | Add List
 
+
+
+## listsByListnameContactsGet
+
+Load Contacts in List
+
+Returns a list of contacts. Required Access Level: ViewContacts
+
+### Example
+
+```bash
+ElasticEmail listsByListnameContactsGet listname=value  limit=value  offset=value
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **listname** | **string** | Name of your list. | [default to null]
+ **limit** | **integer** | Maximum number of returned items. | [optional] [default to null]
+ **offset** | **integer** | How many items should be returned ahead. | [optional] [default to null]
+
+### Return type
+
+[**array[Contact]**](Contact.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not Applicable
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
 ## listsByNameContactsPost

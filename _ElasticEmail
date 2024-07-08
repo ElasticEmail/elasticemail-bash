@@ -10,6 +10,7 @@
 # !
 # ! Based on: https://github.com/Valodim/zsh-curl-completion/blob/master/_curl
 # !
+# ! Generator version: 7.7.0
 # !
 # !
 # ! Installation:
@@ -309,6 +310,7 @@ case $state in
             "contactsGet[Load Contacts]" \
             "contactsImportPost[Upload Contacts]" \
             "contactsPost[Add Contact]"             "emailsByMsgidViewGet[View Email]" \
+            "emailsByTransactionidStatusGet[Get Status]" \
             "emailsMergefilePost[Send Bulk Emails CSV]" \
             "emailsPost[Send Bulk Emails]" \
             "emailsTransactionalPost[Send Transactional Email]"             "eventsByTransactionidGet[Load Email Events]" \
@@ -326,7 +328,8 @@ case $state in
             "inboundrouteByIdPut[Update Route]" \
             "inboundrouteGet[Get Routes]" \
             "inboundrouteOrderPut[Update Sorting]" \
-            "inboundroutePost[Create Route]"             "listsByNameContactsPost[Add Contacts to List]" \
+            "inboundroutePost[Create Route]"             "listsByListnameContactsGet[Load Contacts in List]" \
+            "listsByNameContactsPost[Add Contacts to List]" \
             "listsByNameContactsRemovePost[Remove Contacts from List]" \
             "listsByNameDelete[Delete List]" \
             "listsByNameGet[Load List]" \
@@ -498,6 +501,33 @@ case $state in
                     )
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
+      emailsByTransactionidStatusGet)
+        local -a _op_arguments
+        _op_arguments=(
+          "transactionid=:[PATH] Transaction identifier"
+          "showFailed=true:[QUERY] Include Bounced email addresses."
+          "showFailed=false:[QUERY] Include Bounced email addresses."
+"showSent=true:[QUERY] Include Sent email addresses."
+          "showSent=false:[QUERY] Include Sent email addresses."
+"showDelivered=true:[QUERY] Include all delivered email addresses."
+          "showDelivered=false:[QUERY] Include all delivered email addresses."
+"showPending=true:[QUERY] Include Ready to send email addresses."
+          "showPending=false:[QUERY] Include Ready to send email addresses."
+"showOpened=true:[QUERY] Include Opened email addresses."
+          "showOpened=false:[QUERY] Include Opened email addresses."
+"showClicked=true:[QUERY] Include Clicked email addresses."
+          "showClicked=false:[QUERY] Include Clicked email addresses."
+"showAbuse=true:[QUERY] Include Reported as abuse email addresses."
+          "showAbuse=false:[QUERY] Include Reported as abuse email addresses."
+"showUnsubscribed=true:[QUERY] Include Unsubscribed email addresses."
+          "showUnsubscribed=false:[QUERY] Include Unsubscribed email addresses."
+"showErrors=true:[QUERY] Include error messages for bounced emails."
+          "showErrors=false:[QUERY] Include error messages for bounced emails."
+"showMessageIDs=true:[QUERY] Include all MessageIDs for this transaction"
+          "showMessageIDs=false:[QUERY] Include all MessageIDs for this transaction"
+          )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
       emailsMergefilePost)
         local -a _op_arguments
         _op_arguments=(
@@ -665,6 +695,15 @@ case $state in
         local -a _op_arguments
         _op_arguments=(
                               )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      listsByListnameContactsGet)
+        local -a _op_arguments
+        _op_arguments=(
+          "listname=:[PATH] Name of your list."
+          "limit=:[QUERY] Maximum number of returned items."
+"offset=:[QUERY] How many items should be returned ahead."
+          )
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
       listsByNameContactsPost)

@@ -8,6 +8,7 @@
 # ! openapi-generator (https://openapi-generator.tech)
 # ! FROM OPENAPI SPECIFICATION IN JSON.
 # !
+# ! Generator version: 7.7.0
 # !
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -123,6 +124,17 @@ operation_parameters_minimum_occurrences["contactsImportPost:::file"]=0
 operation_parameters_minimum_occurrences["contactsPost:::ContactPayload"]=1
 operation_parameters_minimum_occurrences["contactsPost:::listnames"]=0
 operation_parameters_minimum_occurrences["emailsByMsgidViewGet:::msgid"]=1
+operation_parameters_minimum_occurrences["emailsByTransactionidStatusGet:::transactionid"]=1
+operation_parameters_minimum_occurrences["emailsByTransactionidStatusGet:::showFailed"]=0
+operation_parameters_minimum_occurrences["emailsByTransactionidStatusGet:::showSent"]=0
+operation_parameters_minimum_occurrences["emailsByTransactionidStatusGet:::showDelivered"]=0
+operation_parameters_minimum_occurrences["emailsByTransactionidStatusGet:::showPending"]=0
+operation_parameters_minimum_occurrences["emailsByTransactionidStatusGet:::showOpened"]=0
+operation_parameters_minimum_occurrences["emailsByTransactionidStatusGet:::showClicked"]=0
+operation_parameters_minimum_occurrences["emailsByTransactionidStatusGet:::showAbuse"]=0
+operation_parameters_minimum_occurrences["emailsByTransactionidStatusGet:::showUnsubscribed"]=0
+operation_parameters_minimum_occurrences["emailsByTransactionidStatusGet:::showErrors"]=0
+operation_parameters_minimum_occurrences["emailsByTransactionidStatusGet:::showMessageIDs"]=0
 operation_parameters_minimum_occurrences["emailsMergefilePost:::MergeEmailPayload"]=1
 operation_parameters_minimum_occurrences["emailsPost:::EmailMessageData"]=1
 operation_parameters_minimum_occurrences["emailsTransactionalPost:::EmailTransactionalMessageData"]=1
@@ -173,6 +185,9 @@ operation_parameters_minimum_occurrences["inboundrouteByIdPut:::id"]=1
 operation_parameters_minimum_occurrences["inboundrouteByIdPut:::InboundPayload"]=1
 operation_parameters_minimum_occurrences["inboundrouteOrderPut:::SortOrderItem"]=1
 operation_parameters_minimum_occurrences["inboundroutePost:::InboundPayload"]=1
+operation_parameters_minimum_occurrences["listsByListnameContactsGet:::listname"]=1
+operation_parameters_minimum_occurrences["listsByListnameContactsGet:::limit"]=0
+operation_parameters_minimum_occurrences["listsByListnameContactsGet:::offset"]=0
 operation_parameters_minimum_occurrences["listsByNameContactsPost:::name"]=1
 operation_parameters_minimum_occurrences["listsByNameContactsPost:::EmailsPayload"]=1
 operation_parameters_minimum_occurrences["listsByNameContactsRemovePost:::name"]=1
@@ -300,6 +315,17 @@ operation_parameters_maximum_occurrences["contactsImportPost:::file"]=0
 operation_parameters_maximum_occurrences["contactsPost:::ContactPayload"]=0
 operation_parameters_maximum_occurrences["contactsPost:::listnames"]=0
 operation_parameters_maximum_occurrences["emailsByMsgidViewGet:::msgid"]=0
+operation_parameters_maximum_occurrences["emailsByTransactionidStatusGet:::transactionid"]=0
+operation_parameters_maximum_occurrences["emailsByTransactionidStatusGet:::showFailed"]=0
+operation_parameters_maximum_occurrences["emailsByTransactionidStatusGet:::showSent"]=0
+operation_parameters_maximum_occurrences["emailsByTransactionidStatusGet:::showDelivered"]=0
+operation_parameters_maximum_occurrences["emailsByTransactionidStatusGet:::showPending"]=0
+operation_parameters_maximum_occurrences["emailsByTransactionidStatusGet:::showOpened"]=0
+operation_parameters_maximum_occurrences["emailsByTransactionidStatusGet:::showClicked"]=0
+operation_parameters_maximum_occurrences["emailsByTransactionidStatusGet:::showAbuse"]=0
+operation_parameters_maximum_occurrences["emailsByTransactionidStatusGet:::showUnsubscribed"]=0
+operation_parameters_maximum_occurrences["emailsByTransactionidStatusGet:::showErrors"]=0
+operation_parameters_maximum_occurrences["emailsByTransactionidStatusGet:::showMessageIDs"]=0
 operation_parameters_maximum_occurrences["emailsMergefilePost:::MergeEmailPayload"]=0
 operation_parameters_maximum_occurrences["emailsPost:::EmailMessageData"]=0
 operation_parameters_maximum_occurrences["emailsTransactionalPost:::EmailTransactionalMessageData"]=0
@@ -350,6 +376,9 @@ operation_parameters_maximum_occurrences["inboundrouteByIdPut:::id"]=0
 operation_parameters_maximum_occurrences["inboundrouteByIdPut:::InboundPayload"]=0
 operation_parameters_maximum_occurrences["inboundrouteOrderPut:::SortOrderItem"]=0
 operation_parameters_maximum_occurrences["inboundroutePost:::InboundPayload"]=0
+operation_parameters_maximum_occurrences["listsByListnameContactsGet:::listname"]=0
+operation_parameters_maximum_occurrences["listsByListnameContactsGet:::limit"]=0
+operation_parameters_maximum_occurrences["listsByListnameContactsGet:::offset"]=0
 operation_parameters_maximum_occurrences["listsByNameContactsPost:::name"]=0
 operation_parameters_maximum_occurrences["listsByNameContactsPost:::EmailsPayload"]=0
 operation_parameters_maximum_occurrences["listsByNameContactsRemovePost:::name"]=0
@@ -474,6 +503,17 @@ operation_parameters_collection_type["contactsImportPost:::file"]=""
 operation_parameters_collection_type["contactsPost:::ContactPayload"]=
 operation_parameters_collection_type["contactsPost:::listnames"]="multi"
 operation_parameters_collection_type["emailsByMsgidViewGet:::msgid"]=""
+operation_parameters_collection_type["emailsByTransactionidStatusGet:::transactionid"]=""
+operation_parameters_collection_type["emailsByTransactionidStatusGet:::showFailed"]=""
+operation_parameters_collection_type["emailsByTransactionidStatusGet:::showSent"]=""
+operation_parameters_collection_type["emailsByTransactionidStatusGet:::showDelivered"]=""
+operation_parameters_collection_type["emailsByTransactionidStatusGet:::showPending"]=""
+operation_parameters_collection_type["emailsByTransactionidStatusGet:::showOpened"]=""
+operation_parameters_collection_type["emailsByTransactionidStatusGet:::showClicked"]=""
+operation_parameters_collection_type["emailsByTransactionidStatusGet:::showAbuse"]=""
+operation_parameters_collection_type["emailsByTransactionidStatusGet:::showUnsubscribed"]=""
+operation_parameters_collection_type["emailsByTransactionidStatusGet:::showErrors"]=""
+operation_parameters_collection_type["emailsByTransactionidStatusGet:::showMessageIDs"]=""
 operation_parameters_collection_type["emailsMergefilePost:::MergeEmailPayload"]=""
 operation_parameters_collection_type["emailsPost:::EmailMessageData"]=""
 operation_parameters_collection_type["emailsTransactionalPost:::EmailTransactionalMessageData"]=""
@@ -524,6 +564,9 @@ operation_parameters_collection_type["inboundrouteByIdPut:::id"]=""
 operation_parameters_collection_type["inboundrouteByIdPut:::InboundPayload"]=""
 operation_parameters_collection_type["inboundrouteOrderPut:::SortOrderItem"]=
 operation_parameters_collection_type["inboundroutePost:::InboundPayload"]=""
+operation_parameters_collection_type["listsByListnameContactsGet:::listname"]=""
+operation_parameters_collection_type["listsByListnameContactsGet:::limit"]=""
+operation_parameters_collection_type["listsByListnameContactsGet:::offset"]=""
 operation_parameters_collection_type["listsByNameContactsPost:::name"]=""
 operation_parameters_collection_type["listsByNameContactsPost:::EmailsPayload"]=""
 operation_parameters_collection_type["listsByNameContactsRemovePost:::name"]=""
@@ -771,20 +814,24 @@ header_arguments_to_curl() {
 #
 ##############################################################################
 body_parameters_to_json() {
-    local body_json="-d '{"
-    local count=0
-    for key in "${!body_parameters[@]}"; do
-        if [[ $((count++)) -gt 0 ]]; then
-            body_json+=", "
-        fi
-        body_json+="\"${key}\": ${body_parameters[${key}]}"
-    done
-    body_json+="}'"
-
-    if [[ "${#body_parameters[@]}" -eq 0 ]]; then
-        echo ""
+    if [[ $RAW_BODY == "1" ]]; then
+        echo "-d '${body_parameters["RAW_BODY"]}'"
     else
-        echo "${body_json}"
+        local body_json="-d '{"
+        local count=0
+        for key in "${!body_parameters[@]}"; do
+            if [[ $((count++)) -gt 0 ]]; then
+                body_json+=", "
+            fi
+            body_json+="\"${key}\": ${body_parameters[${key}]}"
+        done
+        body_json+="}'"
+
+        if [[ "${#body_parameters[@]}" -eq 0 ]]; then
+            echo ""
+        else
+            echo "${body_json}"
+        fi
     fi
 }
 
@@ -1045,6 +1092,7 @@ echo "  $ops" | column -t -s ';'
     echo -e "${BOLD}${WHITE}[emails]${OFF}"
 read -r -d '' ops <<EOF
   ${CYAN}emailsByMsgidViewGet${OFF};View Email (AUTH)
+  ${CYAN}emailsByTransactionidStatusGet${OFF};Get Status (AUTH)
   ${CYAN}emailsMergefilePost${OFF};Send Bulk Emails CSV (AUTH)
   ${CYAN}emailsPost${OFF};Send Bulk Emails (AUTH)
   ${CYAN}emailsTransactionalPost${OFF};Send Transactional Email (AUTH)
@@ -1086,6 +1134,7 @@ echo "  $ops" | column -t -s ';'
     echo ""
     echo -e "${BOLD}${WHITE}[lists]${OFF}"
 read -r -d '' ops <<EOF
+  ${CYAN}listsByListnameContactsGet${OFF};Load Contacts in List (AUTH)
   ${CYAN}listsByNameContactsPost${OFF};Add Contacts to List (AUTH)
   ${CYAN}listsByNameContactsRemovePost${OFF};Remove Contacts from List (AUTH)
   ${CYAN}listsByNameDelete${OFF};Delete List (AUTH)
@@ -1545,6 +1594,44 @@ print_emailsByMsgidViewGet_help() {
 }
 ##############################################################################
 #
+# Print help for emailsByTransactionidStatusGet operation
+#
+##############################################################################
+print_emailsByTransactionidStatusGet_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}emailsByTransactionidStatusGet - Get Status${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "Get status details of an email transaction. Required Access Level: ViewReports" | paste -sd' ' | fold -sw 80
+    echo -e ""
+    echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}transactionid${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Transaction identifier ${YELLOW}Specify as: transactionid=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}showFailed${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: false)${OFF} - Include Bounced email addresses.${YELLOW} Specify as: showFailed=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}showSent${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: false)${OFF} - Include Sent email addresses.${YELLOW} Specify as: showSent=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}showDelivered${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: false)${OFF} - Include all delivered email addresses.${YELLOW} Specify as: showDelivered=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}showPending${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: false)${OFF} - Include Ready to send email addresses.${YELLOW} Specify as: showPending=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}showOpened${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: false)${OFF} - Include Opened email addresses.${YELLOW} Specify as: showOpened=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}showClicked${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: false)${OFF} - Include Clicked email addresses.${YELLOW} Specify as: showClicked=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}showAbuse${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: false)${OFF} - Include Reported as abuse email addresses.${YELLOW} Specify as: showAbuse=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}showUnsubscribed${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: false)${OFF} - Include Unsubscribed email addresses.${YELLOW} Specify as: showUnsubscribed=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}showErrors${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: false)${OFF} - Include error messages for bounced emails.${YELLOW} Specify as: showErrors=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}showMessageIDs${OFF} ${BLUE}[boolean]${OFF} ${CYAN}(default: false)${OFF} - Include all MessageIDs for this transaction${YELLOW} Specify as: showMessageIDs=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=200
+    echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
+##############################################################################
+#
 # Print help for emailsMergefilePost operation
 #
 ##############################################################################
@@ -1983,6 +2070,28 @@ print_inboundroutePost_help() {
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}body${OFF} ${BLUE}[application/json]${OFF} ${RED}(required)${OFF}${OFF} - " | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=200
+    echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
+##############################################################################
+#
+# Print help for listsByListnameContactsGet operation
+#
+##############################################################################
+print_listsByListnameContactsGet_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}listsByListnameContactsGet - Load Contacts in List${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "Returns a list of contacts. Required Access Level: ViewContacts" | paste -sd' ' | fold -sw 80
+    echo -e ""
+    echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}listname${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Name of your list. ${YELLOW}Specify as: listname=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}limit${OFF} ${BLUE}[integer]${OFF} ${CYAN}(default: null)${OFF} - Maximum number of returned items.${YELLOW} Specify as: limit=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}offset${OFF} ${BLUE}[integer]${OFF} ${CYAN}(default: null)${OFF} - How many items should be returned ahead.${YELLOW} Specify as: offset=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=200
@@ -3904,6 +4013,42 @@ call_emailsByMsgidViewGet() {
 
 ##############################################################################
 #
+# Call emailsByTransactionidStatusGet operation
+#
+##############################################################################
+call_emailsByTransactionidStatusGet() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=(transactionid)
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(showFailed showSent showDelivered showPending showOpened showClicked showAbuse showUnsubscribed showErrors showMessageIDs  )
+    local path
+
+    if ! path=$(build_request_path "/v4/emails/{transactionid}/status" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="GET"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    if [[ "$print_curl" = true ]]; then
+        echo "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    else
+        eval "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    fi
+}
+
+##############################################################################
+#
 # Call emailsMergefilePost operation
 #
 ##############################################################################
@@ -4949,6 +5094,42 @@ call_inboundroutePost() {
         else
             eval "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} ${body_json_curl} \"${host}${path}\""
         fi
+    fi
+}
+
+##############################################################################
+#
+# Call listsByListnameContactsGet operation
+#
+##############################################################################
+call_listsByListnameContactsGet() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=(listname)
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(limit offset  )
+    local path
+
+    if ! path=$(build_request_path "/v4/lists/{listname}/contacts" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="GET"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    if [[ "$print_curl" = true ]]; then
+        echo "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    else
+        eval "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
     fi
 }
 
@@ -8014,6 +8195,9 @@ case $key in
     emailsByMsgidViewGet)
     operation="emailsByMsgidViewGet"
     ;;
+    emailsByTransactionidStatusGet)
+    operation="emailsByTransactionidStatusGet"
+    ;;
     emailsMergefilePost)
     operation="emailsMergefilePost"
     ;;
@@ -8076,6 +8260,9 @@ case $key in
     ;;
     inboundroutePost)
     operation="inboundroutePost"
+    ;;
+    listsByListnameContactsGet)
+    operation="listsByListnameContactsGet"
     ;;
     listsByNameContactsPost)
     operation="listsByNameContactsPost"
@@ -8265,6 +8452,16 @@ case $key in
         body_parameters[${body_key}]="\"${body_value}\""
     fi
     ;;
+    --body=*)
+    # Parse value of body as argument and convert it into only
+    # the raw body content
+    if [[ "$operation" ]]; then
+        IFS='--body=' read -r body_value <<< "$key"
+        body_value=${body_value##--body=}
+        body_parameters["RAW_BODY"]="${body_value}"
+        RAW_BODY=1
+    fi
+    ;;
     *:=*)
     # Parse body arguments and convert them into top level
     # JSON properties passed in the body content without quotes
@@ -8386,6 +8583,9 @@ case $operation in
     emailsByMsgidViewGet)
     call_emailsByMsgidViewGet
     ;;
+    emailsByTransactionidStatusGet)
+    call_emailsByTransactionidStatusGet
+    ;;
     emailsMergefilePost)
     call_emailsMergefilePost
     ;;
@@ -8448,6 +8648,9 @@ case $operation in
     ;;
     inboundroutePost)
     call_inboundroutePost
+    ;;
+    listsByListnameContactsGet)
+    call_listsByListnameContactsGet
     ;;
     listsByNameContactsPost)
     call_listsByNameContactsPost

@@ -143,6 +143,7 @@ Class | Method | HTTP request | Description
 *ContactsApi* | [**contactsImportPost**](docs/ContactsApi.md#contactsimportpost) | **POST** /contacts/import | Upload Contacts
 *ContactsApi* | [**contactsPost**](docs/ContactsApi.md#contactspost) | **POST** /contacts | Add Contact
 *EmailsApi* | [**emailsByMsgidViewGet**](docs/EmailsApi.md#emailsbymsgidviewget) | **GET** /emails/{msgid}/view | View Email
+*EmailsApi* | [**emailsByTransactionidStatusGet**](docs/EmailsApi.md#emailsbytransactionidstatusget) | **GET** /emails/{transactionid}/status | Get Status
 *EmailsApi* | [**emailsMergefilePost**](docs/EmailsApi.md#emailsmergefilepost) | **POST** /emails/mergefile | Send Bulk Emails CSV
 *EmailsApi* | [**emailsPost**](docs/EmailsApi.md#emailspost) | **POST** /emails | Send Bulk Emails
 *EmailsApi* | [**emailsTransactionalPost**](docs/EmailsApi.md#emailstransactionalpost) | **POST** /emails/transactional | Send Transactional Email
@@ -164,6 +165,7 @@ Class | Method | HTTP request | Description
 *InboundRouteApi* | [**inboundrouteGet**](docs/InboundRouteApi.md#inboundrouteget) | **GET** /inboundroute | Get Routes
 *InboundRouteApi* | [**inboundrouteOrderPut**](docs/InboundRouteApi.md#inboundrouteorderput) | **PUT** /inboundroute/order | Update Sorting
 *InboundRouteApi* | [**inboundroutePost**](docs/InboundRouteApi.md#inboundroutepost) | **POST** /inboundroute | Create Route
+*ListsApi* | [**listsByListnameContactsGet**](docs/ListsApi.md#listsbylistnamecontactsget) | **GET** /lists/{listname}/contacts | Load Contacts in List
 *ListsApi* | [**listsByNameContactsPost**](docs/ListsApi.md#listsbynamecontactspost) | **POST** /lists/{name}/contacts | Add Contacts to List
 *ListsApi* | [**listsByNameContactsRemovePost**](docs/ListsApi.md#listsbynamecontactsremovepost) | **POST** /lists/{name}/contacts/remove | Remove Contacts from List
 *ListsApi* | [**listsByNameDelete**](docs/ListsApi.md#listsbynamedelete) | **DELETE** /lists/{name} | Delete List
@@ -253,6 +255,8 @@ Class | Method | HTTP request | Description
  - [DeliveryOptimizationType](docs/DeliveryOptimizationType.md)
  - [EmailContent](docs/EmailContent.md)
  - [EmailData](docs/EmailData.md)
+ - [EmailJobFailedStatus](docs/EmailJobFailedStatus.md)
+ - [EmailJobStatus](docs/EmailJobStatus.md)
  - [EmailMessageData](docs/EmailMessageData.md)
  - [EmailPredictedValidationStatus](docs/EmailPredictedValidationStatus.md)
  - [EmailRecipient](docs/EmailRecipient.md)
