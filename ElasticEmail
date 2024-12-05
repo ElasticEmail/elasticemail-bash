@@ -8,7 +8,7 @@
 # ! openapi-generator (https://openapi-generator.tech)
 # ! FROM OPENAPI SPECIFICATION IN JSON.
 # !
-# ! Generator version: 7.7.0
+# ! Generator version: 7.5.0
 # !
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -98,6 +98,7 @@ declare -a result_color_table=( "$WHITE" "$WHITE" "$GREEN" "$YELLOW" "$WHITE" "$
 declare -A operation_parameters_minimum_occurrences
 operation_parameters_minimum_occurrences["campaignsByNameDelete:::name"]=1
 operation_parameters_minimum_occurrences["campaignsByNameGet:::name"]=1
+operation_parameters_minimum_occurrences["campaignsByNamePausePut:::name"]=1
 operation_parameters_minimum_occurrences["campaignsByNamePut:::name"]=1
 operation_parameters_minimum_occurrences["campaignsByNamePut:::Campaign"]=1
 operation_parameters_minimum_occurrences["campaignsGet:::search"]=0
@@ -123,6 +124,15 @@ operation_parameters_minimum_occurrences["contactsImportPost:::fileUrl"]=0
 operation_parameters_minimum_occurrences["contactsImportPost:::file"]=0
 operation_parameters_minimum_occurrences["contactsPost:::ContactPayload"]=1
 operation_parameters_minimum_occurrences["contactsPost:::listnames"]=0
+operation_parameters_minimum_occurrences["domainsByDomainDelete:::domain"]=1
+operation_parameters_minimum_occurrences["domainsByDomainGet:::domain"]=1
+operation_parameters_minimum_occurrences["domainsByDomainPut:::domain"]=1
+operation_parameters_minimum_occurrences["domainsByDomainPut:::DomainUpdatePayload"]=1
+operation_parameters_minimum_occurrences["domainsByDomainRestrictedGet:::domain"]=1
+operation_parameters_minimum_occurrences["domainsByDomainVerificationPut:::domain"]=1
+operation_parameters_minimum_occurrences["domainsByDomainVerificationPut:::body"]=1
+operation_parameters_minimum_occurrences["domainsByEmailDefaultPatch:::email"]=1
+operation_parameters_minimum_occurrences["domainsPost:::DomainPayload"]=1
 operation_parameters_minimum_occurrences["emailsByMsgidViewGet:::msgid"]=1
 operation_parameters_minimum_occurrences["emailsByTransactionidStatusGet:::transactionid"]=1
 operation_parameters_minimum_occurrences["emailsByTransactionidStatusGet:::showFailed"]=0
@@ -289,6 +299,7 @@ operation_parameters_minimum_occurrences["verificationsGet:::offset"]=0
 declare -A operation_parameters_maximum_occurrences
 operation_parameters_maximum_occurrences["campaignsByNameDelete:::name"]=0
 operation_parameters_maximum_occurrences["campaignsByNameGet:::name"]=0
+operation_parameters_maximum_occurrences["campaignsByNamePausePut:::name"]=0
 operation_parameters_maximum_occurrences["campaignsByNamePut:::name"]=0
 operation_parameters_maximum_occurrences["campaignsByNamePut:::Campaign"]=0
 operation_parameters_maximum_occurrences["campaignsGet:::search"]=0
@@ -314,6 +325,15 @@ operation_parameters_maximum_occurrences["contactsImportPost:::fileUrl"]=0
 operation_parameters_maximum_occurrences["contactsImportPost:::file"]=0
 operation_parameters_maximum_occurrences["contactsPost:::ContactPayload"]=0
 operation_parameters_maximum_occurrences["contactsPost:::listnames"]=0
+operation_parameters_maximum_occurrences["domainsByDomainDelete:::domain"]=0
+operation_parameters_maximum_occurrences["domainsByDomainGet:::domain"]=0
+operation_parameters_maximum_occurrences["domainsByDomainPut:::domain"]=0
+operation_parameters_maximum_occurrences["domainsByDomainPut:::DomainUpdatePayload"]=0
+operation_parameters_maximum_occurrences["domainsByDomainRestrictedGet:::domain"]=0
+operation_parameters_maximum_occurrences["domainsByDomainVerificationPut:::domain"]=0
+operation_parameters_maximum_occurrences["domainsByDomainVerificationPut:::body"]=0
+operation_parameters_maximum_occurrences["domainsByEmailDefaultPatch:::email"]=0
+operation_parameters_maximum_occurrences["domainsPost:::DomainPayload"]=0
 operation_parameters_maximum_occurrences["emailsByMsgidViewGet:::msgid"]=0
 operation_parameters_maximum_occurrences["emailsByTransactionidStatusGet:::transactionid"]=0
 operation_parameters_maximum_occurrences["emailsByTransactionidStatusGet:::showFailed"]=0
@@ -477,6 +497,7 @@ operation_parameters_maximum_occurrences["verificationsGet:::offset"]=0
 declare -A operation_parameters_collection_type
 operation_parameters_collection_type["campaignsByNameDelete:::name"]=""
 operation_parameters_collection_type["campaignsByNameGet:::name"]=""
+operation_parameters_collection_type["campaignsByNamePausePut:::name"]=""
 operation_parameters_collection_type["campaignsByNamePut:::name"]=""
 operation_parameters_collection_type["campaignsByNamePut:::Campaign"]=""
 operation_parameters_collection_type["campaignsGet:::search"]=""
@@ -502,6 +523,15 @@ operation_parameters_collection_type["contactsImportPost:::fileUrl"]=""
 operation_parameters_collection_type["contactsImportPost:::file"]=""
 operation_parameters_collection_type["contactsPost:::ContactPayload"]=
 operation_parameters_collection_type["contactsPost:::listnames"]="multi"
+operation_parameters_collection_type["domainsByDomainDelete:::domain"]=""
+operation_parameters_collection_type["domainsByDomainGet:::domain"]=""
+operation_parameters_collection_type["domainsByDomainPut:::domain"]=""
+operation_parameters_collection_type["domainsByDomainPut:::DomainUpdatePayload"]=""
+operation_parameters_collection_type["domainsByDomainRestrictedGet:::domain"]=""
+operation_parameters_collection_type["domainsByDomainVerificationPut:::domain"]=""
+operation_parameters_collection_type["domainsByDomainVerificationPut:::body"]=""
+operation_parameters_collection_type["domainsByEmailDefaultPatch:::email"]=""
+operation_parameters_collection_type["domainsPost:::DomainPayload"]=""
 operation_parameters_collection_type["emailsByMsgidViewGet:::msgid"]=""
 operation_parameters_collection_type["emailsByTransactionidStatusGet:::transactionid"]=""
 operation_parameters_collection_type["emailsByTransactionidStatusGet:::showFailed"]=""
@@ -1069,6 +1099,7 @@ EOF
 read -r -d '' ops <<EOF
   ${CYAN}campaignsByNameDelete${OFF};Delete Campaign (AUTH)
   ${CYAN}campaignsByNameGet${OFF};Load Campaign (AUTH)
+  ${CYAN}campaignsByNamePausePut${OFF};Pause Campaign (AUTH)
   ${CYAN}campaignsByNamePut${OFF};Update Campaign (AUTH)
   ${CYAN}campaignsGet${OFF};Load Campaigns (AUTH)
   ${CYAN}campaignsPost${OFF};Add Campaign (AUTH)
@@ -1086,6 +1117,19 @@ read -r -d '' ops <<EOF
   ${CYAN}contactsGet${OFF};Load Contacts (AUTH)
   ${CYAN}contactsImportPost${OFF};Upload Contacts (AUTH)
   ${CYAN}contactsPost${OFF};Add Contact (AUTH)
+EOF
+echo "  $ops" | column -t -s ';'
+    echo ""
+    echo -e "${BOLD}${WHITE}[domains]${OFF}"
+read -r -d '' ops <<EOF
+  ${CYAN}domainsByDomainDelete${OFF};Delete Domain (AUTH)
+  ${CYAN}domainsByDomainGet${OFF};Load Domain (AUTH)
+  ${CYAN}domainsByDomainPut${OFF};Update Domain (AUTH)
+  ${CYAN}domainsByDomainRestrictedGet${OFF};Check for domain restriction (AUTH)
+  ${CYAN}domainsByDomainVerificationPut${OFF};Verify Domain (AUTH)
+  ${CYAN}domainsByEmailDefaultPatch${OFF};Set Default (AUTH)
+  ${CYAN}domainsGet${OFF};Load Domains (AUTH)
+  ${CYAN}domainsPost${OFF};Add Domain (AUTH)
 EOF
 echo "  $ops" | column -t -s ';'
     echo ""
@@ -1322,6 +1366,24 @@ print_campaignsByNameGet_help() {
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Name of Campaign to get ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=200
+    echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
+##############################################################################
+#
+# Print help for campaignsByNamePausePut operation
+#
+##############################################################################
+print_campaignsByNamePausePut_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}campaignsByNamePausePut - Pause Campaign${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "Pauses the specific campaign, cancelling emails that are waiting to be sent. Required Access Level: ModifyCampaigns" | paste -sd' ' | fold -sw 80
+    echo -e ""
+    echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Name of Campaign to pause ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=200
@@ -1576,6 +1638,153 @@ print_contactsPost_help() {
 }
 ##############################################################################
 #
+# Print help for domainsByDomainDelete operation
+#
+##############################################################################
+print_domainsByDomainDelete_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}domainsByDomainDelete - Delete Domain${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "Deletes configured domain from Account. Required Access Level: ModifySettings" | paste -sd' ' | fold -sw 80
+    echo -e ""
+    echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}domain${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Name of the given domain ${YELLOW}Specify as: domain=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=200
+    echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
+##############################################################################
+#
+# Print help for domainsByDomainGet operation
+#
+##############################################################################
+print_domainsByDomainGet_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}domainsByDomainGet - Load Domain${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "Retrieve a domain configured for this Account. Required Access Level: ViewSettings" | paste -sd' ' | fold -sw 80
+    echo -e ""
+    echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}domain${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Name of the given domain ${YELLOW}Specify as: domain=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=200
+    echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
+##############################################################################
+#
+# Print help for domainsByDomainPut operation
+#
+##############################################################################
+print_domainsByDomainPut_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}domainsByDomainPut - Update Domain${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "Updates the specified domain. Required Access Level: ModifySettings" | paste -sd' ' | fold -sw 80
+    echo -e ""
+    echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}domain${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Name of the given domain ${YELLOW}Specify as: domain=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}body${OFF} ${BLUE}[application/json]${OFF} ${RED}(required)${OFF}${OFF} - Updated Domain resource" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=200
+    echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
+##############################################################################
+#
+# Print help for domainsByDomainRestrictedGet operation
+#
+##############################################################################
+print_domainsByDomainRestrictedGet_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}domainsByDomainRestrictedGet - Check for domain restriction${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "Checking if domain is from free provider, or restricted. Required Access Level: ViewSettings" | paste -sd' ' | fold -sw 80
+    echo -e ""
+    echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}domain${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Name of the given domain ${YELLOW}Specify as: domain=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=200
+    echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
+##############################################################################
+#
+# Print help for domainsByDomainVerificationPut operation
+#
+##############################################################################
+print_domainsByDomainVerificationPut_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}domainsByDomainVerificationPut - Verify Domain${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "Verifies that required DNS records exist for specified domain. Required Access Level: ModifySettings" | paste -sd' ' | fold -sw 80
+    echo -e ""
+    echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}domain${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Name of the given domain ${YELLOW}Specify as: domain=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}body${OFF} ${BLUE}[application/json]${OFF} ${RED}(required)${OFF}${OFF} - Tracking type used in the Tracking verification" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=200
+    echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
+##############################################################################
+#
+# Print help for domainsByEmailDefaultPatch operation
+#
+##############################################################################
+print_domainsByEmailDefaultPatch_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}domainsByEmailDefaultPatch - Set Default${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "Sets a verified email address as default sender. Required Access Level: ModifySettings" | paste -sd' ' | fold -sw 80
+    echo -e ""
+    echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}email${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Default email sender, example: mail@yourdomain.com ${YELLOW}Specify as: email=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=200
+    echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
+##############################################################################
+#
+# Print help for domainsGet operation
+#
+##############################################################################
+print_domainsGet_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}domainsGet - Load Domains${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "Returns a list of all domains configured for this Account. Required Access Level: ViewSettings" | paste -sd' ' | fold -sw 80
+    echo -e ""
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=200
+    echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
+##############################################################################
+#
+# Print help for domainsPost operation
+#
+##############################################################################
+print_domainsPost_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}domainsPost - Add Domain${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "Add new domain to Account. Required Access Level: ModifySettings" | paste -sd' ' | fold -sw 80
+    echo -e ""
+    echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}body${OFF} ${BLUE}[application/json]${OFF} ${RED}(required)${OFF}${OFF} - Domain to add" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=201
+    echo -e "${result_color_table[${code:0:1}]}  201;Created${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
+##############################################################################
+#
 # Print help for emailsByMsgidViewGet operation
 #
 ##############################################################################
@@ -1639,7 +1848,15 @@ print_emailsMergefilePost_help() {
     echo ""
     echo -e "${BOLD}${WHITE}emailsMergefilePost - Send Bulk Emails CSV${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "Send bulk merge email. Required Access Level: SendHttp" | paste -sd' ' | fold -sw 80
+    echo -e "Send to a list of contacts submitted in a CSV data file. The first column in the CSV must be the email address and the CSV must contain a header row. Additional fields can be included with a named header row and can be merged with the template using {merge} tags in the content.
+            
+             Example CSV:
+            
+             email, firstname, lastname
+             test1@gmail.com, michael, smith
+             test2@gmail.com, janet, smith
+            
+             Merge file must not be empty. Required Access Level: SendHttp" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}body${OFF} ${BLUE}[application/json]${OFF} ${RED}(required)${OFF}${OFF} - Email data" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
@@ -3334,6 +3551,42 @@ call_campaignsByNameGet() {
 
 ##############################################################################
 #
+# Call campaignsByNamePausePut operation
+#
+##############################################################################
+call_campaignsByNamePausePut() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=(name)
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(  )
+    local path
+
+    if ! path=$(build_request_path "/v4/campaigns/{name}/pause" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="PUT"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    if [[ "$print_curl" = true ]]; then
+        echo "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    else
+        eval "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    fi
+}
+
+##############################################################################
+#
 # Call campaignsByNamePut operation
 #
 ##############################################################################
@@ -3912,6 +4165,420 @@ call_contactsPost() {
     local path
 
     if ! path=$(build_request_path "/v4/contacts" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="POST"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    local body_json_curl=""
+
+    #
+    # Check if the user provided 'Content-type' headers in the
+    # command line. If not try to set them based on the OpenAPI specification
+    # if values produces and consumes are defined unambiguously
+    #
+    if [[ -z $header_content_type ]]; then
+        header_content_type="application/json"
+    fi
+
+
+    if [[ -z $header_content_type && "$force" = false ]]; then
+        :
+        echo "ERROR: Request's content-type not specified!!!"
+        echo "This operation expects content-type in one of the following formats:"
+        echo -e "\\t- application/json"
+        echo ""
+        echo "Use '--content-type' to set proper content type"
+        exit 1
+    else
+        headers_curl="${headers_curl} -H 'Content-type: ${header_content_type}'"
+    fi
+
+
+    #
+    # If we have received some body content over pipe, pass it from the
+    # temporary file to cURL
+    #
+    if [[ -n $body_content_temp_file ]]; then
+        if [[ "$print_curl" = true ]]; then
+            echo "cat ${body_content_temp_file} | curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\" -d @-"
+        else
+            eval "cat ${body_content_temp_file} | curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\" -d @-"
+        fi
+        rm "${body_content_temp_file}"
+    #
+    # If not, try to build the content body from arguments KEY==VALUE and KEY:=VALUE
+    #
+    else
+        body_json_curl=$(body_parameters_to_json)
+        if [[ "$print_curl" = true ]]; then
+            echo "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} ${body_json_curl} \"${host}${path}\""
+        else
+            eval "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} ${body_json_curl} \"${host}${path}\""
+        fi
+    fi
+}
+
+##############################################################################
+#
+# Call domainsByDomainDelete operation
+#
+##############################################################################
+call_domainsByDomainDelete() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=(domain)
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(  )
+    local path
+
+    if ! path=$(build_request_path "/v4/domains/{domain}" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="DELETE"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    if [[ "$print_curl" = true ]]; then
+        echo "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    else
+        eval "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    fi
+}
+
+##############################################################################
+#
+# Call domainsByDomainGet operation
+#
+##############################################################################
+call_domainsByDomainGet() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=(domain)
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(  )
+    local path
+
+    if ! path=$(build_request_path "/v4/domains/{domain}" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="GET"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    if [[ "$print_curl" = true ]]; then
+        echo "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    else
+        eval "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    fi
+}
+
+##############################################################################
+#
+# Call domainsByDomainPut operation
+#
+##############################################################################
+call_domainsByDomainPut() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=(domain)
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(  )
+    local path
+
+    if ! path=$(build_request_path "/v4/domains/{domain}" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="PUT"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    local body_json_curl=""
+
+    #
+    # Check if the user provided 'Content-type' headers in the
+    # command line. If not try to set them based on the OpenAPI specification
+    # if values produces and consumes are defined unambiguously
+    #
+    if [[ -z $header_content_type ]]; then
+        header_content_type="application/json"
+    fi
+
+
+    if [[ -z $header_content_type && "$force" = false ]]; then
+        :
+        echo "ERROR: Request's content-type not specified!!!"
+        echo "This operation expects content-type in one of the following formats:"
+        echo -e "\\t- application/json"
+        echo ""
+        echo "Use '--content-type' to set proper content type"
+        exit 1
+    else
+        headers_curl="${headers_curl} -H 'Content-type: ${header_content_type}'"
+    fi
+
+
+    #
+    # If we have received some body content over pipe, pass it from the
+    # temporary file to cURL
+    #
+    if [[ -n $body_content_temp_file ]]; then
+        if [[ "$print_curl" = true ]]; then
+            echo "cat ${body_content_temp_file} | curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\" -d @-"
+        else
+            eval "cat ${body_content_temp_file} | curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\" -d @-"
+        fi
+        rm "${body_content_temp_file}"
+    #
+    # If not, try to build the content body from arguments KEY==VALUE and KEY:=VALUE
+    #
+    else
+        body_json_curl=$(body_parameters_to_json)
+        if [[ "$print_curl" = true ]]; then
+            echo "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} ${body_json_curl} \"${host}${path}\""
+        else
+            eval "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} ${body_json_curl} \"${host}${path}\""
+        fi
+    fi
+}
+
+##############################################################################
+#
+# Call domainsByDomainRestrictedGet operation
+#
+##############################################################################
+call_domainsByDomainRestrictedGet() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=(domain)
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(  )
+    local path
+
+    if ! path=$(build_request_path "/v4/domains/{domain}/restricted" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="GET"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    if [[ "$print_curl" = true ]]; then
+        echo "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    else
+        eval "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    fi
+}
+
+##############################################################################
+#
+# Call domainsByDomainVerificationPut operation
+#
+##############################################################################
+call_domainsByDomainVerificationPut() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=(domain)
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(  )
+    local path
+
+    if ! path=$(build_request_path "/v4/domains/{domain}/verification" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="PUT"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    local body_json_curl=""
+
+    #
+    # Check if the user provided 'Content-type' headers in the
+    # command line. If not try to set them based on the OpenAPI specification
+    # if values produces and consumes are defined unambiguously
+    #
+    if [[ -z $header_content_type ]]; then
+        header_content_type="application/json"
+    fi
+
+
+    if [[ -z $header_content_type && "$force" = false ]]; then
+        :
+        echo "ERROR: Request's content-type not specified!!!"
+        echo "This operation expects content-type in one of the following formats:"
+        echo -e "\\t- application/json"
+        echo ""
+        echo "Use '--content-type' to set proper content type"
+        exit 1
+    else
+        headers_curl="${headers_curl} -H 'Content-type: ${header_content_type}'"
+    fi
+
+
+    #
+    # If we have received some body content over pipe, pass it from the
+    # temporary file to cURL
+    #
+    if [[ -n $body_content_temp_file ]]; then
+        if [[ "$print_curl" = true ]]; then
+            echo "cat ${body_content_temp_file} | curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\" -d @-"
+        else
+            eval "cat ${body_content_temp_file} | curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\" -d @-"
+        fi
+        rm "${body_content_temp_file}"
+    #
+    # If not, try to build the content body from arguments KEY==VALUE and KEY:=VALUE
+    #
+    else
+        body_json_curl=$(body_parameters_to_json)
+        if [[ "$print_curl" = true ]]; then
+            echo "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} ${body_json_curl} \"${host}${path}\""
+        else
+            eval "curl ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} ${body_json_curl} \"${host}${path}\""
+        fi
+    fi
+}
+
+##############################################################################
+#
+# Call domainsByEmailDefaultPatch operation
+#
+##############################################################################
+call_domainsByEmailDefaultPatch() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=(email)
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(  )
+    local path
+
+    if ! path=$(build_request_path "/v4/domains/{email}/default" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="PATCH"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    if [[ "$print_curl" = true ]]; then
+        echo "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    else
+        eval "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    fi
+}
+
+##############################################################################
+#
+# Call domainsGet operation
+#
+##############################################################################
+call_domainsGet() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=()
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(  )
+    local path
+
+    if ! path=$(build_request_path "/v4/domains" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="GET"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    if [[ "$print_curl" = true ]]; then
+        echo "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    else
+        eval "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    fi
+}
+
+##############################################################################
+#
+# Call domainsPost operation
+#
+##############################################################################
+call_domainsPost() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=()
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(  )
+    local path
+
+    if ! path=$(build_request_path "/v4/domains" path_parameter_names query_parameter_names); then
         ERROR_MSG=$path
         exit 1
     fi
@@ -8156,6 +8823,9 @@ case $key in
     campaignsByNameGet)
     operation="campaignsByNameGet"
     ;;
+    campaignsByNamePausePut)
+    operation="campaignsByNamePausePut"
+    ;;
     campaignsByNamePut)
     operation="campaignsByNamePut"
     ;;
@@ -8191,6 +8861,30 @@ case $key in
     ;;
     contactsPost)
     operation="contactsPost"
+    ;;
+    domainsByDomainDelete)
+    operation="domainsByDomainDelete"
+    ;;
+    domainsByDomainGet)
+    operation="domainsByDomainGet"
+    ;;
+    domainsByDomainPut)
+    operation="domainsByDomainPut"
+    ;;
+    domainsByDomainRestrictedGet)
+    operation="domainsByDomainRestrictedGet"
+    ;;
+    domainsByDomainVerificationPut)
+    operation="domainsByDomainVerificationPut"
+    ;;
+    domainsByEmailDefaultPatch)
+    operation="domainsByEmailDefaultPatch"
+    ;;
+    domainsGet)
+    operation="domainsGet"
+    ;;
+    domainsPost)
+    operation="domainsPost"
     ;;
     emailsByMsgidViewGet)
     operation="emailsByMsgidViewGet"
@@ -8544,6 +9238,9 @@ case $operation in
     campaignsByNameGet)
     call_campaignsByNameGet
     ;;
+    campaignsByNamePausePut)
+    call_campaignsByNamePausePut
+    ;;
     campaignsByNamePut)
     call_campaignsByNamePut
     ;;
@@ -8579,6 +9276,30 @@ case $operation in
     ;;
     contactsPost)
     call_contactsPost
+    ;;
+    domainsByDomainDelete)
+    call_domainsByDomainDelete
+    ;;
+    domainsByDomainGet)
+    call_domainsByDomainGet
+    ;;
+    domainsByDomainPut)
+    call_domainsByDomainPut
+    ;;
+    domainsByDomainRestrictedGet)
+    call_domainsByDomainRestrictedGet
+    ;;
+    domainsByDomainVerificationPut)
+    call_domainsByDomainVerificationPut
+    ;;
+    domainsByEmailDefaultPatch)
+    call_domainsByEmailDefaultPatch
+    ;;
+    domainsGet)
+    call_domainsGet
+    ;;
+    domainsPost)
+    call_domainsPost
     ;;
     emailsByMsgidViewGet)
     call_emailsByMsgidViewGet

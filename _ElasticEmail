@@ -10,7 +10,7 @@
 # !
 # ! Based on: https://github.com/Valodim/zsh-curl-completion/blob/master/_curl
 # !
-# ! Generator version: 7.7.0
+# ! Generator version: 7.5.0
 # !
 # !
 # ! Installation:
@@ -299,6 +299,7 @@ case $state in
     _values "Operations" \
             "campaignsByNameDelete[Delete Campaign]" \
             "campaignsByNameGet[Load Campaign]" \
+            "campaignsByNamePausePut[Pause Campaign]" \
             "campaignsByNamePut[Update Campaign]" \
             "campaignsGet[Load Campaigns]" \
             "campaignsPost[Add Campaign]"             "contactsByEmailDelete[Delete Contact]" \
@@ -309,7 +310,14 @@ case $state in
             "contactsExportPost[Export Contacts]" \
             "contactsGet[Load Contacts]" \
             "contactsImportPost[Upload Contacts]" \
-            "contactsPost[Add Contact]"             "emailsByMsgidViewGet[View Email]" \
+            "contactsPost[Add Contact]"             "domainsByDomainDelete[Delete Domain]" \
+            "domainsByDomainGet[Load Domain]" \
+            "domainsByDomainPut[Update Domain]" \
+            "domainsByDomainRestrictedGet[Check for domain restriction]" \
+            "domainsByDomainVerificationPut[Verify Domain]" \
+            "domainsByEmailDefaultPatch[Set Default]" \
+            "domainsGet[Load Domains]" \
+            "domainsPost[Add Domain]"             "emailsByMsgidViewGet[View Email]" \
             "emailsByTransactionidStatusGet[Get Status]" \
             "emailsMergefilePost[Send Bulk Emails CSV]" \
             "emailsPost[Send Bulk Emails]" \
@@ -403,6 +411,13 @@ case $state in
                     )
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
+      campaignsByNamePausePut)
+        local -a _op_arguments
+        _op_arguments=(
+          "name=:[PATH] Name of Campaign to pause"
+                    )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
       campaignsByNamePut)
         local -a _op_arguments
         _op_arguments=(
@@ -492,6 +507,60 @@ case $state in
         _op_arguments=(
                     "listnames=:[QUERY] Names of lists to which the uploaded contacts should be added to"
           )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      domainsByDomainDelete)
+        local -a _op_arguments
+        _op_arguments=(
+          "domain=:[PATH] Name of the given domain"
+                    )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      domainsByDomainGet)
+        local -a _op_arguments
+        _op_arguments=(
+          "domain=:[PATH] Name of the given domain"
+                    )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      domainsByDomainPut)
+        local -a _op_arguments
+        _op_arguments=(
+          "domain=:[PATH] Name of the given domain"
+                    )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      domainsByDomainRestrictedGet)
+        local -a _op_arguments
+        _op_arguments=(
+          "domain=:[PATH] Name of the given domain"
+                    )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      domainsByDomainVerificationPut)
+        local -a _op_arguments
+        _op_arguments=(
+          "domain=:[PATH] Name of the given domain"
+                    )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      domainsByEmailDefaultPatch)
+        local -a _op_arguments
+        _op_arguments=(
+          "email=:[PATH] Default email sender, example: mail@yourdomain.com"
+                    )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      domainsGet)
+        local -a _op_arguments
+        _op_arguments=(
+                              )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      domainsPost)
+        local -a _op_arguments
+        _op_arguments=(
+                              )
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
       emailsByMsgidViewGet)

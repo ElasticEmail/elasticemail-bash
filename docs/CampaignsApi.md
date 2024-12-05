@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**campaignsByNameDelete**](CampaignsApi.md#campaignsByNameDelete) | **DELETE** /campaigns/{name} | Delete Campaign
 [**campaignsByNameGet**](CampaignsApi.md#campaignsByNameGet) | **GET** /campaigns/{name} | Load Campaign
+[**campaignsByNamePausePut**](CampaignsApi.md#campaignsByNamePausePut) | **PUT** /campaigns/{name}/pause | Pause Campaign
 [**campaignsByNamePut**](CampaignsApi.md#campaignsByNamePut) | **PUT** /campaigns/{name} | Update Campaign
 [**campaignsGet**](CampaignsApi.md#campaignsGet) | **GET** /campaigns | Load Campaigns
 [**campaignsPost**](CampaignsApi.md#campaignsPost) | **POST** /campaigns | Add Campaign
@@ -78,6 +79,41 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not Applicable
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## campaignsByNamePausePut
+
+Pause Campaign
+
+Pauses the specific campaign, cancelling emails that are waiting to be sent. Required Access Level: ModifyCampaigns
+
+### Example
+
+```bash
+ElasticEmail campaignsByNamePausePut name=value
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string** | Name of Campaign to pause | [default to null]
+
+### Return type
+
+(empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not Applicable
+- **Accept**: Not Applicable
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

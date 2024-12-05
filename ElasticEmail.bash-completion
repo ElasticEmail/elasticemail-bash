@@ -8,7 +8,7 @@
 # ! openapi-generator (https://openapi-generator.tech)
 # ! FROM OPENAPI SPECIFICATION IN JSON.
 # !
-# ! Generator version: 7.7.0
+# ! Generator version: 7.5.0
 # !
 # !
 # ! System wide installation:
@@ -71,6 +71,7 @@ _ElasticEmail()
     declare -A operations
     operations["campaignsByNameDelete"]=1
     operations["campaignsByNameGet"]=1
+    operations["campaignsByNamePausePut"]=1
     operations["campaignsByNamePut"]=1
     operations["campaignsGet"]=1
     operations["campaignsPost"]=1
@@ -83,6 +84,14 @@ _ElasticEmail()
     operations["contactsGet"]=1
     operations["contactsImportPost"]=1
     operations["contactsPost"]=1
+    operations["domainsByDomainDelete"]=1
+    operations["domainsByDomainGet"]=1
+    operations["domainsByDomainPut"]=1
+    operations["domainsByDomainRestrictedGet"]=1
+    operations["domainsByDomainVerificationPut"]=1
+    operations["domainsByEmailDefaultPatch"]=1
+    operations["domainsGet"]=1
+    operations["domainsPost"]=1
     operations["emailsByMsgidViewGet"]=1
     operations["emailsByTransactionidStatusGet"]=1
     operations["emailsMergefilePost"]=1
@@ -173,6 +182,7 @@ _ElasticEmail()
     declare -A operation_parameters
     operation_parameters["campaignsByNameDelete"]="name= "
     operation_parameters["campaignsByNameGet"]="name= "
+    operation_parameters["campaignsByNamePausePut"]="name= "
     operation_parameters["campaignsByNamePut"]="name= "
     operation_parameters["campaignsGet"]="search= offset= limit= "
     operation_parameters["campaignsPost"]=""
@@ -185,6 +195,14 @@ _ElasticEmail()
     operation_parameters["contactsGet"]="limit= offset= "
     operation_parameters["contactsImportPost"]="listName= encodingName= fileUrl= "
     operation_parameters["contactsPost"]="listnames= "
+    operation_parameters["domainsByDomainDelete"]="domain= "
+    operation_parameters["domainsByDomainGet"]="domain= "
+    operation_parameters["domainsByDomainPut"]="domain= "
+    operation_parameters["domainsByDomainRestrictedGet"]="domain= "
+    operation_parameters["domainsByDomainVerificationPut"]="domain= "
+    operation_parameters["domainsByEmailDefaultPatch"]="email= "
+    operation_parameters["domainsGet"]=""
+    operation_parameters["domainsPost"]=""
     operation_parameters["emailsByMsgidViewGet"]="msgid= "
     operation_parameters["emailsByTransactionidStatusGet"]="transactionid= showFailed= showSent= showDelivered= showPending= showOpened= showClicked= showAbuse= showUnsubscribed= showErrors= showMessageIDs= "
     operation_parameters["emailsMergefilePost"]=""

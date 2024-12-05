@@ -130,6 +130,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *CampaignsApi* | [**campaignsByNameDelete**](docs/CampaignsApi.md#campaignsbynamedelete) | **DELETE** /campaigns/{name} | Delete Campaign
 *CampaignsApi* | [**campaignsByNameGet**](docs/CampaignsApi.md#campaignsbynameget) | **GET** /campaigns/{name} | Load Campaign
+*CampaignsApi* | [**campaignsByNamePausePut**](docs/CampaignsApi.md#campaignsbynamepauseput) | **PUT** /campaigns/{name}/pause | Pause Campaign
 *CampaignsApi* | [**campaignsByNamePut**](docs/CampaignsApi.md#campaignsbynameput) | **PUT** /campaigns/{name} | Update Campaign
 *CampaignsApi* | [**campaignsGet**](docs/CampaignsApi.md#campaignsget) | **GET** /campaigns | Load Campaigns
 *CampaignsApi* | [**campaignsPost**](docs/CampaignsApi.md#campaignspost) | **POST** /campaigns | Add Campaign
@@ -142,6 +143,14 @@ Class | Method | HTTP request | Description
 *ContactsApi* | [**contactsGet**](docs/ContactsApi.md#contactsget) | **GET** /contacts | Load Contacts
 *ContactsApi* | [**contactsImportPost**](docs/ContactsApi.md#contactsimportpost) | **POST** /contacts/import | Upload Contacts
 *ContactsApi* | [**contactsPost**](docs/ContactsApi.md#contactspost) | **POST** /contacts | Add Contact
+*DomainsApi* | [**domainsByDomainDelete**](docs/DomainsApi.md#domainsbydomaindelete) | **DELETE** /domains/{domain} | Delete Domain
+*DomainsApi* | [**domainsByDomainGet**](docs/DomainsApi.md#domainsbydomainget) | **GET** /domains/{domain} | Load Domain
+*DomainsApi* | [**domainsByDomainPut**](docs/DomainsApi.md#domainsbydomainput) | **PUT** /domains/{domain} | Update Domain
+*DomainsApi* | [**domainsByDomainRestrictedGet**](docs/DomainsApi.md#domainsbydomainrestrictedget) | **GET** /domains/{domain}/restricted | Check for domain restriction
+*DomainsApi* | [**domainsByDomainVerificationPut**](docs/DomainsApi.md#domainsbydomainverificationput) | **PUT** /domains/{domain}/verification | Verify Domain
+*DomainsApi* | [**domainsByEmailDefaultPatch**](docs/DomainsApi.md#domainsbyemaildefaultpatch) | **PATCH** /domains/{email}/default | Set Default
+*DomainsApi* | [**domainsGet**](docs/DomainsApi.md#domainsget) | **GET** /domains | Load Domains
+*DomainsApi* | [**domainsPost**](docs/DomainsApi.md#domainspost) | **POST** /domains | Add Domain
 *EmailsApi* | [**emailsByMsgidViewGet**](docs/EmailsApi.md#emailsbymsgidviewget) | **GET** /emails/{msgid}/view | View Email
 *EmailsApi* | [**emailsByTransactionidStatusGet**](docs/EmailsApi.md#emailsbytransactionidstatusget) | **GET** /emails/{transactionid}/status | Get Status
 *EmailsApi* | [**emailsMergefilePost**](docs/EmailsApi.md#emailsmergefilepost) | **POST** /emails/mergefile | Send Bulk Emails CSV
@@ -241,6 +250,7 @@ Class | Method | HTTP request | Description
  - [CampaignRecipient](docs/CampaignRecipient.md)
  - [CampaignStatus](docs/CampaignStatus.md)
  - [CampaignTemplate](docs/CampaignTemplate.md)
+ - [CertificateValidationStatus](docs/CertificateValidationStatus.md)
  - [ChannelLogStatusSummary](docs/ChannelLogStatusSummary.md)
  - [CompressionFormat](docs/CompressionFormat.md)
  - [ConsentData](docs/ConsentData.md)
@@ -253,6 +263,11 @@ Class | Method | HTTP request | Description
  - [ContactUpdatePayload](docs/ContactUpdatePayload.md)
  - [ContactsList](docs/ContactsList.md)
  - [DeliveryOptimizationType](docs/DeliveryOptimizationType.md)
+ - [DomainData](docs/DomainData.md)
+ - [DomainDetail](docs/DomainDetail.md)
+ - [DomainOwner](docs/DomainOwner.md)
+ - [DomainPayload](docs/DomainPayload.md)
+ - [DomainUpdatePayload](docs/DomainUpdatePayload.md)
  - [EmailContent](docs/EmailContent.md)
  - [EmailData](docs/EmailData.md)
  - [EmailJobFailedStatus](docs/EmailJobFailedStatus.md)
@@ -287,6 +302,7 @@ Class | Method | HTTP request | Description
  - [MergeEmailPayload](docs/MergeEmailPayload.md)
  - [MessageAttachment](docs/MessageAttachment.md)
  - [MessageCategory](docs/MessageCategory.md)
+ - [MessageCategoryEnum](docs/MessageCategoryEnum.md)
  - [NewApiKey](docs/NewApiKey.md)
  - [NewSmtpCredentials](docs/NewSmtpCredentials.md)
  - [Options](docs/Options.md)
@@ -310,6 +326,8 @@ Class | Method | HTTP request | Description
  - [TemplatePayload](docs/TemplatePayload.md)
  - [TemplateScope](docs/TemplateScope.md)
  - [TemplateType](docs/TemplateType.md)
+ - [TrackingType](docs/TrackingType.md)
+ - [TrackingValidationStatus](docs/TrackingValidationStatus.md)
  - [TransactionalRecipient](docs/TransactionalRecipient.md)
  - [Utm](docs/Utm.md)
  - [VerificationFileResult](docs/VerificationFileResult.md)
