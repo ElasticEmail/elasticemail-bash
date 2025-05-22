@@ -345,3 +345,10 @@ Class | Method | HTTP request | Description
 - **API key parameter name**: X-ElasticEmail-ApiKey
 - **Location**: HTTP header
 
+## ApiKeyAuthCustomBranding
+
+
+- **Type**: API key
+- **API key parameter name**: X-Auth-Token
+- **Location**: HTTP header
+

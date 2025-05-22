@@ -711,6 +711,9 @@ basic_auth_credential=""
 ##
 # The user API key
 apikey_auth_credential=""
+##
+# The user API key
+apikey_auth_credential=""
 
 ##
 # If true, the script will only output the actual cURL command that would be
@@ -816,13 +819,26 @@ header_arguments_to_curl() {
     local api_key_header=""
     local api_key_header_in_cli=""
     api_key_header="X-ElasticEmail-ApiKey"
+    local api_key_header=""
+    local api_key_header_in_cli=""
+    api_key_header="X-Auth-Token"
 
     for key in "${!header_arguments[@]}"; do
         headers_curl+="-H \"${key}: ${header_arguments[${key}]}\" "
         if [[ "${key}XX" == "${api_key_header}XX" ]]; then
             api_key_header_in_cli="YES"
         fi
+        if [[ "${key}XX" == "${api_key_header}XX" ]]; then
+            api_key_header_in_cli="YES"
+        fi
     done
+    #
+    # If the api_key was not provided in the header, try one from the
+    # environment variable
+    #
+    if [[ -z $api_key_header_in_cli && -n $apikey_auth_credential ]]; then
+        headers_curl+="-H \"${api_key_header}: ${apikey_auth_credential}\""
+    fi
     #
     # If the api_key was not provided in the header, try one from the
     # environment variable
@@ -1091,6 +1107,8 @@ EOF
     echo -e "${BOLD}${WHITE}Authentication methods${OFF}"
     echo -e ""
     echo -e "  - ${BLUE}Api-key${OFF} - add '${RED}X-ElasticEmail-ApiKey:<api-key>${OFF}' after ${YELLOW}<operation>${OFF}"
+    
+    echo -e "  - ${BLUE}Api-key${OFF} - add '${RED}X-Auth-Token:<api-key>${OFF}' after ${YELLOW}<operation>${OFF}"
     
     echo ""
     echo -e "${BOLD}${WHITE}Operations (grouped by tags)${OFF}"
@@ -2459,7 +2477,7 @@ print_securityApikeysByNameDelete_help() {
     echo ""
     echo -e "${BOLD}${WHITE}securityApikeysByNameDelete - Delete ApiKey${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "Delete your existing ApiKey. Required Access Level: Security" | paste -sd' ' | fold -sw 80
+    echo -e "Delete your existing ApiKey. Required Access Level: ModifyAccessTokens" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Name of the ApiKey ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
@@ -2499,7 +2517,7 @@ print_securityApikeysByNamePut_help() {
     echo ""
     echo -e "${BOLD}${WHITE}securityApikeysByNamePut - Update ApiKey${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "Update your existing ApiKey. Required Access Level: Security" | paste -sd' ' | fold -sw 80
+    echo -e "Update your existing ApiKey. Required Access Level: ModifyAccessTokens" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Name of the ApiKey ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
@@ -2538,7 +2556,7 @@ print_securityApikeysPost_help() {
     echo ""
     echo -e "${BOLD}${WHITE}securityApikeysPost - Add ApiKey${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "Add a new ApiKey. Required Access Level: Security" | paste -sd' ' | fold -sw 80
+    echo -e "Add a new ApiKey. Required Access Level: ModifyAccessTokens" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}body${OFF} ${BLUE}[application/json]${OFF} ${RED}(required)${OFF}${OFF} - " | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
@@ -2557,7 +2575,7 @@ print_securitySmtpByNameDelete_help() {
     echo ""
     echo -e "${BOLD}${WHITE}securitySmtpByNameDelete - Delete SMTP Credential${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "Delete your existing SMTP Credentials. Required Access Level: Security" | paste -sd' ' | fold -sw 80
+    echo -e "Delete your existing SMTP Credentials. Required Access Level: ModifyAccessTokens" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Name of the SMTP Credential ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
@@ -2597,7 +2615,7 @@ print_securitySmtpByNamePut_help() {
     echo ""
     echo -e "${BOLD}${WHITE}securitySmtpByNamePut - Update SMTP Credential${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "Update your existing SMTP Credentials. Required Access Level: Security" | paste -sd' ' | fold -sw 80
+    echo -e "Update your existing SMTP Credentials. Required Access Level: ModifyAccessTokens" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Name of the SMTP Credential ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
@@ -2636,7 +2654,7 @@ print_securitySmtpPost_help() {
     echo ""
     echo -e "${BOLD}${WHITE}securitySmtpPost - Add SMTP Credential${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "Add new SMTP Credential. Required Access Level: Security" | paste -sd' ' | fold -sw 80
+    echo -e "Add new SMTP Credential. Required Access Level: ModifyAccessTokens" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}body${OFF} ${BLUE}[application/json]${OFF} ${RED}(required)${OFF}${OFF} - " | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
@@ -9176,6 +9194,13 @@ case $key in
         # header, override the ${apikey_auth_credential} variable
         #
         if [[ $header_name == "X-ElasticEmail-ApiKey" ]]; then
+            apikey_auth_credential=$header_value
+        fi
+        #
+        # If the header key is the same as the api_key expected by API in the
+        # header, override the ${apikey_auth_credential} variable
+        #
+        if [[ $header_name == "X-Auth-Token" ]]; then
             apikey_auth_credential=$header_value
         fi
         header_arguments[$header_name]=$header_value
