@@ -56,7 +56,7 @@ Name | Type | Description  | Notes
 
 Get Email Verification Result
 
-Returns a result of verified email. Required Access Level: VerifyEmails
+Returns a result of verified email. Required Access Level: ViewVerifyEmails
 
 ### Example
 
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 
 Download File Verification Result
 
-Download verification results as a ZIP file. Required Access Level: VerifyEmails
+Download verification results as a ZIP file. Required Access Level: ViewVerifyEmails
 
 ### Example
 
@@ -196,7 +196,7 @@ Name | Type | Description  | Notes
 
 Get Detailed File Verification Result
 
-Returns status and results (if verified) of file with given ID. Required Access Level: VerifyEmails
+Returns status and results (if verified) of file with given ID. Required Access Level: ViewVerifyEmails
 
 ### Example
 
@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 
 Get Files Verification Results
 
-Returns a list of uploaded files, their statuses and results. Required Access Level: VerifyEmails
+Returns a list of uploaded files, their statuses and results. Required Access Level: ViewVerifyEmails
 
 ### Example
 
@@ -335,7 +335,7 @@ This endpoint does not need any parameter.
 
 Get Emails Verification Results
 
-Returns a results of all verified single emails. Required Access Level: VerifyEmails
+Returns a results of all verified single emails. Required Access Level: ViewVerifyEmails
 
 ### Example
 

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **CustomFields** | **map[String, string]** |  | [optional] [default to null]
 **Consent** | [**ConsentData**](ConsentData.md) |  | [optional] [default to null]
 **Source** | [**ContactSource**](ContactSource.md) |  | [optional] [default to null]
+**SourceInfo** | **string** |  | [optional] [default to null]
 **DateAdded** | **string** |  | [optional] [default to null]
 **DateUpdated** | **string** |  | [optional] [default to null]
 **StatusChangeDate** | **string** |  | [optional] [default to null]

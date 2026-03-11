@@ -8,7 +8,7 @@
 # ! openapi-generator (https://openapi-generator.tech)
 # ! FROM OPENAPI SPECIFICATION IN JSON.
 # !
-# ! Generator version: 7.5.0
+# ! Generator version: 7.11.0
 # !
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -1334,9 +1334,9 @@ Every API call is established on which specific request type (GET, POST, PUT, DE
 
 The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.
 
-To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.
+To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.
 
-Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 EOF
 echo "$appdescription" | paste -sd' ' | fold -sw 80
 }
@@ -2497,7 +2497,7 @@ print_securityApikeysByNameGet_help() {
     echo ""
     echo -e "${BOLD}${WHITE}securityApikeysByNameGet - Load ApiKey${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "Load your existing ApiKey info. Required Access Level: Security" | paste -sd' ' | fold -sw 80
+    echo -e "Load your existing ApiKey info. Required Access Level: ViewAccessTokens" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Name of the ApiKey ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
@@ -2537,7 +2537,7 @@ print_securityApikeysGet_help() {
     echo ""
     echo -e "${BOLD}${WHITE}securityApikeysGet - List ApiKeys${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "List all your existing ApiKeys. Required Access Level: Security" | paste -sd' ' | fold -sw 80
+    echo -e "List all your existing ApiKeys. Required Access Level: ViewAccessTokens" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}subaccount${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - Email of the subaccount of which ApiKeys should be loaded${YELLOW} Specify as: subaccount=value${OFF}" \
@@ -2595,7 +2595,7 @@ print_securitySmtpByNameGet_help() {
     echo ""
     echo -e "${BOLD}${WHITE}securitySmtpByNameGet - Load SMTP Credential${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "Load your existing SMTP Credential info. Required Access Level: Security" | paste -sd' ' | fold -sw 80
+    echo -e "Load your existing SMTP Credential info. Required Access Level: ViewAccessTokens" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Name of the SMTP Credential ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
@@ -2635,7 +2635,7 @@ print_securitySmtpGet_help() {
     echo ""
     echo -e "${BOLD}${WHITE}securitySmtpGet - List SMTP Credentials${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "List all your existing SMTP Credentials. Required Access Level: Security" | paste -sd' ' | fold -sw 80
+    echo -e "List all your existing SMTP Credentials. Required Access Level: ViewAccessTokens" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}subaccount${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - Email of the subaccount of which credentials should be listed${YELLOW} Specify as: subaccount=value${OFF}" \
@@ -3336,7 +3336,7 @@ print_verificationsByEmailGet_help() {
     echo ""
     echo -e "${BOLD}${WHITE}verificationsByEmailGet - Get Email Verification Result${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "Returns a result of verified email. Required Access Level: VerifyEmails" | paste -sd' ' | fold -sw 80
+    echo -e "Returns a result of verified email. Required Access Level: ViewVerifyEmails" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}email${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Email address to view verification result of ${YELLOW}Specify as: email=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
@@ -3390,7 +3390,7 @@ print_verificationsFilesByIdResultDownloadGet_help() {
     echo ""
     echo -e "${BOLD}${WHITE}verificationsFilesByIdResultDownloadGet - Download File Verification Result${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "Download verification results as a ZIP file. Required Access Level: VerifyEmails" | paste -sd' ' | fold -sw 80
+    echo -e "Download verification results as a ZIP file. Required Access Level: ViewVerifyEmails" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}id${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Verification ID to download ${YELLOW}Specify as: id=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
@@ -3408,7 +3408,7 @@ print_verificationsFilesByIdResultGet_help() {
     echo ""
     echo -e "${BOLD}${WHITE}verificationsFilesByIdResultGet - Get Detailed File Verification Result${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "Returns status and results (if verified) of file with given ID. Required Access Level: VerifyEmails" | paste -sd' ' | fold -sw 80
+    echo -e "Returns status and results (if verified) of file with given ID. Required Access Level: ViewVerifyEmails" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}id${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ID of the Verification to display status of ${YELLOW}Specify as: id=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
@@ -3465,7 +3465,7 @@ print_verificationsFilesResultGet_help() {
     echo ""
     echo -e "${BOLD}${WHITE}verificationsFilesResultGet - Get Files Verification Results${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "Returns a list of uploaded files, their statuses and results. Required Access Level: VerifyEmails" | paste -sd' ' | fold -sw 80
+    echo -e "Returns a list of uploaded files, their statuses and results. Required Access Level: ViewVerifyEmails" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -3481,7 +3481,7 @@ print_verificationsGet_help() {
     echo ""
     echo -e "${BOLD}${WHITE}verificationsGet - Get Emails Verification Results${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "Returns a results of all verified single emails. Required Access Level: VerifyEmails" | paste -sd' ' | fold -sw 80
+    echo -e "Returns a results of all verified single emails. Required Access Level: ViewVerifyEmails" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}limit${OFF} ${BLUE}[integer]${OFF} ${CYAN}(default: null)${OFF} - Maximum number of returned items.${YELLOW} Specify as: limit=value${OFF}" \
