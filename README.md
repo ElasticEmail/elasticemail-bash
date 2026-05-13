@@ -235,6 +235,11 @@ Class | Method | HTTP request | Description
 *VerificationsApi* | [**verificationsFilesPost**](docs/VerificationsApi.md#verificationsfilespost) | **POST** /verifications/files | Upload File with Emails
 *VerificationsApi* | [**verificationsFilesResultGet**](docs/VerificationsApi.md#verificationsfilesresultget) | **GET** /verifications/files/result | Get Files Verification Results
 *VerificationsApi* | [**verificationsGet**](docs/VerificationsApi.md#verificationsget) | **GET** /verifications | Get Emails Verification Results
+*WebhookApi* | [**webhookByPublicidDelete**](docs/WebhookApi.md#webhookbypubliciddelete) | **DELETE** /webhook/{publicid} | Delete Webhook
+*WebhookApi* | [**webhookByPublicidGet**](docs/WebhookApi.md#webhookbypublicidget) | **GET** /webhook/{publicid} | Load Webhook
+*WebhookApi* | [**webhookByPublicidPut**](docs/WebhookApi.md#webhookbypublicidput) | **PUT** /webhook/{publicid} | Update Webhook
+*WebhookApi* | [**webhookGet**](docs/WebhookApi.md#webhookget) | **GET** /webhook | Load Webhooks
+*WebhookApi* | [**webhookPost**](docs/WebhookApi.md#webhookpost) | **POST** /webhook | Add Webhook
 
 
 ## Documentation For Models
@@ -333,6 +338,9 @@ Class | Method | HTTP request | Description
  - [VerificationFileResult](docs/VerificationFileResult.md)
  - [VerificationFileResultDetails](docs/VerificationFileResultDetails.md)
  - [VerificationStatus](docs/VerificationStatus.md)
+ - [Webhook](docs/Webhook.md)
+ - [WebhookCreatePayload](docs/WebhookCreatePayload.md)
+ - [WebhookUpdatePayload](docs/WebhookUpdatePayload.md)
 
 
 ## Documentation For Authorization

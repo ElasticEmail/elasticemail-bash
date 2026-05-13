@@ -389,7 +389,11 @@ case $state in
             "verificationsFilesByIdVerificationPost[Start verification]" \
             "verificationsFilesPost[Upload File with Emails]" \
             "verificationsFilesResultGet[Get Files Verification Results]" \
-            "verificationsGet[Get Emails Verification Results]" \
+            "verificationsGet[Get Emails Verification Results]"             "webhookByPublicidDelete[Delete Webhook]" \
+            "webhookByPublicidGet[Load Webhook]" \
+            "webhookByPublicidPut[Update Webhook]" \
+            "webhookGet[Load Webhooks]" \
+            "webhookPost[Add Webhook]" \
 
     _arguments "(--help)--help[Print information about operation]"
 
@@ -1202,6 +1206,41 @@ case $state in
                     "limit=:[QUERY] Maximum number of returned items."
 "offset=:[QUERY] How many items should be returned ahead."
           )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      webhookByPublicidDelete)
+        local -a _op_arguments
+        _op_arguments=(
+          "publicid=:[PATH] "
+                    )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      webhookByPublicidGet)
+        local -a _op_arguments
+        _op_arguments=(
+          "publicid=:[PATH] "
+                    )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      webhookByPublicidPut)
+        local -a _op_arguments
+        _op_arguments=(
+          "publicid=:[PATH] "
+                    )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      webhookGet)
+        local -a _op_arguments
+        _op_arguments=(
+                    "limit=:[QUERY] Maximum number of returned items."
+"offset=:[QUERY] How many items should be returned ahead."
+          )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      webhookPost)
+        local -a _op_arguments
+        _op_arguments=(
+                              )
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
     esac

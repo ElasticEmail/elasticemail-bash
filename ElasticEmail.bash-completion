@@ -176,6 +176,11 @@ _ElasticEmail()
     operations["verificationsFilesPost"]=1
     operations["verificationsFilesResultGet"]=1
     operations["verificationsGet"]=1
+    operations["webhookByPublicidDelete"]=1
+    operations["webhookByPublicidGet"]=1
+    operations["webhookByPublicidPut"]=1
+    operations["webhookGet"]=1
+    operations["webhookPost"]=1
 
     # An associative array of operations to their parameters
     # Only include path, query and header parameters
@@ -287,6 +292,11 @@ _ElasticEmail()
     operation_parameters["verificationsFilesPost"]=""
     operation_parameters["verificationsFilesResultGet"]=""
     operation_parameters["verificationsGet"]="limit= offset= "
+    operation_parameters["webhookByPublicidDelete"]="publicid= "
+    operation_parameters["webhookByPublicidGet"]="publicid= "
+    operation_parameters["webhookByPublicidPut"]="publicid= "
+    operation_parameters["webhookGet"]="limit= offset= "
+    operation_parameters["webhookPost"]=""
 
     # An associative array of possible values for enum parameters
     declare -A operation_parameters_enum_values

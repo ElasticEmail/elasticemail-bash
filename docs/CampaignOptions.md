@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **TriggerFrequency** | **float** |  | [optional] [default to null]
 **TriggerCount** | **integer** |  | [optional] [default to null]
 **SplitOptions** | [**SplitOptions**](SplitOptions.md) |  | [optional] [default to null]
+**SendAtLocalTime** | **boolean** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
