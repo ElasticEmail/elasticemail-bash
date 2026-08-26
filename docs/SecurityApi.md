@@ -71,7 +71,7 @@ ElasticEmail securityApikeysByNameGet name=value  subaccount=value
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **string** | Name of the ApiKey | [default to null]
- **subaccount** | **string** | Email of the subaccount of which ApiKey should be loaded | [optional] [default to null]
+ **subaccount** | **string** | Email of the subaccount of which ApiKey should be loaded. The default API key created for the subaccount has a 48-hour expiration period. | [optional] [default to null]
 
 ### Return type
 
@@ -142,7 +142,7 @@ ElasticEmail securityApikeysGet  subaccount=value
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **subaccount** | **string** | Email of the subaccount of which ApiKeys should be loaded | [optional] [default to null]
+ **subaccount** | **string** | Email of the subaccount of which ApiKeys should be loaded. The default API key created for the subaccount has a 48-hour expiration period. | [optional] [default to null]
 
 ### Return type
 

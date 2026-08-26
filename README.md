@@ -128,6 +128,7 @@ All URIs are relative to */v4*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*CampaignsApi* | [**campaignsAutomationByNameTriggerPost**](docs/CampaignsApi.md#campaignsautomationbynametriggerpost) | **POST** /campaigns/automation/{name}/trigger | Trigger Automation for Contact
 *CampaignsApi* | [**campaignsByNameDelete**](docs/CampaignsApi.md#campaignsbynamedelete) | **DELETE** /campaigns/{name} | Delete Campaign
 *CampaignsApi* | [**campaignsByNameGet**](docs/CampaignsApi.md#campaignsbynameget) | **GET** /campaigns/{name} | Load Campaign
 *CampaignsApi* | [**campaignsByNamePausePut**](docs/CampaignsApi.md#campaignsbynamepauseput) | **PUT** /campaigns/{name}/pause | Pause Campaign
@@ -202,6 +203,7 @@ Class | Method | HTTP request | Description
 *StatisticsApi* | [**statisticsChannelsByNameGet**](docs/StatisticsApi.md#statisticschannelsbynameget) | **GET** /statistics/channels/{name} | Load Channel Stats
 *StatisticsApi* | [**statisticsChannelsGet**](docs/StatisticsApi.md#statisticschannelsget) | **GET** /statistics/channels | Load Channels Stats
 *StatisticsApi* | [**statisticsGet**](docs/StatisticsApi.md#statisticsget) | **GET** /statistics | Load Statistics
+*SubAccountsApi* | [**subaccountsByEmailApikeyGet**](docs/SubAccountsApi.md#subaccountsbyemailapikeyget) | **GET** /subaccounts/{email}/apikey | Get SubAccount ApiKey
 *SubAccountsApi* | [**subaccountsByEmailCreditsPatch**](docs/SubAccountsApi.md#subaccountsbyemailcreditspatch) | **PATCH** /subaccounts/{email}/credits | Add, Subtract Email Credits
 *SubAccountsApi* | [**subaccountsByEmailDelete**](docs/SubAccountsApi.md#subaccountsbyemaildelete) | **DELETE** /subaccounts/{email} | Delete SubAccount
 *SubAccountsApi* | [**subaccountsByEmailGet**](docs/SubAccountsApi.md#subaccountsbyemailget) | **GET** /subaccounts/{email} | Load SubAccount
@@ -267,6 +269,7 @@ Class | Method | HTTP request | Description
  - [ContactStatus](docs/ContactStatus.md)
  - [ContactUpdatePayload](docs/ContactUpdatePayload.md)
  - [ContactsList](docs/ContactsList.md)
+ - [DKIMRecord](docs/DKIMRecord.md)
  - [DeliveryOptimizationType](docs/DeliveryOptimizationType.md)
  - [DomainData](docs/DomainData.md)
  - [DomainDetail](docs/DomainDetail.md)

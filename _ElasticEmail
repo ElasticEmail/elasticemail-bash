@@ -297,6 +297,7 @@ case $state in
   ops)
     # Operations
     _values "Operations" \
+            "campaignsAutomationByNameTriggerPost[Trigger Automation for Contact]" \
             "campaignsByNameDelete[Delete Campaign]" \
             "campaignsByNameGet[Load Campaign]" \
             "campaignsByNamePausePut[Pause Campaign]" \
@@ -360,7 +361,8 @@ case $state in
             "statisticsCampaignsGet[Load Campaigns Stats]" \
             "statisticsChannelsByNameGet[Load Channel Stats]" \
             "statisticsChannelsGet[Load Channels Stats]" \
-            "statisticsGet[Load Statistics]"             "subaccountsByEmailCreditsPatch[Add, Subtract Email Credits]" \
+            "statisticsGet[Load Statistics]"             "subaccountsByEmailApikeyGet[Get SubAccount ApiKey]" \
+            "subaccountsByEmailCreditsPatch[Add, Subtract Email Credits]" \
             "subaccountsByEmailDelete[Delete SubAccount]" \
             "subaccountsByEmailGet[Load SubAccount]" \
             "subaccountsByEmailSettingsEmailPut[Update SubAccount Email Settings]" \
@@ -401,6 +403,14 @@ case $state in
     ;;
   args)
     case $line[1] in
+      campaignsAutomationByNameTriggerPost)
+        local -a _op_arguments
+        _op_arguments=(
+          "name=:[PATH] "
+          "contactEmail=:[QUERY] "
+          )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
       campaignsByNameDelete)
         local -a _op_arguments
         _op_arguments=(
@@ -840,7 +850,7 @@ case $state in
         local -a _op_arguments
         _op_arguments=(
           "name=:[PATH] Name of the ApiKey"
-          "subaccount=:[QUERY] Email of the subaccount of which ApiKey should be loaded"
+          "subaccount=:[QUERY] Email of the subaccount of which ApiKey should be loaded. The default API key created for the subaccount has a 48-hour expiration period."
           )
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
@@ -854,7 +864,7 @@ case $state in
       securityApikeysGet)
         local -a _op_arguments
         _op_arguments=(
-                    "subaccount=:[QUERY] Email of the subaccount of which ApiKeys should be loaded"
+                    "subaccount=:[QUERY] Email of the subaccount of which ApiKeys should be loaded. The default API key created for the subaccount has a 48-hour expiration period."
           )
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
@@ -971,6 +981,13 @@ case $state in
                     "from=:[QUERY] Starting date for search in YYYY-MM-DDThh:mm:ss format."
 "to=:[QUERY] Ending date for search in YYYY-MM-DDThh:mm:ss format."
           )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      subaccountsByEmailApikeyGet)
+        local -a _op_arguments
+        _op_arguments=(
+          "email=:[PATH] Email address of Sub-Account"
+                    )
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
       subaccountsByEmailCreditsPatch)

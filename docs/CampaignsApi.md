@@ -4,6 +4,7 @@ All URIs are relative to */v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**campaignsAutomationByNameTriggerPost**](CampaignsApi.md#campaignsAutomationByNameTriggerPost) | **POST** /campaigns/automation/{name}/trigger | Trigger Automation for Contact
 [**campaignsByNameDelete**](CampaignsApi.md#campaignsByNameDelete) | **DELETE** /campaigns/{name} | Delete Campaign
 [**campaignsByNameGet**](CampaignsApi.md#campaignsByNameGet) | **GET** /campaigns/{name} | Load Campaign
 [**campaignsByNamePausePut**](CampaignsApi.md#campaignsByNamePausePut) | **PUT** /campaigns/{name}/pause | Pause Campaign
@@ -11,6 +12,42 @@ Method | HTTP request | Description
 [**campaignsGet**](CampaignsApi.md#campaignsGet) | **GET** /campaigns | Load Campaigns
 [**campaignsPost**](CampaignsApi.md#campaignsPost) | **POST** /campaigns | Add Campaign
 
+
+
+## campaignsAutomationByNameTriggerPost
+
+Trigger Automation for Contact
+
+Manually trigger an Automation for a contact. Required Access Level: ModifyAutomations
+
+### Example
+
+```bash
+ElasticEmail campaignsAutomationByNameTriggerPost name=value  contactEmail=value
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string** |  | [default to null]
+ **contactEmail** | **string** |  | [default to null]
+
+### Return type
+
+(empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not Applicable
+- **Accept**: Not Applicable
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
 ## campaignsByNameDelete

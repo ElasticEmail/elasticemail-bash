@@ -96,6 +96,8 @@ declare -a result_color_table=( "$WHITE" "$WHITE" "$GREEN" "$YELLOW" "$WHITE" "$
 # 0 - optional
 # 1 - required
 declare -A operation_parameters_minimum_occurrences
+operation_parameters_minimum_occurrences["campaignsAutomationByNameTriggerPost:::name"]=1
+operation_parameters_minimum_occurrences["campaignsAutomationByNameTriggerPost:::contactEmail"]=1
 operation_parameters_minimum_occurrences["campaignsByNameDelete:::name"]=1
 operation_parameters_minimum_occurrences["campaignsByNameGet:::name"]=1
 operation_parameters_minimum_occurrences["campaignsByNamePausePut:::name"]=1
@@ -240,6 +242,7 @@ operation_parameters_minimum_occurrences["statisticsChannelsGet:::limit"]=0
 operation_parameters_minimum_occurrences["statisticsChannelsGet:::offset"]=0
 operation_parameters_minimum_occurrences["statisticsGet:::from"]=1
 operation_parameters_minimum_occurrences["statisticsGet:::to"]=0
+operation_parameters_minimum_occurrences["subaccountsByEmailApikeyGet:::email"]=1
 operation_parameters_minimum_occurrences["subaccountsByEmailCreditsPatch:::email"]=1
 operation_parameters_minimum_occurrences["subaccountsByEmailCreditsPatch:::SubaccountEmailCreditsPayload"]=1
 operation_parameters_minimum_occurrences["subaccountsByEmailDelete:::email"]=1
@@ -304,6 +307,8 @@ operation_parameters_minimum_occurrences["webhookPost:::WebhookCreatePayload"]=1
 # N - N values
 # 0 - unlimited
 declare -A operation_parameters_maximum_occurrences
+operation_parameters_maximum_occurrences["campaignsAutomationByNameTriggerPost:::name"]=0
+operation_parameters_maximum_occurrences["campaignsAutomationByNameTriggerPost:::contactEmail"]=0
 operation_parameters_maximum_occurrences["campaignsByNameDelete:::name"]=0
 operation_parameters_maximum_occurrences["campaignsByNameGet:::name"]=0
 operation_parameters_maximum_occurrences["campaignsByNamePausePut:::name"]=0
@@ -448,6 +453,7 @@ operation_parameters_maximum_occurrences["statisticsChannelsGet:::limit"]=0
 operation_parameters_maximum_occurrences["statisticsChannelsGet:::offset"]=0
 operation_parameters_maximum_occurrences["statisticsGet:::from"]=0
 operation_parameters_maximum_occurrences["statisticsGet:::to"]=0
+operation_parameters_maximum_occurrences["subaccountsByEmailApikeyGet:::email"]=0
 operation_parameters_maximum_occurrences["subaccountsByEmailCreditsPatch:::email"]=0
 operation_parameters_maximum_occurrences["subaccountsByEmailCreditsPatch:::SubaccountEmailCreditsPayload"]=0
 operation_parameters_maximum_occurrences["subaccountsByEmailDelete:::email"]=0
@@ -509,6 +515,8 @@ operation_parameters_maximum_occurrences["webhookPost:::WebhookCreatePayload"]=0
 # The type of collection for specifying multiple values for parameter:
 # - multi, csv, ssv, tsv
 declare -A operation_parameters_collection_type
+operation_parameters_collection_type["campaignsAutomationByNameTriggerPost:::name"]=""
+operation_parameters_collection_type["campaignsAutomationByNameTriggerPost:::contactEmail"]=""
 operation_parameters_collection_type["campaignsByNameDelete:::name"]=""
 operation_parameters_collection_type["campaignsByNameGet:::name"]=""
 operation_parameters_collection_type["campaignsByNamePausePut:::name"]=""
@@ -653,6 +661,7 @@ operation_parameters_collection_type["statisticsChannelsGet:::limit"]=""
 operation_parameters_collection_type["statisticsChannelsGet:::offset"]=""
 operation_parameters_collection_type["statisticsGet:::from"]=""
 operation_parameters_collection_type["statisticsGet:::to"]=""
+operation_parameters_collection_type["subaccountsByEmailApikeyGet:::email"]=""
 operation_parameters_collection_type["subaccountsByEmailCreditsPatch:::email"]=""
 operation_parameters_collection_type["subaccountsByEmailCreditsPatch:::SubaccountEmailCreditsPayload"]=""
 operation_parameters_collection_type["subaccountsByEmailDelete:::email"]=""
@@ -1136,6 +1145,7 @@ EOF
     echo ""
     echo -e "${BOLD}${WHITE}[campaigns]${OFF}"
 read -r -d '' ops <<EOF
+  ${CYAN}campaignsAutomationByNameTriggerPost${OFF};Trigger Automation for Contact (AUTH)
   ${CYAN}campaignsByNameDelete${OFF};Delete Campaign (AUTH)
   ${CYAN}campaignsByNameGet${OFF};Load Campaign (AUTH)
   ${CYAN}campaignsByNamePausePut${OFF};Pause Campaign (AUTH)
@@ -1265,6 +1275,7 @@ echo "  $ops" | column -t -s ';'
     echo ""
     echo -e "${BOLD}${WHITE}[subAccounts]${OFF}"
 read -r -d '' ops <<EOF
+  ${CYAN}subaccountsByEmailApikeyGet${OFF};Get SubAccount ApiKey (AUTH)
   ${CYAN}subaccountsByEmailCreditsPatch${OFF};Add, Subtract Email Credits (AUTH)
   ${CYAN}subaccountsByEmailDelete${OFF};Delete SubAccount (AUTH)
   ${CYAN}subaccountsByEmailGet${OFF};Load SubAccount (AUTH)
@@ -1384,6 +1395,26 @@ print_version() {
     echo ""
 }
 
+##############################################################################
+#
+# Print help for campaignsAutomationByNameTriggerPost operation
+#
+##############################################################################
+print_campaignsAutomationByNameTriggerPost_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}campaignsAutomationByNameTriggerPost - Trigger Automation for Contact${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "Manually trigger an Automation for a contact. Required Access Level: ModifyAutomations" | paste -sd' ' | fold -sw 80
+    echo -e ""
+    echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e "  * ${GREEN}contactEmail${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - ${YELLOW} Specify as: contactEmail=value${OFF}" \
+        | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=200
+    echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
 ##############################################################################
 #
 # Print help for campaignsByNameDelete operation
@@ -2532,7 +2563,7 @@ print_securityApikeysByNameGet_help() {
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}name${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Name of the ApiKey ${YELLOW}Specify as: name=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
-    echo -e "  * ${GREEN}subaccount${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - Email of the subaccount of which ApiKey should be loaded${YELLOW} Specify as: subaccount=value${OFF}" \
+    echo -e "  * ${GREEN}subaccount${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - Email of the subaccount of which ApiKey should be loaded. The default API key created for the subaccount has a 48-hour expiration period.${YELLOW} Specify as: subaccount=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2571,7 +2602,7 @@ print_securityApikeysGet_help() {
     echo -e "List all your existing ApiKeys. Required Access Level: ViewAccessTokens" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
-    echo -e "  * ${GREEN}subaccount${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - Email of the subaccount of which ApiKeys should be loaded${YELLOW} Specify as: subaccount=value${OFF}" \
+    echo -e "  * ${GREEN}subaccount${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - Email of the subaccount of which ApiKeys should be loaded. The default API key created for the subaccount has a 48-hour expiration period.${YELLOW} Specify as: subaccount=value${OFF}" \
         | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
@@ -2892,6 +2923,25 @@ print_statisticsGet_help() {
 }
 ##############################################################################
 #
+# Print help for subaccountsByEmailApikeyGet operation
+#
+##############################################################################
+print_subaccountsByEmailApikeyGet_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}subaccountsByEmailApikeyGet - Get SubAccount ApiKey${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "Returns API key token for the specified SubAccount.
+            The default API key created for the subaccount has a 48-hour expiration period. Required Access Level: ModifySubAccounts" | paste -sd' ' | fold -sw 80
+    echo -e ""
+    echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}email${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} - Email address of Sub-Account ${YELLOW}Specify as: email=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=200
+    echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
+##############################################################################
+#
 # Print help for subaccountsByEmailCreditsPatch operation
 #
 ##############################################################################
@@ -2996,7 +3046,8 @@ print_subaccountsPost_help() {
     echo ""
     echo -e "${BOLD}${WHITE}subaccountsPost - Add SubAccount${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
-    echo -e "Add a new SubAccount to your Account. To receive an access token for this SubAccount, make a POST security/apikeys request using the 'subaccount' parameter. Required Access Level: ModifySubAccounts" | paste -sd' ' | fold -sw 80
+    echo -e "Add a new SubAccount to your Account. To receive an access token for this SubAccount, make a POST security/apikeys request using the 'subaccount' parameter.
+            The default API key created for the subaccount has a 48-hour expiration period. Required Access Level: ModifySubAccounts" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
     echo -e "  * ${GREEN}body${OFF} ${BLUE}[application/json]${OFF} ${RED}(required)${OFF}${OFF} - " | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
@@ -3621,6 +3672,42 @@ print_webhookPost_help() {
     echo -e "${result_color_table[${code:0:1}]}  201;Created${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
 }
 
+
+##############################################################################
+#
+# Call campaignsAutomationByNameTriggerPost operation
+#
+##############################################################################
+call_campaignsAutomationByNameTriggerPost() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=(name)
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(contactEmail  )
+    local path
+
+    if ! path=$(build_request_path "/v4/campaigns/automation/{name}/trigger" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="POST"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    if [[ "$print_curl" = true ]]; then
+        echo "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    else
+        eval "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    fi
+}
 
 ##############################################################################
 #
@@ -7339,6 +7426,42 @@ call_statisticsGet() {
 
 ##############################################################################
 #
+# Call subaccountsByEmailApikeyGet operation
+#
+##############################################################################
+call_subaccountsByEmailApikeyGet() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=(email)
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(  )
+    local path
+
+    if ! path=$(build_request_path "/v4/subaccounts/{email}/apikey" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="GET"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    if [[ "$print_curl" = true ]]; then
+        echo "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    else
+        eval "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    fi
+}
+
+##############################################################################
+#
 # Call subaccountsByEmailCreditsPatch operation
 #
 ##############################################################################
@@ -9226,6 +9349,9 @@ case $key in
         OFF=""
         result_color_table=( "" "" "" "" "" "" "" )
     ;;
+    campaignsAutomationByNameTriggerPost)
+    operation="campaignsAutomationByNameTriggerPost"
+    ;;
     campaignsByNameDelete)
     operation="campaignsByNameDelete"
     ;;
@@ -9448,6 +9574,9 @@ case $key in
     statisticsGet)
     operation="statisticsGet"
     ;;
+    subaccountsByEmailApikeyGet)
+    operation="subaccountsByEmailApikeyGet"
+    ;;
     subaccountsByEmailCreditsPatch)
     operation="subaccountsByEmailCreditsPatch"
     ;;
@@ -9663,6 +9792,9 @@ fi
 
 # Run cURL command based on the operation ID
 case $operation in
+    campaignsAutomationByNameTriggerPost)
+    call_campaignsAutomationByNameTriggerPost
+    ;;
     campaignsByNameDelete)
     call_campaignsByNameDelete
     ;;
@@ -9884,6 +10016,9 @@ case $operation in
     ;;
     statisticsGet)
     call_statisticsGet
+    ;;
+    subaccountsByEmailApikeyGet)
+    call_subaccountsByEmailApikeyGet
     ;;
     subaccountsByEmailCreditsPatch)
     call_subaccountsByEmailCreditsPatch

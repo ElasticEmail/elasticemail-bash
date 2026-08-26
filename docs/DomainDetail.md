@@ -14,13 +14,16 @@ Name | Type | Description | Notes
 **Type** | [**TrackingType**](TrackingType.md) |  | [optional] [default to null]
 **TrackingStatus** | [**TrackingValidationStatus**](TrackingValidationStatus.md) |  | [optional] [default to null]
 **CertificateStatus** | [**CertificateValidationStatus**](CertificateValidationStatus.md) |  | [optional] [default to null]
+**CertificateExpiryDate** | **string** |  | [optional] [default to null]
 **CertificateValidationError** | **string** |  | [optional] [default to null]
 **TrackingTypeUserRequest** | [**TrackingType**](TrackingType.md) |  | [optional] [default to null]
 **VERP** | **boolean** |  | [optional] [default to null]
 **CustomBouncesDomain** | **string** |  | [optional] [default to null]
 **IsCustomBouncesDomainDefault** | **boolean** |  | [optional] [default to null]
+**WasEverVerified** | **boolean** |  | [optional] [default to null]
 **IsMarkedForDeletion** | **boolean** |  | [optional] [default to null]
 **Ownership** | [**DomainOwner**](DomainOwner.md) |  | [optional] [default to null]
+**DKIMRecord** | [**DKIMRecord**](DKIMRecord.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

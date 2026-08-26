@@ -69,6 +69,7 @@ _ElasticEmail()
     # The list of available operation in the REST service
     # It's modelled as an associative array for efficient key lookup
     declare -A operations
+    operations["campaignsAutomationByNameTriggerPost"]=1
     operations["campaignsByNameDelete"]=1
     operations["campaignsByNameGet"]=1
     operations["campaignsByNamePausePut"]=1
@@ -143,6 +144,7 @@ _ElasticEmail()
     operations["statisticsChannelsByNameGet"]=1
     operations["statisticsChannelsGet"]=1
     operations["statisticsGet"]=1
+    operations["subaccountsByEmailApikeyGet"]=1
     operations["subaccountsByEmailCreditsPatch"]=1
     operations["subaccountsByEmailDelete"]=1
     operations["subaccountsByEmailGet"]=1
@@ -185,6 +187,7 @@ _ElasticEmail()
     # An associative array of operations to their parameters
     # Only include path, query and header parameters
     declare -A operation_parameters
+    operation_parameters["campaignsAutomationByNameTriggerPost"]="name= contactEmail= "
     operation_parameters["campaignsByNameDelete"]="name= "
     operation_parameters["campaignsByNameGet"]="name= "
     operation_parameters["campaignsByNamePausePut"]="name= "
@@ -259,6 +262,7 @@ _ElasticEmail()
     operation_parameters["statisticsChannelsByNameGet"]="name= "
     operation_parameters["statisticsChannelsGet"]="limit= offset= "
     operation_parameters["statisticsGet"]="from= to= "
+    operation_parameters["subaccountsByEmailApikeyGet"]="email= "
     operation_parameters["subaccountsByEmailCreditsPatch"]="email= "
     operation_parameters["subaccountsByEmailDelete"]="email= "
     operation_parameters["subaccountsByEmailGet"]="email= "
