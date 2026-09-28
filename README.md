@@ -1,107 +1,237 @@
-# Elastic Email REST API Bash client
+<div align="center">
 
-## Overview
+<img src=".github/ee-logo.png" alt="Elastic Email" width="96" />
 
-This is a Bash client script for accessing Elastic Email REST API service.
+# Elastic Email Bash SDK
 
-The script uses cURL underneath for making all REST calls.
+The official Bash command-line client for the [Elastic Email](https://elasticemail.com) REST API v4.
 
-## Usage
+[![Bash](https://img.shields.io/badge/Bash-4.3%2B-4EAA25?logo=gnubash&logoColor=white)](https://www.gnu.org/software/bash/)
+[![cURL](https://img.shields.io/badge/requires-cURL-073551?logo=curl&logoColor=white)](https://curl.se)
+[![API](https://img.shields.io/badge/API-v4-0A7BBB)](https://elasticemail.com/developers/api-documentation/rest-api)
+[![OpenAPI Generator](https://img.shields.io/badge/generated%20by-OpenAPI%20Generator-6BA539?logo=openapiinitiative&logoColor=white)](https://openapi-generator.tech)
+[![License: MIT](https://img.shields.io/github/license/ElasticEmail/elasticemail-bash?color=yellow)](LICENSE)
 
-```shell
-# Make sure the script has executable rights
-$ chmod u+x ElasticEmail
+[![Latest release](https://img.shields.io/github/v/release/ElasticEmail/elasticemail-bash?logo=github&label=release)](https://github.com/ElasticEmail/elasticemail-bash/releases)
+[![Last commit](https://img.shields.io/github/last-commit/ElasticEmail/elasticemail-bash?logo=github)](https://github.com/ElasticEmail/elasticemail-bash/commits/master)
+[![Open issues](https://img.shields.io/github/issues/ElasticEmail/elasticemail-bash?logo=github)](https://github.com/ElasticEmail/elasticemail-bash/issues)
+[![GitHub stars](https://img.shields.io/github/stars/ElasticEmail/elasticemail-bash?style=flat&logo=github)](https://github.com/ElasticEmail/elasticemail-bash/stargazers)
 
-# Print the list of operations available on the service
-$ ./ElasticEmail -h
+[Installation](#installation) •
+[Quick start](#quick-start) •
+[Examples](#more-examples) •
+[API reference](#api-reference) •
+[Models](#models) •
+[Contributing](#contributing)
 
-# Print the service description
-$ ./ElasticEmail --about
+</div>
 
-# Print detailed information about specific operation
-$ ./ElasticEmail <operationId> -h
+---
 
-# Make GET request
-./ElasticEmail --host http://<hostname>:<port> --accept xml <operationId> <queryParam1>=<value1> <header_key1>:<header_value2>
+## Features
 
-# Make GET request using arbitrary curl options (must be passed before <operationId>) to an SSL service using username:password
-ElasticEmail -k -sS --tlsv1.2 --host https://<hostname> -u <user>:<password> --accept xml <operationId> <queryParam1>=<value1> <header_key1>:<header_value2>
+- **Transactional and bulk email.** Send single messages, bulk campaigns or CSV merge-file sends.
+- **Contacts, lists and segments.** Add, update, import, export and bulk-delete contacts.
+- **Campaigns and automations.** Create, update, pause and trigger automations for a contact.
+- **Templates, files and attachments.** Manage templates and uploaded files.
+- **Domains.** Verify sending domains and check SPF, DKIM, tracking and certificate status.
+- **Webhooks and inbound routes.** Receive delivery events and route incoming mail.
+- **Statistics, events and suppressions.** Track delivery, bounces, complaints and unsubscribes.
+- **Subaccounts and security.** Manage subaccounts and API keys.
+- **One script, no build step.** A single `ElasticEmail` script built on cURL, with built-in help for every operation, a `--dry-run` mode and Bash/Zsh completion.
 
-# Make POST request
-$ echo '<body_content>' | ElasticEmail --host <hostname> --content-type json <operationId> -
+## Requirements
 
-# Make POST request with simple JSON content, e.g.:
-# {
-#   "key1": "value1",
-#   "key2": "value2",
-#   "key3": 23
-# }
-$ echo '<body_content>' | ElasticEmail --host <hostname> --content-type json <operationId> key1==value1 key2=value2 key3:=23 -
+| Tool | Version |
+| --- | --- |
+| Bash | 4.3 or later |
+| cURL | Any recent version |
+| `column` | From `util-linux` or `bsdmainutils` (preinstalled on macOS and most Linux distributions) |
+| OS | Linux, macOS (with a newer Bash, see below), WSL, or the bundled Docker image |
 
-# Make POST request with form data
-$ ElasticEmail --host <hostname> <operationId> key1:=value1 key2:=value2 key3:=23
+You'll also need an Elastic Email **API key**. You can create one in your [API settings](https://app.elasticemail.com/marketing/settings/new/manage-api). Each endpoint's documentation lists the access level it needs.
 
-# Preview the cURL command without actually executing it
-$ ElasticEmail --host http://<hostname>:<port> --dry-run <operationid>
+> [!NOTE]
+> macOS ships with Bash 3.2, which is too old. Install a current Bash with `brew install bash` and run the script with it (`/opt/homebrew/bin/bash ElasticEmail …`, or put Homebrew's `bin` first in your `PATH`).
 
+## Installation
+
+Download the script from the latest [GitHub release](https://github.com/ElasticEmail/elasticemail-bash/releases) and make it executable:
+
+```bash
+curl -fsSLO https://raw.githubusercontent.com/ElasticEmail/elasticemail-bash/master/ElasticEmail
+chmod u+x ElasticEmail
+./ElasticEmail --version
 ```
 
-## Docker image
+Or clone the repository:
 
-You can easily create a Docker image containing a preconfigured environment
-for using the REST Bash client including working autocompletion and short
-welcome message with basic instructions, using the generated Dockerfile:
-
-```shell
-docker build -t my-rest-client .
-docker run -it my-rest-client
+```bash
+git clone https://github.com/ElasticEmail/elasticemail-bash.git
+cd elasticemail-bash
+chmod u+x ElasticEmail
 ```
 
-By default you will be logged into a Zsh environment which has much more
-advanced auto completion, but you can switch to Bash, where basic autocompletion
-is also available.
+To run it from anywhere, copy it onto your `PATH`, e.g. `sudo cp ElasticEmail /usr/local/bin/`.
 
-## Shell completion
+### Docker image
 
-### Bash
+The repository includes a `Dockerfile` with a preconfigured environment (Bash, Zsh and working completion):
 
-The generated bash-completion script can be either directly loaded to the current Bash session using:
+```bash
+docker build -t elasticemail-cli .
+docker run -it elasticemail-cli
+```
 
-```shell
+You start in Zsh, which has richer completion. You can switch to Bash, where basic completion is also available.
+
+### Shell completion
+
+<details>
+<summary><strong>Bash</strong></summary>
+
+Load the completion script into the current session:
+
+```bash
 source ElasticEmail.bash-completion
 ```
 
-Alternatively, the script can be copied to the `/etc/bash-completion.d` (or on OSX with Homebrew to `/usr/local/etc/bash-completion.d`):
+Or install it system-wide (on macOS with Homebrew, use `$(brew --prefix)/etc/bash_completion.d`):
 
-```shell
-sudo cp ElasticEmail.bash-completion /etc/bash-completion.d/ElasticEmail
+```bash
+sudo cp ElasticEmail.bash-completion /etc/bash_completion.d/ElasticEmail
 ```
 
-#### OS X
+On macOS you might need to install bash-completion first:
 
-On OSX you might need to install bash-completion using Homebrew:
-
-```shell
+```bash
 brew install bash-completion
 ```
 
-and add the following to the `~/.bashrc`:
+and add this to `~/.bashrc`:
 
-```shell
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
+```bash
+if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+  . "$(brew --prefix)/etc/bash_completion"
 fi
 ```
 
-### Zsh
+</details>
 
-In Zsh, the generated `_ElasticEmail` Zsh completion file must be copied to one of the folders under `$FPATH` variable.
+<details>
+<summary><strong>Zsh</strong></summary>
 
+Copy the `_ElasticEmail` completion file to one of the directories in your `$fpath`, e.g.:
 
-## Examples
+```bash
+sudo cp _ElasticEmail /usr/local/share/zsh/site-functions/
+```
 
-Function ||
------------- | ------------- 
+</details>
+
+## Quick start
+
+### Configure the client
+
+Pass the API host with `--host` (without the `/v4` base path) and the API key as an `X-ElasticEmail-ApiKey` header after the operation name:
+
+```bash
+export ELASTICEMAIL_API_KEY="your-api-key"
+EE_HOST="https://api.elasticemail.com"
+
+# List available operations, then show help for one
+./ElasticEmail -h
+./ElasticEmail emailsTransactionalPost -h
+
+# Load the first 10 contacts
+./ElasticEmail --host "$EE_HOST" contactsGet limit=10 \
+  "X-ElasticEmail-ApiKey:$ELASTICEMAIL_API_KEY"
+```
+
+> [!TIP]
+> Keep your API key out of scripts and shell history. Load it from an environment variable, a `.env` file that isn't committed, or a secrets manager.
+
+### Send a transactional email
+
+Pipe a JSON body to the operation and pass `-` to read it from stdin:
+
+```bash
+cat <<'JSON' | ./ElasticEmail --host "$EE_HOST" --content-type json \
+  emailsTransactionalPost - "X-ElasticEmail-ApiKey:$ELASTICEMAIL_API_KEY"
+{
+  "Recipients": { "To": ["john.doe@example.com"] },
+  "Content": {
+    "From": "My App <no-reply@yourdomain.com>",
+    "Subject": "Welcome aboard!",
+    "Body": [
+      { "ContentType": "HTML", "Content": "<h1>Hello!</h1><p>Thanks for signing up.</p>" },
+      { "ContentType": "PlainText", "Content": "Hello! Thanks for signing up." }
+    ]
+  }
+}
+JSON
+```
+
+The `From` address must use a domain you've verified in your Elastic Email account.
+
+### Send from a template with merge fields
+
+```bash
+cat <<'JSON' | ./ElasticEmail --host "$EE_HOST" --content-type json \
+  emailsTransactionalPost - "X-ElasticEmail-ApiKey:$ELASTICEMAIL_API_KEY"
+{
+  "Recipients": { "To": ["john.doe@example.com"] },
+  "Content": {
+    "From": "My App <no-reply@yourdomain.com>",
+    "TemplateName": "welcome-template",
+    "Merge": { "firstname": "John" }
+  }
+}
+JSON
+```
+
+### Preview, proxies and other cURL options
+
+Any cURL option placed **before** the operation name is passed straight to cURL. Add `--dry-run` to print the cURL command instead of running it:
+
+```bash
+# Print the request without sending it
+./ElasticEmail --host "$EE_HOST" --dry-run contactsGet limit=10 \
+  "X-ElasticEmail-ApiKey:$ELASTICEMAIL_API_KEY"
+
+# Go through a proxy, with a 30-second timeout
+./ElasticEmail -x http://myProxyUrl:80 --max-time 30 --host "$EE_HOST" \
+  contactsGet "X-ElasticEmail-ApiKey:$ELASTICEMAIL_API_KEY"
+```
+
+Add `-sS` before the operation name to hide cURL's progress meter but keep error messages.
+
+<details>
+<summary><strong>Argument syntax</strong></summary>
+
+After the operation name:
+
+| Form | Meaning |
+| --- | --- |
+| `KEY=VALUE` | Path or query parameter, e.g. `limit=10`, `email=john.doe@example.com` |
+| `HEADER:VALUE` | HTTP header, e.g. `X-ElasticEmail-ApiKey:…` |
+| `KEY==VALUE` | Top-level JSON body field (string) |
+| `KEY:=VALUE` | Top-level JSON body field (number or boolean) |
+| `-` | Read the request body from stdin |
+
+Before the operation name: `--host <url>`, `-ct|--content-type <mime>`, `-ac|--accept <mime>`, `--dry-run`, `--force`, `-nc|--no-colors`, and any cURL option.
+
+</details>
+
+## More examples
+
+Step-by-step scripts for common tasks are in the [`examples/`](examples) folder. Each one has a runnable `.sh` file and a walkthrough.
+
+<details>
+<summary><strong>Show all 19 examples</strong></summary>
+
+Script | Walkthrough
+--- | ---
 [addCampaign](examples/addCampaign.sh) | [readme](examples/addCampaign.md)
 [addContacts](examples/addContacts.sh) | [readme](examples/addContacts.md)
 [addList](examples/addList.sh) | [readme](examples/addList.md)
@@ -122,9 +252,34 @@ Function ||
 [updateCampaign](examples/updateCampaign.sh) | [readme](examples/updateCampaign.md)
 [uploadContacts](examples/uploadContacts.sh) | [readme](examples/uploadContacts.md)
 
-## Documentation for API Endpoints
+</details>
 
-All URIs are relative to */v4*
+More complete samples in other languages are in the **[Elastic Email examples repository](https://github.com/ElasticEmail/elasticemail-examples)**. It covers transactional email, SMTP, webhooks, inbound email, contacts and serverless platforms across 20+ languages and frameworks.
+
+- ✉️ [SMTP quickstart with `curl`](https://github.com/ElasticEmail/elasticemail-examples/blob/main/smtp-elasticemail-examples/QUICKSTART.md)
+- 📂 [All examples](https://github.com/ElasticEmail/elasticemail-examples)
+
+## Authentication
+
+| Scheme | Header | Used for |
+| --- | --- | --- |
+| `apikey` | `X-ElasticEmail-ApiKey` | All standard API calls |
+| `ApiKeyAuthCustomBranding` | `X-Auth-Token` | Custom-branding (white-label) accounts |
+
+Pass the header after the operation name, e.g. `"X-ElasticEmail-ApiKey:$ELASTICEMAIL_API_KEY"`.
+
+## API limits
+
+- Up to **20 concurrent connections** per account
+- A hard timeout of **600 seconds** per request
+
+## API reference
+
+All URIs are relative to `https://api.elasticemail.com/v4`. The client covers **114 operations** across 16 API groups: `CampaignsApi`, `ContactsApi`, `DomainsApi`, `EmailsApi`, `EventsApi`, `FilesApi`, `InboundRouteApi`, `ListsApi`, `SecurityApi`, `SegmentsApi`, `StatisticsApi`, `SubAccountsApi`, `SuppressionsApi`, `TemplatesApi`, `VerificationsApi` and `WebhookApi`. Run `./ElasticEmail <operation> -h` for the parameters of any operation.
+
+<details>
+<summary><strong>Show all endpoints</strong></summary>
+
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -243,8 +398,12 @@ Class | Method | HTTP request | Description
 *WebhookApi* | [**webhookGet**](docs/WebhookApi.md#webhookget) | **GET** /webhook | Load Webhooks
 *WebhookApi* | [**webhookPost**](docs/WebhookApi.md#webhookpost) | **POST** /webhook | Add Webhook
 
+</details>
 
-## Documentation For Models
+## Models
+
+<details>
+<summary><strong>Show all 98 models</strong></summary>
 
  - [AccessLevel](docs/AccessLevel.md)
  - [AccountStatusEnum](docs/AccountStatusEnum.md)
@@ -345,21 +504,46 @@ Class | Method | HTTP request | Description
  - [WebhookCreatePayload](docs/WebhookCreatePayload.md)
  - [WebhookUpdatePayload](docs/WebhookUpdatePayload.md)
 
+</details>
 
-## Documentation For Authorization
+## Known issues
 
+- The generated script also sends your API key as an `X-Auth-Token` header, and the malformed extra header makes cURL print `curl: (3) URL rejected: Malformed input to a URL function`. The request itself is still sent and the API response is returned. Use `--dry-run` to see the exact command.
 
-## apikey
+## Versioning
 
+The client follows the Elastic Email API v4. Versions and release notes are listed in [GitHub Releases](https://github.com/ElasticEmail/elasticemail-bash/releases). The current version is in the [`VERSION`](VERSION) file.
 
-- **Type**: API key
-- **API key parameter name**: X-ElasticEmail-ApiKey
-- **Location**: HTTP header
+<details>
+<summary>Build details</summary>
 
-## ApiKeyAuthCustomBranding
+- API version: 4.0.0
+- SDK version: 4.2.0
+- Generator version: 7.11.0
+- Build package: `org.openapitools.codegen.languages.BashClientCodegen`
 
+</details>
 
-- **Type**: API key
-- **API key parameter name**: X-Auth-Token
-- **Location**: HTTP header
+## Contributing
 
+Contributions are welcome! Most of this client is generated from the Elastic Email OpenAPI specification, so please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+
+- 🐛 [Report a bug](https://github.com/ElasticEmail/elasticemail-bash/issues/new?template=bug_report.md)
+- 💡 [Request a feature](https://github.com/ElasticEmail/elasticemail-bash/issues/new?template=feature_request.md)
+- 🔒 [Report a security issue](SECURITY.md)
+
+This project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md).
+
+## Support
+
+> [!IMPORTANT]
+> The fastest way to get help is the **chat widget on [elasticemail.com](https://elasticemail.com)**. Our support team can help with your account, sending, deliverability and API questions.
+
+- 💬 [Chat with support on elasticemail.com](https://elasticemail.com) (preferred)
+- 📚 [API documentation](https://elasticemail.com/developers/api-documentation/rest-api)
+- 🧪 [Examples repository](https://github.com/ElasticEmail/elasticemail-examples)
+- 🐛 [GitHub issues](https://github.com/ElasticEmail/elasticemail-bash/issues), for bugs in this SDK only
+
+## License
+
+Released under the [MIT License](LICENSE). Copyright © 2021–2026 Elastic Email.
