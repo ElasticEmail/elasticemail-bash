@@ -131,6 +131,9 @@ sudo cp _ElasticEmail /usr/local/share/zsh/site-functions/
 
 ## Quick start
 
+> [!IMPORTANT]
+> Elastic Email only sends from verified domains. Before your first send, [verify your sending domain](https://help.elasticemail.com/en/articles/4934400-how-to-verify-your-domain) and use an address on that domain as the sender.
+
 ### Configure the client
 
 Pass the API host with `--host` (without the `/v4` base path) and the API key as an `X-ElasticEmail-ApiKey` header after the operation name:
@@ -172,7 +175,7 @@ cat <<'JSON' | ./ElasticEmail --host "$EE_HOST" --content-type json \
 JSON
 ```
 
-The `From` address must use a domain you've verified in your Elastic Email account.
+The `From` address must use a domain you've [verified in your Elastic Email account](https://help.elasticemail.com/en/articles/4934400-how-to-verify-your-domain).
 
 ### Send from a template with merge fields
 
