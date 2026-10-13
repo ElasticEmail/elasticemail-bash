@@ -109,7 +109,7 @@ Send to a list of contacts submitted in a CSV data file. The first column in the
 ### Example
 
 ```bash
-ElasticEmail emailsMergefilePost
+ElasticEmail emailsMergefilePost Idempotency-Key:value
 ```
 
 ### Parameters
@@ -118,6 +118,7 @@ ElasticEmail emailsMergefilePost
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **mergeEmailPayload** | [**MergeEmailPayload**](MergeEmailPayload.md) | Email data |
+ **idempotencyKey** | **string** | Makes a retry of this request safe. A repeated request with the same key and the same body gets the stored response of the first one and is not executed again. Generate a new key, e.g. a UUID v4, for each request and reuse it only to retry that request. Keys are scoped to the account and kept for 24 hours after the first request. | [optional] [default to null]
 
 ### Return type
 
@@ -144,7 +145,7 @@ Send bulk merge email. Required Access Level: SendHttp
 ### Example
 
 ```bash
-ElasticEmail emailsPost
+ElasticEmail emailsPost Idempotency-Key:value
 ```
 
 ### Parameters
@@ -153,6 +154,7 @@ ElasticEmail emailsPost
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **emailMessageData** | [**EmailMessageData**](EmailMessageData.md) | Email data |
+ **idempotencyKey** | **string** | Makes a retry of this request safe. A repeated request with the same key and the same body gets the stored response of the first one and is not executed again. Generate a new key, e.g. a UUID v4, for each request and reuse it only to retry that request. Keys are scoped to the account and kept for 24 hours after the first request. | [optional] [default to null]
 
 ### Return type
 
@@ -179,7 +181,7 @@ Send transactional emails (recipients will be known to each other). Required Acc
 ### Example
 
 ```bash
-ElasticEmail emailsTransactionalPost
+ElasticEmail emailsTransactionalPost Idempotency-Key:value
 ```
 
 ### Parameters
@@ -188,6 +190,7 @@ ElasticEmail emailsTransactionalPost
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **emailTransactionalMessageData** | [**EmailTransactionalMessageData**](EmailTransactionalMessageData.md) | Email data |
+ **idempotencyKey** | **string** | Makes a retry of this request safe. A repeated request with the same key and the same body gets the stored response of the first one and is not executed again. Generate a new key, e.g. a UUID v4, for each request and reuse it only to retry that request. Keys are scoped to the account and kept for 24 hours after the first request. | [optional] [default to null]
 
 ### Return type
 

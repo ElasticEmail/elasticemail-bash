@@ -615,19 +615,22 @@ case $state in
       emailsMergefilePost)
         local -a _op_arguments
         _op_arguments=(
-                              )
+                              "Idempotency-Key\::[HEADER] Makes a retry of this request safe. A repeated request with the same key and the same body gets the stored response of the first one and is not executed again. Generate a new key, e.g. a UUID v4, for each request and reuse it only to retry that request. Keys are scoped to the account and kept for 24 hours after the first request."
+)
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
       emailsPost)
         local -a _op_arguments
         _op_arguments=(
-                              )
+                              "Idempotency-Key\::[HEADER] Makes a retry of this request safe. A repeated request with the same key and the same body gets the stored response of the first one and is not executed again. Generate a new key, e.g. a UUID v4, for each request and reuse it only to retry that request. Keys are scoped to the account and kept for 24 hours after the first request."
+)
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
       emailsTransactionalPost)
         local -a _op_arguments
         _op_arguments=(
-                              )
+                              "Idempotency-Key\::[HEADER] Makes a retry of this request safe. A repeated request with the same key and the same body gets the stored response of the first one and is not executed again. Generate a new key, e.g. a UUID v4, for each request and reuse it only to retry that request. Keys are scoped to the account and kept for 24 hours after the first request."
+)
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
       eventsByTransactionidGet)

@@ -35,6 +35,7 @@ The official Bash command-line client for the [Elastic Email](https://elasticema
 - **Campaigns and automations.** Create, update, pause and trigger automations for a contact.
 - **Templates, files and attachments.** Manage templates and uploaded files.
 - **Domains.** Verify sending domains and check SPF, DKIM, tracking and certificate status.
+- **Safe retries.** Pass an `Idempotency-Key` header on email sends so a retried request is never sent or charged twice.
 - **Webhooks and inbound routes.** Receive delivery events, optionally signed with HMAC-SHA256 and sent as JSON, and route incoming mail.
 - **Statistics, events and suppressions.** Track delivery, bounces, complaints and unsubscribes.
 - **Subaccounts and security.** Manage subaccounts and API keys.
@@ -176,6 +177,22 @@ JSON
 ```
 
 The `From` address must use a domain you've [verified in your Elastic Email account](https://help.elasticemail.com/en/articles/4934400-how-to-verify-your-domain).
+
+### Retry a send safely (Idempotency-Key)
+
+Add an `Idempotency-Key` header to make a send safe to retry after a timeout or a network error. If the first request already went through, the retry gets the stored response (same `TransactionID` and `MessageID`) with an `Idempotency-Replayed: true` header, and nothing is sent or charged twice.
+
+```bash
+# One new key per logical send; reuse it only to retry this send.
+IDEMPOTENCY_KEY=$(uuidgen | tr '[:upper:]' '[:lower:]')
+
+# Keep the body in a file so a retry sends exactly the same bytes.
+./ElasticEmail --host "$EE_HOST" --content-type json \
+  emailsTransactionalPost - "X-ElasticEmail-ApiKey:$ELASTICEMAIL_API_KEY" \
+  "Idempotency-Key:$IDEMPOTENCY_KEY" < welcome.json
+```
+
+To retry, run the same command with the same key and the same `welcome.json` within 24 hours; `emailsPost` and `emailsMergefilePost` accept the header too. The same key with a different body returns `422`, a retry while the first request is still running returns `409`, and `503` means the key couldn't be checked, so wait for `Retry-After` and retry with the same key. Add `-i` before the operation name to see the `Idempotency-Replayed` header.
 
 ### Send from a template with merge fields
 
@@ -545,7 +562,7 @@ The client follows the Elastic Email API v4. Versions and release notes are list
 <summary>Build details</summary>
 
 - API version: 4.0.0
-- SDK version: 4.3.0
+- SDK version: 4.4.0
 - Generator version: 7.11.0
 - Build package: `org.openapitools.codegen.languages.BashClientCodegen`
 

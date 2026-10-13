@@ -148,8 +148,11 @@ operation_parameters_minimum_occurrences["emailsByTransactionidStatusGet:::showU
 operation_parameters_minimum_occurrences["emailsByTransactionidStatusGet:::showErrors"]=0
 operation_parameters_minimum_occurrences["emailsByTransactionidStatusGet:::showMessageIDs"]=0
 operation_parameters_minimum_occurrences["emailsMergefilePost:::MergeEmailPayload"]=1
+operation_parameters_minimum_occurrences["emailsMergefilePost:::Idempotency-Key"]=0
 operation_parameters_minimum_occurrences["emailsPost:::EmailMessageData"]=1
+operation_parameters_minimum_occurrences["emailsPost:::Idempotency-Key"]=0
 operation_parameters_minimum_occurrences["emailsTransactionalPost:::EmailTransactionalMessageData"]=1
+operation_parameters_minimum_occurrences["emailsTransactionalPost:::Idempotency-Key"]=0
 operation_parameters_minimum_occurrences["eventsByTransactionidGet:::transactionid"]=1
 operation_parameters_minimum_occurrences["eventsByTransactionidGet:::from"]=0
 operation_parameters_minimum_occurrences["eventsByTransactionidGet:::to"]=0
@@ -360,8 +363,11 @@ operation_parameters_maximum_occurrences["emailsByTransactionidStatusGet:::showU
 operation_parameters_maximum_occurrences["emailsByTransactionidStatusGet:::showErrors"]=0
 operation_parameters_maximum_occurrences["emailsByTransactionidStatusGet:::showMessageIDs"]=0
 operation_parameters_maximum_occurrences["emailsMergefilePost:::MergeEmailPayload"]=0
+operation_parameters_maximum_occurrences["emailsMergefilePost:::Idempotency-Key"]=0
 operation_parameters_maximum_occurrences["emailsPost:::EmailMessageData"]=0
+operation_parameters_maximum_occurrences["emailsPost:::Idempotency-Key"]=0
 operation_parameters_maximum_occurrences["emailsTransactionalPost:::EmailTransactionalMessageData"]=0
+operation_parameters_maximum_occurrences["emailsTransactionalPost:::Idempotency-Key"]=0
 operation_parameters_maximum_occurrences["eventsByTransactionidGet:::transactionid"]=0
 operation_parameters_maximum_occurrences["eventsByTransactionidGet:::from"]=0
 operation_parameters_maximum_occurrences["eventsByTransactionidGet:::to"]=0
@@ -569,8 +575,11 @@ operation_parameters_collection_type["emailsByTransactionidStatusGet:::showUnsub
 operation_parameters_collection_type["emailsByTransactionidStatusGet:::showErrors"]=""
 operation_parameters_collection_type["emailsByTransactionidStatusGet:::showMessageIDs"]=""
 operation_parameters_collection_type["emailsMergefilePost:::MergeEmailPayload"]=""
+operation_parameters_collection_type["emailsMergefilePost:::Idempotency-Key"]=""
 operation_parameters_collection_type["emailsPost:::EmailMessageData"]=""
+operation_parameters_collection_type["emailsPost:::Idempotency-Key"]=""
 operation_parameters_collection_type["emailsTransactionalPost:::EmailTransactionalMessageData"]=""
+operation_parameters_collection_type["emailsTransactionalPost:::Idempotency-Key"]=""
 operation_parameters_collection_type["eventsByTransactionidGet:::transactionid"]=""
 operation_parameters_collection_type["eventsByTransactionidGet:::from"]=""
 operation_parameters_collection_type["eventsByTransactionidGet:::to"]=""
@@ -1943,12 +1952,23 @@ print_emailsMergefilePost_help() {
              Merge file must not be empty. Required Access Level: SendHttp" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}Idempotency-Key${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - Makes a retry of this request safe. A repeated request with the same key and the same body gets the stored response of the first one and is not executed again. Generate a new key, e.g. a UUID v4, for each request and reuse it only to retry that request. Keys are scoped to the account and kept for 24 hours after the first request. ${YELLOW}Specify as: Idempotency-Key:value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e "  * ${GREEN}body${OFF} ${BLUE}[application/json]${OFF} ${RED}(required)${OFF}${OFF} - Email data" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=200
     echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=400
+    echo -e "${result_color_table[${code:0:1}]}  400;Bad request, e.g. the Idempotency-Key header is not 1 to 255 printable ASCII characters.${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=409
+    echo -e "${result_color_table[${code:0:1}]}  409;A request with the same Idempotency-Key is still in progress. Retry once it has completed.${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=422
+    echo -e "${result_color_table[${code:0:1}]}  422;The Idempotency-Key was already used with a different request.${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=503
+    echo -e "${result_color_table[${code:0:1}]}  503;The Idempotency-Key could not be confirmed, so the request was not executed. Retry after the time given in Retry-After.${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+        echo -e "       ${BOLD}${WHITE}Response headers${OFF}"
+        echo -e "       ${BLUE}Retry-After${OFF} - Seconds to wait before retrying." | paste -sd' ' | fold -sw 80 | sed '2,$s/^/        /'
 }
 ##############################################################################
 #
@@ -1962,12 +1982,23 @@ print_emailsPost_help() {
     echo -e "Send bulk merge email. Required Access Level: SendHttp" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}Idempotency-Key${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - Makes a retry of this request safe. A repeated request with the same key and the same body gets the stored response of the first one and is not executed again. Generate a new key, e.g. a UUID v4, for each request and reuse it only to retry that request. Keys are scoped to the account and kept for 24 hours after the first request. ${YELLOW}Specify as: Idempotency-Key:value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e "  * ${GREEN}body${OFF} ${BLUE}[application/json]${OFF} ${RED}(required)${OFF}${OFF} - Email data" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=200
     echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=400
+    echo -e "${result_color_table[${code:0:1}]}  400;Bad request, e.g. the Idempotency-Key header is not 1 to 255 printable ASCII characters.${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=409
+    echo -e "${result_color_table[${code:0:1}]}  409;A request with the same Idempotency-Key is still in progress. Retry once it has completed.${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=422
+    echo -e "${result_color_table[${code:0:1}]}  422;The Idempotency-Key was already used with a different request.${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=503
+    echo -e "${result_color_table[${code:0:1}]}  503;The Idempotency-Key could not be confirmed, so the request was not executed. Retry after the time given in Retry-After.${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+        echo -e "       ${BOLD}${WHITE}Response headers${OFF}"
+        echo -e "       ${BLUE}Retry-After${OFF} - Seconds to wait before retrying." | paste -sd' ' | fold -sw 80 | sed '2,$s/^/        /'
 }
 ##############################################################################
 #
@@ -1981,12 +2012,23 @@ print_emailsTransactionalPost_help() {
     echo -e "Send transactional emails (recipients will be known to each other). Required Access Level: SendHttp" | paste -sd' ' | fold -sw 80
     echo -e ""
     echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}Idempotency-Key${OFF} ${BLUE}[string]${OFF} ${CYAN}(default: null)${OFF} - Makes a retry of this request safe. A repeated request with the same key and the same body gets the stored response of the first one and is not executed again. Generate a new key, e.g. a UUID v4, for each request and reuse it only to retry that request. Keys are scoped to the account and kept for 24 hours after the first request. ${YELLOW}Specify as: Idempotency-Key:value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e "  * ${GREEN}body${OFF} ${BLUE}[application/json]${OFF} ${RED}(required)${OFF}${OFF} - Email data" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=200
     echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=400
+    echo -e "${result_color_table[${code:0:1}]}  400;Bad request, e.g. the Idempotency-Key header is not 1 to 255 printable ASCII characters.${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=409
+    echo -e "${result_color_table[${code:0:1}]}  409;A request with the same Idempotency-Key is still in progress. Retry once it has completed.${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=422
+    echo -e "${result_color_table[${code:0:1}]}  422;The Idempotency-Key was already used with a different request.${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+    code=503
+    echo -e "${result_color_table[${code:0:1}]}  503;The Idempotency-Key could not be confirmed, so the request was not executed. Retry after the time given in Retry-After.${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+        echo -e "       ${BOLD}${WHITE}Response headers${OFF}"
+        echo -e "       ${BLUE}Retry-After${OFF} - Seconds to wait before retrying." | paste -sd' ' | fold -sw 80 | sed '2,$s/^/        /'
 }
 ##############################################################################
 #
