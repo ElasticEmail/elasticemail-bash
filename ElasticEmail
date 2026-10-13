@@ -296,6 +296,7 @@ operation_parameters_minimum_occurrences["webhookByPublicidDelete:::publicid"]=1
 operation_parameters_minimum_occurrences["webhookByPublicidGet:::publicid"]=1
 operation_parameters_minimum_occurrences["webhookByPublicidPut:::publicid"]=1
 operation_parameters_minimum_occurrences["webhookByPublicidPut:::WebhookUpdatePayload"]=1
+operation_parameters_minimum_occurrences["webhookByPublicidSecretRotatePost:::publicid"]=1
 operation_parameters_minimum_occurrences["webhookGet:::limit"]=0
 operation_parameters_minimum_occurrences["webhookGet:::offset"]=0
 operation_parameters_minimum_occurrences["webhookPost:::WebhookCreatePayload"]=1
@@ -507,6 +508,7 @@ operation_parameters_maximum_occurrences["webhookByPublicidDelete:::publicid"]=0
 operation_parameters_maximum_occurrences["webhookByPublicidGet:::publicid"]=0
 operation_parameters_maximum_occurrences["webhookByPublicidPut:::publicid"]=0
 operation_parameters_maximum_occurrences["webhookByPublicidPut:::WebhookUpdatePayload"]=0
+operation_parameters_maximum_occurrences["webhookByPublicidSecretRotatePost:::publicid"]=0
 operation_parameters_maximum_occurrences["webhookGet:::limit"]=0
 operation_parameters_maximum_occurrences["webhookGet:::offset"]=0
 operation_parameters_maximum_occurrences["webhookPost:::WebhookCreatePayload"]=0
@@ -715,6 +717,7 @@ operation_parameters_collection_type["webhookByPublicidDelete:::publicid"]=""
 operation_parameters_collection_type["webhookByPublicidGet:::publicid"]=""
 operation_parameters_collection_type["webhookByPublicidPut:::publicid"]=""
 operation_parameters_collection_type["webhookByPublicidPut:::WebhookUpdatePayload"]=""
+operation_parameters_collection_type["webhookByPublicidSecretRotatePost:::publicid"]=""
 operation_parameters_collection_type["webhookGet:::limit"]=""
 operation_parameters_collection_type["webhookGet:::offset"]=""
 operation_parameters_collection_type["webhookPost:::WebhookCreatePayload"]=""
@@ -1332,6 +1335,7 @@ read -r -d '' ops <<EOF
   ${CYAN}webhookByPublicidDelete${OFF};Delete Webhook (AUTH)
   ${CYAN}webhookByPublicidGet${OFF};Load Webhook (AUTH)
   ${CYAN}webhookByPublicidPut${OFF};Update Webhook (AUTH)
+  ${CYAN}webhookByPublicidSecretRotatePost${OFF};Rotate Webhook Secret (AUTH)
   ${CYAN}webhookGet${OFF};Load Webhooks (AUTH)
   ${CYAN}webhookPost${OFF};Add Webhook (AUTH)
 EOF
@@ -3626,6 +3630,25 @@ print_webhookByPublicidPut_help() {
     echo -e "  * ${GREEN}publicid${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: publicid=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e "  * ${GREEN}body${OFF} ${BLUE}[application/json]${OFF} ${RED}(required)${OFF}${OFF} - " | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo -e ""
+    echo ""
+    echo -e "${BOLD}${WHITE}Responses${OFF}"
+    code=200
+    echo -e "${result_color_table[${code:0:1}]}  200;OK${OFF}" | paste -sd' ' | column -t -s ';' | fold -sw 80 | sed '2,$s/^/       /'
+}
+##############################################################################
+#
+# Print help for webhookByPublicidSecretRotatePost operation
+#
+##############################################################################
+print_webhookByPublicidSecretRotatePost_help() {
+    echo ""
+    echo -e "${BOLD}${WHITE}webhookByPublicidSecretRotatePost - Rotate Webhook Secret${OFF}${BLUE}(AUTH - HEADER)${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
+    echo -e ""
+    echo -e "Replace the signing secret of a webhook created with signing. The old secret stops being used at once - there is no grace period.
+            The new secret is returned only in this response. Notifications your endpoint rejects while it still has the old secret are retried and signed with the new one. Required Access Level: ModifyWebNotifications" | paste -sd' ' | fold -sw 80
+    echo -e ""
+    echo -e "${BOLD}${WHITE}Parameters${OFF}"
+    echo -e "  * ${GREEN}publicid${OFF} ${BLUE}[string]${OFF} ${RED}(required)${OFF} ${CYAN}(default: null)${OFF} -  ${YELLOW}Specify as: publicid=value${OFF}" | paste -sd' ' | fold -sw 80 | sed '2,$s/^/    /'
     echo ""
     echo -e "${BOLD}${WHITE}Responses${OFF}"
     code=200
@@ -9140,6 +9163,42 @@ call_webhookByPublicidPut() {
 
 ##############################################################################
 #
+# Call webhookByPublicidSecretRotatePost operation
+#
+##############################################################################
+call_webhookByPublicidSecretRotatePost() {
+    # ignore error about 'path_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local path_parameter_names=(publicid)
+    # ignore error about 'query_parameter_names' being unused; passed by reference
+    # shellcheck disable=SC2034
+    local query_parameter_names=(  )
+    local path
+
+    if ! path=$(build_request_path "/v4/webhook/{publicid}/secret/rotate" path_parameter_names query_parameter_names); then
+        ERROR_MSG=$path
+        exit 1
+    fi
+    local method="POST"
+    local headers_curl
+    headers_curl=$(header_arguments_to_curl)
+    if [[ -n $header_accept ]]; then
+        headers_curl="${headers_curl} -H 'Accept: ${header_accept}'"
+    fi
+
+    local basic_auth_option=""
+    if [[ -n $basic_auth_credential ]]; then
+        basic_auth_option="-u ${basic_auth_credential}"
+    fi
+    if [[ "$print_curl" = true ]]; then
+        echo "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    else
+        eval "curl -d '' ${basic_auth_option} ${curl_arguments} ${headers_curl} -X ${method} \"${host}${path}\""
+    fi
+}
+
+##############################################################################
+#
 # Call webhookGet operation
 #
 ##############################################################################
@@ -9685,6 +9744,9 @@ case $key in
     webhookByPublicidPut)
     operation="webhookByPublicidPut"
     ;;
+    webhookByPublicidSecretRotatePost)
+    operation="webhookByPublicidSecretRotatePost"
+    ;;
     webhookGet)
     operation="webhookGet"
     ;;
@@ -10127,6 +10189,9 @@ case $operation in
     ;;
     webhookByPublicidPut)
     call_webhookByPublicidPut
+    ;;
+    webhookByPublicidSecretRotatePost)
+    call_webhookByPublicidSecretRotatePost
     ;;
     webhookGet)
     call_webhookGet

@@ -278,7 +278,7 @@ Pass the header after the operation name, e.g. `"X-ElasticEmail-ApiKey:$ELASTICE
 
 ## API reference
 
-All URIs are relative to `https://api.elasticemail.com/v4`. The client covers **114 operations** across 16 API groups: `CampaignsApi`, `ContactsApi`, `DomainsApi`, `EmailsApi`, `EventsApi`, `FilesApi`, `InboundRouteApi`, `ListsApi`, `SecurityApi`, `SegmentsApi`, `StatisticsApi`, `SubAccountsApi`, `SuppressionsApi`, `TemplatesApi`, `VerificationsApi` and `WebhookApi`. Run `./ElasticEmail <operation> -h` for the parameters of any operation.
+All URIs are relative to `https://api.elasticemail.com/v4`. The client covers **115 operations** across 16 API groups: `CampaignsApi`, `ContactsApi`, `DomainsApi`, `EmailsApi`, `EventsApi`, `FilesApi`, `InboundRouteApi`, `ListsApi`, `SecurityApi`, `SegmentsApi`, `StatisticsApi`, `SubAccountsApi`, `SuppressionsApi`, `TemplatesApi`, `VerificationsApi` and `WebhookApi`. Run `./ElasticEmail <operation> -h` for the parameters of any operation.
 
 <details>
 <summary><strong>Show all endpoints</strong></summary>
@@ -398,6 +398,7 @@ Class | Method | HTTP request | Description
 *WebhookApi* | [**webhookByPublicidDelete**](docs/WebhookApi.md#webhookbypubliciddelete) | **DELETE** /webhook/{publicid} | Delete Webhook
 *WebhookApi* | [**webhookByPublicidGet**](docs/WebhookApi.md#webhookbypublicidget) | **GET** /webhook/{publicid} | Load Webhook
 *WebhookApi* | [**webhookByPublicidPut**](docs/WebhookApi.md#webhookbypublicidput) | **PUT** /webhook/{publicid} | Update Webhook
+*WebhookApi* | [**webhookByPublicidSecretRotatePost**](docs/WebhookApi.md#webhookbypublicidsecretrotatepost) | **POST** /webhook/{publicid}/secret/rotate | Rotate Webhook Secret
 *WebhookApi* | [**webhookGet**](docs/WebhookApi.md#webhookget) | **GET** /webhook | Load Webhooks
 *WebhookApi* | [**webhookPost**](docs/WebhookApi.md#webhookpost) | **POST** /webhook | Add Webhook
 
@@ -406,7 +407,7 @@ Class | Method | HTTP request | Description
 ## Models
 
 <details>
-<summary><strong>Show all 98 models</strong></summary>
+<summary><strong>Show all 99 models</strong></summary>
 
  - [AccessLevel](docs/AccessLevel.md)
  - [AccountStatusEnum](docs/AccountStatusEnum.md)
@@ -505,6 +506,7 @@ Class | Method | HTTP request | Description
  - [VerificationStatus](docs/VerificationStatus.md)
  - [Webhook](docs/Webhook.md)
  - [WebhookCreatePayload](docs/WebhookCreatePayload.md)
+ - [WebhookDeliveryMethod](docs/WebhookDeliveryMethod.md)
  - [WebhookUpdatePayload](docs/WebhookUpdatePayload.md)
 
 </details>
@@ -521,7 +523,7 @@ The client follows the Elastic Email API v4. Versions and release notes are list
 <summary>Build details</summary>
 
 - API version: 4.0.0
-- SDK version: 4.2.0
+- SDK version: 4.3.0
 - Generator version: 7.11.0
 - Build package: `org.openapitools.codegen.languages.BashClientCodegen`
 

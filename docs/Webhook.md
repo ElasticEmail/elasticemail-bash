@@ -16,6 +16,9 @@ Name | Type | Description | Notes
 **NotificationForAbuseReport** | **boolean** |  | [optional] [default to null]
 **NotificationForError** | **boolean** |  | [optional] [default to null]
 **IsEnabled** | **boolean** |  | [optional] [default to null]
+**SigningEnabled** | **boolean** |  | [optional] [default to null]
+**DeliveryMethod** | [**WebhookDeliveryMethod**](WebhookDeliveryMethod.md) |  | [optional] [default to null]
+**SigningSecret** | **string** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

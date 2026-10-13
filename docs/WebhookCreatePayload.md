@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **NotificationForUnsubscribed** | **boolean** |  | [optional] [default to null]
 **NotificationForAbuseReport** | **boolean** |  | [optional] [default to null]
 **NotificationForError** | **boolean** |  | [optional] [default to null]
+**EnableSigning** | **boolean** |  | [optional] [default to null]
+**DeliveryMethod** | [**WebhookDeliveryMethod**](WebhookDeliveryMethod.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

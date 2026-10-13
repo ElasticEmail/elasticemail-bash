@@ -394,6 +394,7 @@ case $state in
             "verificationsGet[Get Emails Verification Results]"             "webhookByPublicidDelete[Delete Webhook]" \
             "webhookByPublicidGet[Load Webhook]" \
             "webhookByPublicidPut[Update Webhook]" \
+            "webhookByPublicidSecretRotatePost[Rotate Webhook Secret]" \
             "webhookGet[Load Webhooks]" \
             "webhookPost[Add Webhook]" \
 
@@ -1240,6 +1241,13 @@ case $state in
         _describe -t actions 'operations' _op_arguments -S '' && ret=0
         ;;
       webhookByPublicidPut)
+        local -a _op_arguments
+        _op_arguments=(
+          "publicid=:[PATH] "
+                    )
+        _describe -t actions 'operations' _op_arguments -S '' && ret=0
+        ;;
+      webhookByPublicidSecretRotatePost)
         local -a _op_arguments
         _op_arguments=(
           "publicid=:[PATH] "

@@ -181,6 +181,7 @@ _ElasticEmail()
     operations["webhookByPublicidDelete"]=1
     operations["webhookByPublicidGet"]=1
     operations["webhookByPublicidPut"]=1
+    operations["webhookByPublicidSecretRotatePost"]=1
     operations["webhookGet"]=1
     operations["webhookPost"]=1
 
@@ -299,6 +300,7 @@ _ElasticEmail()
     operation_parameters["webhookByPublicidDelete"]="publicid= "
     operation_parameters["webhookByPublicidGet"]="publicid= "
     operation_parameters["webhookByPublicidPut"]="publicid= "
+    operation_parameters["webhookByPublicidSecretRotatePost"]="publicid= "
     operation_parameters["webhookGet"]="limit= offset= "
     operation_parameters["webhookPost"]=""
 
