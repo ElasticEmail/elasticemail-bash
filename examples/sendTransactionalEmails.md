@@ -12,7 +12,7 @@ When using Elastic Email you send emails to your contacts. One of options is to 
 A transactional email have a limit of 50 maximum recipients.
 
 ## Preparation
-It's a Bash script so it's a program to be run by Unix shell. On linux (eg. Ubuntu) there's no need to install anything additional. 
+It's a Bash script so it's a program to be run by Unix shell. On linux (eg. Ubuntu) there's no need to install anything additional except `jq`, which this example uses to read the response, and `uuidgen` (preinstalled on macOS and most Linux distributions).
 
 Create a new file eg. `script.sh`
 
@@ -37,10 +37,10 @@ Variable for host value:
 host=https://api.elasticemail.com
 ```
 
-Use your API key (remember to check a required access level):
+Read your API key from the `ELASTICEMAIL_API_KEY` environment variable (remember to check a required access level). The script stops with an error if the variable is not set:
 
 ```bash
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 ```
 
 and create header variables for api key:
@@ -87,10 +87,16 @@ json='{
 ```
 
 
-And finally, you can use the lib to make an api call:
+And finally, you can use the lib to make an api call. Pass an `Idempotency-Key` header with a new UUID, so the send can be retried after a timeout without delivering the email twice: a retry with the same key and the same body gets the stored response. `jq` reads the `TransactionID` from the response:
 
 ```bash
-echo $json | ./ElasticEmail --host $host --content-type json $apiMethod - $apiKeyHeader
+# One new key per send; reuse it only to retry this same send with the same body.
+idempotencyKey=$(uuidgen | tr '[:upper:]' '[:lower:]')
+
+response=$(echo "$json" | ./ElasticEmail --host "$host" --content-type json "$apiMethod" - "$apiKeyHeader" "Idempotency-Key:$idempotencyKey")
+
+echo "$response"
+echo "TransactionID: $(jq -r .TransactionID <<<"$response")  Idempotency-Key: $idempotencyKey"
 ```
 
 ## The whole code to copy and paste:
@@ -100,7 +106,7 @@ echo $json | ./ElasticEmail --host $host --content-type json $apiMethod - $apiKe
 
 host=https://api.elasticemail.com
 
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 
 apiKeyHeaderName=X-ElasticEmail-ApiKey
 apiKeyHeader=$apiKeyHeaderName:$apiKey
@@ -129,10 +135,17 @@ json='{
         }
     }'
 
-echo $json | ./ElasticEmail --host $host --content-type json $apiMethod - $apiKeyHeader
+# One new key per send; reuse it only to retry this same send with the same body.
+idempotencyKey=$(uuidgen | tr '[:upper:]' '[:lower:]')
+
+response=$(echo "$json" | ./ElasticEmail --host "$host" --content-type json "$apiMethod" - "$apiKeyHeader" "Idempotency-Key:$idempotencyKey")
+
+echo "$response"
+echo "TransactionID: $(jq -r .TransactionID <<<"$response")  Idempotency-Key: $idempotencyKey"
 ```
 
 ## Run the code
 ```
+export ELASTICEMAIL_API_KEY=your-api-key
 bash script.sh
 ```

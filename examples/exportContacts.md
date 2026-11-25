@@ -35,10 +35,10 @@ Variable for host value:
 host=https://api.elasticemail.com
 ```
 
-Use your API key (remember to check a required access level):
+Read your API key from the `ELASTICEMAIL_API_KEY` environment variable (remember to check a required access level). The script stops with an error if the variable is not set:
 
 ```bash
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 ```
 
 and create header variables for api key:
@@ -71,24 +71,24 @@ compressionFormat="Zip"
 Define emails to be exported:
 
 ```bash
-emails=("johnsmith@domain.com" "karol.szczycinski@elasticemail.com")
+emails=("johnsmith@domain.com" "johndoe@domain.com")
 ```
 
 Let's transform it to format required by the lib `emails=value1 emails=value2 emails=...`:
 
 ```bash
-emailsParams=""
+emailsParams=()
 
 for email in "${emails[@]}"
 do
-    emailsParams="emails=\"$email\" $emailsParams "
+    emailsParams+=("emails=$email")
 done
 ```
 
 And finally, you can use the lib to make an api call:
 
 ```bash
-./ElasticEmail --host $host $apiMethod $apiKeyHeader fileFormat="$fileFormat" fileName="$fileName" compressionFormat="$compressionFormat" $emailsParams
+./ElasticEmail --host "$host" "$apiMethod" "$apiKeyHeader" fileFormat="$fileFormat" fileName="$fileName" compressionFormat="$compressionFormat" "${emailsParams[@]}"
 ```
 
 ## The whole code to copy and paste:
@@ -98,7 +98,7 @@ And finally, you can use the lib to make an api call:
 
 host=https://api.elasticemail.com
 
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 
 apiKeyHeaderName=X-ElasticEmail-ApiKey
 apiKeyHeader=$apiKeyHeaderName:$apiKey
@@ -111,17 +111,18 @@ compressionFormat="Zip"
 
 emails=("johnsmith@domain.com" "johndoe@domain.com")
 
-emailsParams=""
+emailsParams=()
 
 for email in "${emails[@]}"
 do
-    emailsParams="emails=\"$email\" $emailsParams "
+    emailsParams+=("emails=$email")
 done
 
-./ElasticEmail --host $host $apiMethod $apiKeyHeader fileFormat="$fileFormat" fileName="$fileName" compressionFormat="$compressionFormat" $emailsParams
+./ElasticEmail --host "$host" "$apiMethod" "$apiKeyHeader" fileFormat="$fileFormat" fileName="$fileName" compressionFormat="$compressionFormat" "${emailsParams[@]}"
 ```
 
 ## Run the code
 ```
+export ELASTICEMAIL_API_KEY=your-api-key
 bash script.sh
 ```

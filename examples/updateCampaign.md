@@ -10,7 +10,7 @@ When using Elastic Email, when you send an email to any group of contacts we cal
 https://elasticemail.com/developers/api-documentation/rest-api#operation/campaignsByNamePut
 
 ## Preparation
-It's a Bash script so it's a program to be run by Unix shell. On linux (eg. Ubuntu) there's no need to install anything additional. 
+It's a Bash script so it's a program to be run by Unix shell. On linux (eg. Ubuntu) there's no need to install anything additional except `jq`, which this example uses to URL-encode the name.
 
 Create a new file eg. `script.sh`
 
@@ -35,10 +35,10 @@ Variable for host value:
 host=https://api.elasticemail.com
 ```
 
-Use your API key (remember to check a required access level):
+Read your API key from the `ELASTICEMAIL_API_KEY` environment variable (remember to check a required access level). The script stops with an error if the variable is not set:
 
 ```bash
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 ```
 
 and create header variables for api key:
@@ -88,7 +88,7 @@ json='{
 And finally, you can use the lib to make an api call:
 
 ```bash
-echo $json | ./ElasticEmail --host $host --content-type json $apiMethod name="$campaignNameEncoded" - $apiKeyHeader
+echo "$json" | ./ElasticEmail --host "$host" --content-type json "$apiMethod" name="$campaignNameEncoded" - "$apiKeyHeader"
 ```
 
 ## The whole code to copy and paste:
@@ -98,7 +98,7 @@ echo $json | ./ElasticEmail --host $host --content-type json $apiMethod name="$c
 
 host=https://api.elasticemail.com
 
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 
 apiKeyHeaderName=X-ElasticEmail-ApiKey
 apiKeyHeader=$apiKeyHeaderName:$apiKey
@@ -107,7 +107,7 @@ apiMethod=campaignsByNamePut
 
 campaignName="my new campaign"
 
-campaignNameEncoded=$(node -p "encodeURIComponent('$campaignName')")
+campaignNameEncoded=$(jq -rn --arg v "$campaignName" '$v|@uri')
 
 json='{ 
     Name: "my campaign", 
@@ -123,10 +123,11 @@ json='{
         }]
     }'
 
-echo $json | ./ElasticEmail --host $host --content-type json $apiMethod name="$campaignNameEncoded" - $apiKeyHeader
+echo "$json" | ./ElasticEmail --host "$host" --content-type json "$apiMethod" name="$campaignNameEncoded" - "$apiKeyHeader"
 ```
 
 ## Run the code
 ```
+export ELASTICEMAIL_API_KEY=your-api-key
 bash script.sh
 ```

@@ -858,37 +858,23 @@ lookup_mime_type() {
 ##############################################################################
 header_arguments_to_curl() {
     local headers_curl=""
-    local api_key_header=""
+    local api_key_header="X-ElasticEmail-ApiKey"
     local api_key_header_in_cli=""
-    api_key_header="X-ElasticEmail-ApiKey"
-    local api_key_header=""
-    local api_key_header_in_cli=""
-    api_key_header="X-Auth-Token"
 
+    # Either auth header (X-ElasticEmail-ApiKey, or X-Auth-Token for
+    # custom-branding accounts) counts as the API key given on the CLI.
     for key in "${!header_arguments[@]}"; do
         headers_curl+="-H \"${key}: ${header_arguments[${key}]}\" "
-        if [[ "${key}XX" == "${api_key_header}XX" ]]; then
-            api_key_header_in_cli="YES"
-        fi
-        if [[ "${key}XX" == "${api_key_header}XX" ]]; then
+        if [[ "${key}" == "X-ElasticEmail-ApiKey" || "${key}" == "X-Auth-Token" ]]; then
             api_key_header_in_cli="YES"
         fi
     done
     #
-    # If the api_key was not provided in the header, try one from the
-    # environment variable
+    # If the api_key was not provided in the header, use the stored one
     #
     if [[ -z $api_key_header_in_cli && -n $apikey_auth_credential ]]; then
-        headers_curl+="-H \"${api_key_header}: ${apikey_auth_credential}\""
+        headers_curl+="-H \"${api_key_header}: ${apikey_auth_credential}\" "
     fi
-    #
-    # If the api_key was not provided in the header, try one from the
-    # environment variable
-    #
-    if [[ -z $api_key_header_in_cli && -n $apikey_auth_credential ]]; then
-        headers_curl+="-H \"${api_key_header}: ${apikey_auth_credential}\""
-    fi
-    headers_curl+=" "
 
     echo "${headers_curl}"
 }

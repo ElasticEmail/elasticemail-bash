@@ -2,15 +2,13 @@
 
 host=https://api.elasticemail.com
 
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 
 apiKeyHeaderName=X-ElasticEmail-ApiKey
 apiKeyHeader=$apiKeyHeaderName:$apiKey
 
-apiMethod=contactsDeletePost
+apiMethod=contactsByEmailDelete
 
-json='{ 
-        Emails: ["johnsmith@domain.com2"]
-    }'
+email="johnsmith@domain.com"
 
-echo $json | ./ElasticEmail --host $host --content-type json $apiMethod - $apiKeyHeader
+./ElasticEmail --host "$host" "$apiMethod" email="$email" "$apiKeyHeader"

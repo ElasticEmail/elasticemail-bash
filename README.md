@@ -270,7 +270,7 @@ JSON
 Step-by-step scripts for common tasks are in the [`examples/`](examples) folder. Each one has a runnable `.sh` file and a walkthrough.
 
 <details>
-<summary><strong>Show all 19 examples</strong></summary>
+<summary><strong>Show all 20 examples</strong></summary>
 
 Script | Walkthrough
 --- | ---
@@ -280,6 +280,7 @@ Script | Walkthrough
 [addTemplate](examples/addTemplate.sh) | [readme](examples/addTemplate.md)
 [deleteCampaign](examples/deleteCampaign.sh) | [readme](examples/deleteCampaign.md)
 [deleteContact](examples/deleteContact.sh) | [readme](examples/deleteContact.md)
+[deleteContacts](examples/deleteContacts.sh) | [readme](examples/deleteContacts.md)
 [deleteList](examples/deleteList.sh) | [readme](examples/deleteList.md)
 [deleteTemplate](examples/deleteTemplate.sh) | [readme](examples/deleteTemplate.md)
 [exportContacts](examples/exportContacts.sh) | [readme](examples/exportContacts.md)

@@ -2,7 +2,7 @@
 
 host=https://api.elasticemail.com
 
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 
 apiKeyHeaderName=X-ElasticEmail-ApiKey
 apiKeyHeader=$apiKeyHeaderName:$apiKey
@@ -15,11 +15,11 @@ compressionFormat="Zip"
 
 emails=("johnsmith@domain.com" "johndoe@domain.com")
 
-emailsParams=""
+emailsParams=()
 
 for email in "${emails[@]}"
 do
-    emailsParams="emails=\"$email\" $emailsParams "
+    emailsParams+=("emails=$email")
 done
 
-./ElasticEmail --host $host $apiMethod $apiKeyHeader fileFormat="$fileFormat" fileName="$fileName" compressionFormat="$compressionFormat" $emailsParams
+./ElasticEmail --host "$host" "$apiMethod" "$apiKeyHeader" fileFormat="$fileFormat" fileName="$fileName" compressionFormat="$compressionFormat" "${emailsParams[@]}"

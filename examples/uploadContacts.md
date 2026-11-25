@@ -1,26 +1,6 @@
-# WARNING
-**This snippet in this version does not use the Bash lib.**
-It uses directly curl.
-Karol: I couldn't figure it out how to properly send a file with the lib.
-
-It works fine when file is passed as form data with `-F` param
-But the libs seems to only add body params with `-d` param
-
-A not working version:
-```
-./ElasticEmail --host $host contactsImportPost $apiKeyHeader listName="$listName" encodingName="$encodingName" file:=@contacts.csv
-```
-
-It generates eg:
-```
-curl -d 'file=@contacts.csv'   -H "X-ElasticEmail-ApiKey: API_KEY"   -X POST "https://api.elasticemail.com/v4/contacts/import?listName=a2&encodingName=utf-8"
-```
-
-# END OF WARNING
-
 # Upload Contacts
 
-This guide will walk you through the process of adding new contacts to your account, by uploading them from a CSV file, using the NodeJS library. 
+This guide will walk you through the process of adding new contacts to your account, by uploading them from a CSV file, using the Bash library.
 
 *Required Access Level: ModifyContacts*
 
@@ -32,7 +12,7 @@ When using Elastic Email, you send emails to contacts – recipients who receive
 
 
 ## Preparation
-It's a Bash script so it's a program to be run by Unix shell. On linux (eg. Ubuntu) there's no need to install anything additional. 
+It's a Bash script so it's a program to be run by Unix shell. On linux (eg. Ubuntu) there's no need to install anything additional except `jq`, which this example uses to URL-encode the name.
 
 Create a new file eg. `script.sh`
 
@@ -41,9 +21,9 @@ Download the lib from ElasticEmail repository https://github.com/ElasticEmail/el
 $ chmod u+x ElasticEmail
 ```
 
-## Let's dig into the code
+Put a `contacts.csv` file next to the script. There is a sample one in this folder.
 
-This code uses curl directly.
+## Let's dig into the code
 
 Put the below code to your file.
 
@@ -59,10 +39,10 @@ Variable for host value:
 host=https://api.elasticemail.com
 ```
 
-Use your API key (remember to check a required access level):
+Read your API key from the `ELASTICEMAIL_API_KEY` environment variable (remember to check a required access level). The script stops with an error if the variable is not set:
 
 ```bash
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 ```
 
 and create header variables for api key:
@@ -71,28 +51,31 @@ apiKeyHeaderName=X-ElasticEmail-ApiKey
 apiKeyHeader=$apiKeyHeaderName:$apiKey
 ```
 
-Define endpoint path:
-
-```bash
-apiMethodUrl="$host/v4/contacts/import"
+Define a method that will be used:
+```
+apiMethod=contactsImportPost
 ```
 
-
-Create options with a file name with it's encoding. 
-Optionaly a list name to which contacts should be added, otherwise contacts will be added to all contacts.
-
+Define the CSV file to upload and its encoding:
 
 ```bash
-file="@contacts.csv"
+file="contacts.csv"
 
 encodingName="utf-8"
 ```
 
-
-And finally, you can use the lib to make an api call:
+Optionally, name a list to which the contacts should be added. Otherwise they are only added to all contacts. URL-encode the name in case it contains special characters:
 
 ```bash
-curl -F file=$file   -H "$apiKeyHeader"   -X POST "$apiMethodUrl?encodingName=$encodingName&listName=$listNameEncoded"
+listName="a2"
+
+listNameEncoded=$(jq -rn --arg v "$listName" '$v|@uri')
+```
+
+And finally, you can use the lib to make an api call. The API expects the CSV as a multipart form field called `file`. Named parameters such as `listName=...` become query parameters, but every argument placed before the method name is handed to curl as is, so `-F "file=@$file"` there sends the file as multipart form data. The lib doesn't quote these curl arguments, so use a file path without spaces.
+
+```bash
+./ElasticEmail --host "$host" -F "file=@$file" "$apiMethod" listName="$listNameEncoded" encodingName="$encodingName" "$apiKeyHeader"
 ```
 
 ## The whole code to copy and paste:
@@ -102,25 +85,28 @@ curl -F file=$file   -H "$apiKeyHeader"   -X POST "$apiMethodUrl?encodingName=$e
 
 host=https://api.elasticemail.com
 
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 
 apiKeyHeaderName=X-ElasticEmail-ApiKey
 apiKeyHeader=$apiKeyHeaderName:$apiKey
 
-apiMethodUrl="$host/v4/contacts/import"
+apiMethod=contactsImportPost
 
-file="@contacts.csv"
+# The CSV is sent as a multipart "file" field. The lib passes every argument
+# placed before the method name straight to curl, so -F does the upload.
+file="contacts.csv"
 
 encodingName="utf-8"
 
 listName="a2"
 
-listNameEncoded=$(node -p "encodeURIComponent('$listName')") # output: "%5B%5D%3F%3F%5B%5DSpecial_characters%21%40%23%24%25%5E%26%2A%28%29222%0A"
+listNameEncoded=$(jq -rn --arg v "$listName" '$v|@uri')
 
-curl -F file=$file   -H "$apiKeyHeader"   -X POST "$apiMethodUrl?encodingName=$encodingName&listName=$listNameEncoded"
+./ElasticEmail --host "$host" -F "file=@$file" "$apiMethod" listName="$listNameEncoded" encodingName="$encodingName" "$apiKeyHeader"
 ```
 
 ## Run the code
 ```
+export ELASTICEMAIL_API_KEY=your-api-key
 bash script.sh
 ```

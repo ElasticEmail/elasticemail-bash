@@ -2,7 +2,7 @@
 
 host=https://api.elasticemail.com
 
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 
 apiKeyHeaderName=X-ElasticEmail-ApiKey
 apiKeyHeader=$apiKeyHeaderName:$apiKey
@@ -17,4 +17,4 @@ json='[{
         LastName: "Smith"
     }]'
 
-echo $json | ./ElasticEmail --host $host --content-type json $apiMethod - $apiKeyHeader listnames="$listname"
+echo "$json" | ./ElasticEmail --host "$host" --content-type json "$apiMethod" - "$apiKeyHeader" listnames="$listname"

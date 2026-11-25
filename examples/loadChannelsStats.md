@@ -36,10 +36,10 @@ Variable for host value:
 host=https://api.elasticemail.com
 ```
 
-Use your API key (remember to check a required access level):
+Read your API key from the `ELASTICEMAIL_API_KEY` environment variable (remember to check a required access level). The script stops with an error if the variable is not set:
 
 ```bash
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 ```
 
 and create header variables for api key:
@@ -77,7 +77,7 @@ const pageinationOptions = {
 And finally, you can use the lib to make an api call:
 
 ```bash
-./ElasticEmail --host $host $apiMethod name="$listNameEncoded" $apiKeyHeader
+./ElasticEmail --host "$host" "$apiMethod" name="$listNameEncoded" "$apiKeyHeader"
 ```
 
 ## The whole code to copy and paste:
@@ -87,7 +87,7 @@ And finally, you can use the lib to make an api call:
 
 host=https://api.elasticemail.com
 
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 
 apiKeyHeaderName=X-ElasticEmail-ApiKey
 apiKeyHeader=$apiKeyHeaderName:$apiKey
@@ -97,10 +97,11 @@ apiMethod=statisticsChannelsGet
 limit=0
 offset=0
 
-./ElasticEmail --host $host $apiMethod limit=${limit}  offset=${offset} $apiKeyHeader
+./ElasticEmail --host "$host" "$apiMethod" limit="${limit}"  offset="${offset}" "$apiKeyHeader"
 ```
 
 ## Run the code
 ```
+export ELASTICEMAIL_API_KEY=your-api-key
 bash script.sh
 ```

@@ -2,7 +2,7 @@
 
 host=https://api.elasticemail.com
 
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 
 apiKeyHeaderName=X-ElasticEmail-ApiKey
 apiKeyHeader=$apiKeyHeaderName:$apiKey
@@ -31,4 +31,10 @@ json='{
         }
     }'
 
-echo $json | ./ElasticEmail --host $host --content-type json $apiMethod - $apiKeyHeader
+# One new key per send; reuse it only to retry this same send with the same body.
+idempotencyKey=$(uuidgen | tr '[:upper:]' '[:lower:]')
+
+response=$(echo "$json" | ./ElasticEmail --host "$host" --content-type json "$apiMethod" - "$apiKeyHeader" "Idempotency-Key:$idempotencyKey")
+
+echo "$response"
+echo "TransactionID: $(jq -r .TransactionID <<<"$response")  Idempotency-Key: $idempotencyKey"

@@ -2,7 +2,7 @@
 
 host=https://api.elasticemail.com
 
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 
 apiKeyHeaderName=X-ElasticEmail-ApiKey
 apiKeyHeader=$apiKeyHeaderName:$apiKey
@@ -11,7 +11,7 @@ apiMethod=campaignsByNamePut
 
 campaignName="my new campaign"
 
-campaignNameEncoded=$(node -p "encodeURIComponent('$campaignName')")
+campaignNameEncoded=$(jq -rn --arg v "$campaignName" '$v|@uri')
 
 json='{ 
     Name: "my new campaign3", 
@@ -27,4 +27,4 @@ json='{
         }]
     }'
 
-echo $json | ./ElasticEmail --host $host --content-type json $apiMethod name="$campaignNameEncoded" - $apiKeyHeader
+echo "$json" | ./ElasticEmail --host "$host" --content-type json "$apiMethod" name="$campaignNameEncoded" - "$apiKeyHeader"

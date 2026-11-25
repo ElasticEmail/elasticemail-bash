@@ -2,19 +2,21 @@
 
 host=https://api.elasticemail.com
 
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 
 apiKeyHeaderName=X-ElasticEmail-ApiKey
 apiKeyHeader=$apiKeyHeaderName:$apiKey
 
-apiMethodUrl="$host/v4/contacts/import"
+apiMethod=contactsImportPost
 
-file="@contacts.csv"
+# The CSV is sent as a multipart "file" field. The lib passes every argument
+# placed before the method name straight to curl, so -F does the upload.
+file="contacts.csv"
 
 encodingName="utf-8"
 
 listName="a2"
 
-listNameEncoded=$(node -p "encodeURIComponent('$listName')") # output: "%5B%5D%3F%3F%5B%5DSpecial_characters%21%40%23%24%25%5E%26%2A%28%29222%0A"
+listNameEncoded=$(jq -rn --arg v "$listName" '$v|@uri')
 
-curl -F file=$file   -H "$apiKeyHeader"   -X POST "$apiMethodUrl?encodingName=$encodingName&listName=$listNameEncoded"
+./ElasticEmail --host "$host" -F "file=@$file" "$apiMethod" listName="$listNameEncoded" encodingName="$encodingName" "$apiKeyHeader"

@@ -1,6 +1,6 @@
-# Delete Contacts
+# Delete Contact
 
-This guide will walk you through steps of deleting contact(s) from your account using the Bash library. 
+This guide will walk you through steps of deleting one contact from your account, by its email address, using the Bash library. To delete several contacts in one call, see [deleteContacts](deleteContacts.md).
 
 *Required Access Level: ModifyContacts*
 
@@ -35,10 +35,10 @@ Variable for host value:
 host=https://api.elasticemail.com
 ```
 
-Use your API key (remember to check a required access level):
+Read your API key from the `ELASTICEMAIL_API_KEY` environment variable (remember to check a required access level). The script stops with an error if the variable is not set:
 
 ```bash
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 ```
 
 and create header variables for api key:
@@ -49,21 +49,19 @@ apiKeyHeader=$apiKeyHeaderName:$apiKey
 
 Define a method that will be used:
 ```
-apiMethod=contactsDeletePost
+apiMethod=contactsByEmailDelete
 ```
 
-Define JSON with emails to delete:
+Specify the email address of the contact to delete:
 
 ```bash
-json='{ 
-        Emails: ["johnsmith@domain.com2"]
-    }'
+email="johnsmith@domain.com"
 ```
 
 And finally, you can use the lib to make an api call:
 
 ```bash
-echo $json | ./ElasticEmail --host $host --content-type json $apiMethod - $apiKeyHeader
+./ElasticEmail --host "$host" "$apiMethod" email="$email" "$apiKeyHeader"
 ```
 
 ## The whole code to copy and paste:
@@ -73,21 +71,20 @@ echo $json | ./ElasticEmail --host $host --content-type json $apiMethod - $apiKe
 
 host=https://api.elasticemail.com
 
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 
 apiKeyHeaderName=X-ElasticEmail-ApiKey
 apiKeyHeader=$apiKeyHeaderName:$apiKey
 
-apiMethod=contactsDeletePost
+apiMethod=contactsByEmailDelete
 
-json='{ 
-        Emails: ["johnsmith@domain.com2"]
-    }'
+email="johnsmith@domain.com"
 
-echo $json | ./ElasticEmail --host $host --content-type json $apiMethod - $apiKeyHeader
+./ElasticEmail --host "$host" "$apiMethod" email="$email" "$apiKeyHeader"
 ```
 
 ## Run the code
 ```
+export ELASTICEMAIL_API_KEY=your-api-key
 bash script.sh
 ```

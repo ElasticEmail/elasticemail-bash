@@ -10,7 +10,7 @@ This guide will walk you through steps of removing contacts list from your accou
 When using Elastic Email, you send emails to contacts – recipients who receive your emails. Contacts can be grouped by created segments or lists. Segments add contacts automatically when specfied conditions are met, and contacts on lists are managed manually.
 
 ## Preparation
-It's a Bash script so it's a program to be run by Unix shell. On linux (eg. Ubuntu) there's no need to install anything additional. 
+It's a Bash script so it's a program to be run by Unix shell. On linux (eg. Ubuntu) there's no need to install anything additional except `jq`, which this example uses to URL-encode the name.
 
 Create a new file eg. `script.sh`
 
@@ -35,10 +35,10 @@ Variable for host value:
 host=https://api.elasticemail.com
 ```
 
-Use your API key (remember to check a required access level):
+Read your API key from the `ELASTICEMAIL_API_KEY` environment variable (remember to check a required access level). The script stops with an error if the variable is not set:
 
 ```bash
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 ```
 
 and create header variables for api key:
@@ -58,16 +58,16 @@ The only thing you need to specify is a list name
 listName="test name 3[]??[]Special_characters!@#$%^&*()222"
 ```
 
-But in case when your name contains some special URL characters you need to properly encode it first. For example you can use Bash engine and `encodeURIComponent` from JavaScript language for doing that or use other way of your preference:
+But in case when your name contains some special URL characters you need to properly encode it first. For example you can use `jq` (its `@uri` filter) or any other way you prefer:
 
 ```bash
-listNameEncoded=$(node -p "encodeURIComponent('$listName')") # output: "%5B%5D%3F%3F%5B%5DSpecial_characters%21%40%23%24%25%5E%26%2A%28%29222%0A"
+listNameEncoded=$(jq -rn --arg v "$listName" '$v|@uri')
 ```
 
 And finally, you can use the lib to make an api call:
 
 ```bash
-./ElasticEmail --host $host $apiMethod name="$listNameEncoded" $apiKeyHeader
+./ElasticEmail --host "$host" "$apiMethod" name="$listNameEncoded" "$apiKeyHeader"
 ```
 
 ## The whole code to copy and paste:
@@ -75,7 +75,7 @@ And finally, you can use the lib to make an api call:
 ```bash
 host=https://api.elasticemail.com
 
-apiKey=YOUR_API_KEY
+apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 
 apiKeyHeaderName=X-ElasticEmail-ApiKey
 apiKeyHeader=$apiKeyHeaderName:$apiKey
@@ -84,12 +84,13 @@ apiMethod=listsByNameDelete
 
 listName="test name 3[]??[]Special_characters!@#$%^&*()222"
 
-listNameEncoded=$(node -p "encodeURIComponent('$listName')") # output: "%5B%5D%3F%3F%5B%5DSpecial_characters%21%40%23%24%25%5E%26%2A%28%29222%0A"
+listNameEncoded=$(jq -rn --arg v "$listName" '$v|@uri')
 
-./ElasticEmail --host $host $apiMethod name="$listNameEncoded" $apiKeyHeader
+./ElasticEmail --host "$host" "$apiMethod" name="$listNameEncoded" "$apiKeyHeader"
 ```
 
 ## Run the code
 ```
+export ELASTICEMAIL_API_KEY=your-api-key
 bash script.sh
 ```
