@@ -7,6 +7,7 @@ apiKey="${ELASTICEMAIL_API_KEY:?set ELASTICEMAIL_API_KEY}"
 apiKeyHeaderName=X-ElasticEmail-ApiKey
 apiKeyHeader=$apiKeyHeaderName:$apiKey
 
+# README:BEGIN quickstart
 apiMethod=emailsTransactionalPost
 
 json='{
@@ -38,3 +39,4 @@ response=$(echo "$json" | ./ElasticEmail --host "$host" --content-type json "$ap
 
 echo "$response"
 echo "TransactionID: $(jq -r .TransactionID <<<"$response")  Idempotency-Key: $idempotencyKey"
+# README:END quickstart
